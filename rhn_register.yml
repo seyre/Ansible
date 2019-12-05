@@ -4,3 +4,8 @@
     copy:
      src: /var/satellite/RHN-Register
      dest: /var/tmp
+  - name:  mv current repo's into BACKUP dir under /etc/yum.repos.d
+    command:  mkdir -p /etc/yum.repos.d/BACKUP
+    command:  mv /etc/yum.repos.d/*.repo BACKUP
+  - name:  Yum - clean all cache on servers
+    command:  yum clean all
