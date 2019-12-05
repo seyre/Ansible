@@ -1,0 +1,6 @@
+- hosts:  lnlxtst01
+  tasks:
+  - name:  Ansible copy RHN-Register folder from Spacewalk to Target Server
+    copy:
+     src: /var/satellite/RHN-Register
+     dest: /var/tmp
