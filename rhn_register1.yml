@@ -1,0 +1,8 @@
+- hosts:  lnlxtst01
+  tasks:
+  - name:  Ansible copy RHN-Register folder from Spacewalk to Target Server
+    copy:
+     src: /var/satellite/RHN-Register
+     dest: /var/tmp
+  - name:  mv current repo's into BACKUP dir under /etc/yum.repos.d
+    command:  mkdir -p /etc/yum.repos.d/BACKUP
