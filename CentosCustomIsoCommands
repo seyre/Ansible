@@ -1,0 +1,74 @@
+
+
+
+cd /var/satellite
+mkdir -p /var/satellite/kickstart_build/isolinux/{images,ks,LiveOS,Packages,postinstall}
+
+pwd
+cd kickstart_build/
+pwd
+ls
+df -h
+/bin/cp /mnt/centos7/.discinfo /var/satellite/kickstart_build/isolinux/
+/bin/cp /mnt/centos7/isolinux/* /var/satellite/kickstart_build/isolinux/
+rsync -av /mnt/centos7/images/ /var/satellite/kickstart_build/isolinux/images/
+/bin/cp /mnt/centos7/LiveOS/* /var/satellite/kickstart_build/isolinux/LiveOS/
+ll /mnt/centos7/repodata/ | grep -i comps
+cd /var/satellite/kickstart_build/
+pwd
+ls
+ls -altr
+pwd
+find . -print | grep -i comps.xml
+ll /mnt/centos7/repodata/ | grep -i comps
+cp /mnt/centos7/repodata/4af1fba0c1d6175b7e3c862b4bddfef93fffb84c37f7d5f18cfbff08abc47f8a-c7-x86_64-comps.xml.gz /var/satellite/kickstart_build/
+cd /var/satellite/kickstart_build/
+gunzip 4af1fba0c1d6175b7e3c862b4bddfef93fffb84c37f7d5f18cfbff08abc47f8a-c7-x86_64-comps.xml.gz
+ls -altr
+mv 4af1fba0c1d6175b7e3c862b4bddfef93fffb84c37f7d5f18cfbff08abc47f8a-c7-x86_64-comps.xml comps.xml
+ls -altr /var/tmp
+ls -altr /var/satellite/RHN-Register/
+rsync -av /mnt/centos7/Packages/ /var/satellite/kickstart_build/isolinux/Packages/
+rsync -av /var/satellite/RHN-Register/ /var/satellite/kickstart_build/isolinux/Packages/
+mkdir -p /var/satellite/3rd-Pary
+pwd
+rsync -av /var/satellite/3rd-Pary/ /var/satellite/kickstart_build/isolinux/Packages/
+rsync -av /var/satellite/RHN-Register/ /var/satellite/kickstart_build/isolinux/Packages/
+ls -altr
+cd ..
+pwd
+cd /var/satellite/kickstart_build/isolinux/
+pwd
+createrepo -g /var/satellite/kickstart_build/comps.xml .
+cp /root/Ansible/ks.cfg /var/satellite/kickstart_build/isolinux/ks/ks.cfg
+
+ksvalidator .
+ksvalidator ./ks,cfg
+ksvalidator /var/satellite/kickstart_build/isolinux/ks/ks.cfg
+echo $?
+pwd
+cd ..
+
+
+# cd /var/satellite/kickstart_build/isolinux/
+# vi isolinux.cfg
+ 
+# Put below line above this line "menu separator" (Line No- 72-76)
+        label check
+        menu label Test this ^Install Using Kickstart CentOS 7
+        menu default
+        kernel vmlinuz biosdevname=0
+        append initrd=initrd.img ks=cdrom:/ks/ks.cfg
+ 
+  
+:wq! (Save & Quite)
+
+
+
+pwd
+cd ..
+pwd		#	Should be /var/satellite/kickstart_build
+
+
+mkisofs -o centos-7-custom_dvd.iso -b isolinux.bin -c boot.cat -no-emul-boot -V 'CentOS 7 x86_64' -boot-load-size 4 -boot-info-table -R -J -v -T isolinux/
+ls -altr
