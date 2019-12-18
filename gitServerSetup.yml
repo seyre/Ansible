@@ -1,0 +1,14 @@
+---
+- hosts: lnlxtst01
+  remote_user:  root
+
+# Register server with --activationkey against a spacewalk
+# server specified by (server_url).
+- name: Register Server with Spacewalk Server
+- rhn_subscription:
+    state: present
+    activationkey: 1-21ad0fddf8f510baf82b58788f384190
+    server_hostname: 192.168.130.76
+    server_url: https://192.168.130.76/XMLRPM
+    channels: "Centos 7 Base x86_64"
+    force_register: yes
