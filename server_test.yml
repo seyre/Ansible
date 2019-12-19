@@ -35,15 +35,15 @@
        -   ansible_distribution_major_version == "7"
   - name: install libnl rpm from a local file
     yum:
-      name: /var/tmp/RHN-Register/libnl-1.1.4-3.el7.x86_64.rpm, /var/tmp/RHN-Register/m2crypto-0.21.1-17.el7.x86_64.rpm, /var/tmp/RHN-Register/pyOpenSSL-0.13.1-4.el7.x86_64.rpm, /var/tmp/RHN-Register/python-dmidecode-3.12.2-3.el7.x86_64.rpm, /var/tmp/RHN-Register/python-ethtool-0.8-8.el7.x86_64.rpm, /var/tmp/RHN-Register/python-gudev-147.2-7.el7.x86_64.rpm, /var/tmp/RHN-Register/python-hwdata-1.7.3-4.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhnlib-2.5.65-8.el7.noarch.rpm, /var/tmp/RHN-Register/rhnsd-5.0.13-10.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-setup-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/yum-rhn-plugin-2.0.1-10.el7.noarch.rpm, /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm, /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
+      name: /var/tmp/RHN-Register/libnl-1.1.4-3.el7.x86_64.rpm, /var/tmp/RHN-Register/m2crypto-0.21.1-17.el7.x86_64.rpm, /var/tmp/RHN-Register/pyOpenSSL-0.13.1-4.el7.x86_64.rpm, /var/tmp/RHN-Register/python-dmidecode-3.12.2-3.el7.x86_64.rpm, /var/tmp/RHN-Register/python-ethtool-0.8-8.el7.x86_64.rpm, /var/tmp/RHN-Register/python-gudev-147.2-7.el7.x86_64.rpm, /var/tmp/RHN-Register/python-hwdata-1.7.3-4.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhnlib-2.5.65-8.el7.noarch.rpm, /var/tmp/RHN-Register/rhnsd-5.0.13-10.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-setup-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/yum-rhn-plugin-2.0.1-10.el7.noarch.rpm
       state: present
 
 ## Install/enable via systemctl osad service
-  - name: Enable start the osad service via systemctl osad used by Spacewalk to action on clients
-    service:
-     name=osad
-     state=restarted
-     enabled=yes
+#  - name: Enable start the osad service via systemctl osad used by Spacewalk to action on clients
+#    service:
+#     name=osad
+#     state=restarted
+#     enabled=yes
 
 ## Configure BASH for users better history
   - name: Add better BASH settings for history
