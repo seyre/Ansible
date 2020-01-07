@@ -152,7 +152,7 @@
       path: "{{ item }}"
       entity: devs
       etype: group
-      permissions: rw
+      permissions: rwx
       state: present
     loop:
       - /home/GlennK
@@ -168,7 +168,7 @@
       path: "{{ item }}"
       entity: DevLead
       etype: group
-      permissions: rw
+      permissions: rwx
       state: present
     loop:
       - /home/GlennK
@@ -186,7 +186,7 @@
       path: "{{ item }}"
       entity: DevMan
       etype: group
-      permissions: rw
+      permissions: rwx
       state: present
     loop:
       - /home/GlennK
@@ -330,7 +330,3 @@
      state: directory
      recurse: yes
      mode: '0757'
-
-
-## DEVELOPMENT ACCESS VIA ACL's
-#  - name: Development access to hoem areas to review code - via ACL's
