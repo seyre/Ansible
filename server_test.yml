@@ -1,4 +1,4 @@
-- hosts: lnlxpoc
+- hosts: lnlxgk01
   tasks:
 ## REGISTER SERVER TO SPACEWALK
   - name:  Ansible copy RHN-Register folder from Spacewalk to Target Server
@@ -19,23 +19,48 @@
     file:
      path: /etc/yum.repos.d/BACKUP
      state: directory
-  - name: Enable CENTOS repos(CentOS only)
-    ini_file:
-      dest: /etc/yum.repos.d/CentOS-Base.repo
-      section: "{{ item }}"
-      option: enabled
-      value: 0
-    with_items:
-       - base
-       - updates
-       - extras
-       - centosplus
-    when:
-       - (ansible_distribution == "CentOS")
-       -   ansible_distribution_major_version == "7"
+#  - name: Enable CENTOS repos(CentOS only)
+#    ini_file:
+#      dest: /etc/yum.repos.d/CentOS-Base.repo
+#      section: "{{ item }}"
+#      option: enabled
+#      value: 0
+#    with_items:
+#       - base
+#       - updates
+#       - extras
+#       - centosplus
+#    when:
+#       - (ansible_distribution == "CentOS")
+#       -   ansible_distribution_major_version == "7"
   - name: install libnl rpm from a local file
     yum:
       name: /var/tmp/RHN-Register/libnl-1.1.4-3.el7.x86_64.rpm, /var/tmp/RHN-Register/m2crypto-0.21.1-17.el7.x86_64.rpm, /var/tmp/RHN-Register/pyOpenSSL-0.13.1-4.el7.x86_64.rpm, /var/tmp/RHN-Register/python-dmidecode-3.12.2-3.el7.x86_64.rpm, /var/tmp/RHN-Register/python-ethtool-0.8-8.el7.x86_64.rpm, /var/tmp/RHN-Register/python-gudev-147.2-7.el7.x86_64.rpm, /var/tmp/RHN-Register/python-hwdata-1.7.3-4.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhnlib-2.5.65-8.el7.noarch.rpm, /var/tmp/RHN-Register/rhnsd-5.0.13-10.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-setup-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/yum-rhn-plugin-2.0.1-10.el7.noarch.rpm
+      state: present
+
+## RHN-register
+  - name: rhn-register as with activation key
+    rhn_register:
+      state: present
+      activationkey: 1-21ad0fddf8f510baf82b58788f384190
+      server_url:  http://192.168.130.76/XMLRPC
+
+## RHN-register add software channels
+  - name: rhn-register add software base channels
+    rhn_register:
+      state: present
+      activationkey: 1-21ad0fddf8f510baf82b58788f384190
+      channels: centos-7-base-x86_64
+
+## Install 3rd-Party Software
+  - name:  Ansible copy RHN-Register folder from Spacewalk to Target Server
+    copy:
+     src: /var/satellite/3rd-Party
+     dest: /var/tmp
+
+  - name: install libnl rpm from a local file
+    yum:
+      name: /var/tmp/3rd-Party/aspnetcore-runtime-3.1.0-x64.rpm, /var/tmp/3rd-Party/aspnetcore-targeting-pack-3.1.0.rpm, /var/tmp/3rd-Party/dotnet-host-3.1.0-x64.rpm, /var/tmp/3rd-Party/dotnet-hostfxr-3.1.0-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-deps-3.1.0-rhel.7-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-deps-3.1.0-rhel.7-x64.rpm, /var/tmp/3rd-Party/dotnet-sdk-3.1.100-x64.rpm, /var/tmp/3rd-Party/fontpackages-filesystem-1.44-8.el7.noarch.rpm, /var/tmp/3rd-Party/libappindicator-12.10.0-13.el7.x86_64.rpm, /var/tmp/3rd-Party/libappindicator-gtk3-12.10.0-13.el7.x86_64.rpm, /var/tmp/3rd-Party/libdbusmenu-16.04.0-4.el7.x86_64.rpm, /var/tmp/3rd-Party/libdbusmenu-gtk2-16.04.0-4.el7.x86_64.rpm, /var/tmp/3rd-Party/libdbusmenu-gtk3-16.04.0-4.el7.x86_64.rpm, /var/tmp/3rd-Party/liberation-fonts-1.07.2-16.el7.noarch.rpm, /var/tmp/3rd-Party/liberation-fonts-common-1.07.2-16.el7.noarch.rpm, /var/tmp/3rd-Party/liberation-narrow-fonts-1.07.2-16.el7.noarch.rpm, /var/tmp/3rd-Party/liberation-sans-fonts-1.07.2-16.el7.noarch.rpm, /var/tmp/3rd-Party/liberation-serif-fonts-1.07.2-16.el7.noarch.rpm, /var/tmp/3rd-Party/libindicator-12.10.1-6.el7.x86_64.rpm, /var/tmp/3rd-Party/libindicator-gtk3-12.10.1-6.el7.x86_64.rpm, /var/tmp/3rd-Party/selinux-policy-3.13.1-252.el7.1.noarch.rpm, /var/tmp/3rd-Party/selinux-policy-devel-3.13.1-252.el7.1.noarch.rpm, /var/tmp/3rd-Party/selinux-policy-targeted-3.13.1-252.el7.1.noarch.rpm, /var/tmp/3rd-Party/xorgxrdp-0.2.11-1.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-selinux-0.9.11-5.el7.x86_64.rpm
       state: present
 
 ## Install/enable via systemctl osad service
@@ -44,13 +69,14 @@
 #     name=osad
 #     state=restarted
 #     enabled=yes
+# RPMS /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
 
 ## Configure BASH for users better history
-  - name: Add better BASH settings for history
-    lineinfile:
-     path: /etc/sysctl.conf
-     line: fs.inotify.max_user_watches=524288
-     create: yes
+#  - name: Add better BASH settings for history
+#    lineinfile:
+#     path: /etc/sysctl.conf
+#     line: fs.inotify.max_user_watches=524288
+#     create: yes
 
 
 ## USER/GROUP SETUP
@@ -65,8 +91,4 @@
      path: /etc/sysctl.conf
      line: fs.inotify.max_user_watches=524288
      create: yes
-
-
-
-
 

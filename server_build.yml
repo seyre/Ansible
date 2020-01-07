@@ -64,12 +64,35 @@
      name: devs
      state: present
 
+# Add xrdpusers group
+  - name: Add xrdpusers group
+    group:
+     name: xrdpusers
+     state: present
+
 # Add ECA user/group
-  - name: Add ECA user group
+  - name: Add ECA user and Group
     user:
      name: ECA
      state: present
 
+# Add Developers accounts locally
+  - name: Add ECA developers accoun
+    user:
+     name: "{{ item }}"
+     state: present
+     shell: /bin/bash
+     groups: devs,xrdpusers,ECA
+     append: yes
+    loop:
+      - ECABuildRelease
+      - giteca
+      - NickG
+      - AlexP
+      - SajedH
+      - KulaK
+      - WendyG
+      - IstvanK
 
 ## INSTALL 3RD-PARTY SOFTWARE
 # yum install git @ latest
@@ -91,7 +114,7 @@
       state: present
       disable_gpg_check: yes
 
-# Firewalld - enable xrdp services/ports
+# Firewalld - enable XRDP services/ports
   - name:  Firewalld enbable ports for XRDP
     firewalld:
        port: "{{ item }}"
@@ -106,6 +129,14 @@
       - 4300/tcp
       - 5003/tcp
       - 5103/tcp
+
+# User - group add xrdpusers
+  - name:  Users - group add for xrdpusers
+    group:
+     name: xrdpusers
+     state: present
+
+
 
 
 # Yum install dotnet dependencies from 3rd-Party dir
