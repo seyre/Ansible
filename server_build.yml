@@ -161,6 +161,7 @@
       - /home/SajedH
       - /home/RemyB
       - /home/IstvanK
+      - /home/KulaK
 
 # Setup ACL's for DevLead group(excludes read/write access to DevLead)
   - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
@@ -177,6 +178,7 @@
       - /home/SajedH
       - /home/RemyB
       - /home/IstvanK
+      - /home/KulaK
       - /home/MikeM
       - /home/WendyG
 
@@ -195,6 +197,7 @@
       - /home/SajedH
       - /home/RemyB
       - /home/IstvanK
+      - /home/KulaK
       - /home/MikeM
       - /home/WendyG
       - /home/NickG
