@@ -272,8 +272,56 @@
       state: present
       disable_gpg_check: yes
 
+# Yum_repository add Google Chrome Repository
+  - name: Add Google Chrome repository
+    yum_repository:
+      name: Google_chrome_latest
+      description: Google Chrome Latest
+      baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+      gpgcheck: yes
+      gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+      enabled: yes
+
+# Yum install Google Chrome
+  - name:  Yum install Google Chrome Latest from repo
+    yum:
+      name: google-chrome-stable
+      state: present
+      disable_gpg_check: yes
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: Google_chrome_latest
+      state: absent
+#    notify: yum-clean-metadata
 
 
+## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
+
+# Yum_repository add BeyondCompare ScooterSoft  Repository
+  - name: Add ScotterSoft beyondcompare repository
+    yum_repository:
+      name: beyond_compare_latest
+      description: ScooterSoft beyondcompare latest
+      baseurl: http://www.scootersoftware.com/bcompare4
+      gpgcheck: yes
+      gpgkey: http://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
+      enabled: yes
+
+# Yum install beyondcompare from ScooterSfot
+  - name:  Yum install beyondcompare latest from ScooterSoft repo
+    yum:
+      name: bcompare
+      state: present
+      disable_gpg_check: yes
+
+# Yum_repository BeyondCompare ScooterSoft Remove
+  - name: Remove BeyondCompare ScooterSoft repository
+    yum_repository:
+      name: beyond_compare_latest
+      state: absent
+#    notify: yum-clean-metadata
 
 
 ## Install/enable via systemctl osad service
