@@ -1,4 +1,4 @@
-- hosts: lnlxgk01
+- hosts: lnlxik01
   vars:
 
 
@@ -54,7 +54,7 @@
 ## Spacewalk osad packages install
   - name: YUM install osad Spacewalk packages
     yum:
-      name: /var/tmp/RHN-Register/python2-rhnlib-2.9.5-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-client-tools-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-setup-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-check-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-setup-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-osa-common-5.11.107-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/spacewalk-usix-2.9.1-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-spacewalk-usix-2.9.1-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm, /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
+      name: /var/tmp/RHN-Register/jabberpy-0.5-0.27.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhnlib-2.9.5-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-client-tools-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-setup-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-check-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-rhn-setup-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-osa-common-5.11.107-1.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.9.36-1.el7.noarch.rpm, /var/tmp/RHN-Register/spacewalk-usix-2.9.1-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-spacewalk-usix-2.9.1-1.el7.noarch.rpm, /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm, /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
       state: present
       disable_gpg_check: yes
 
@@ -273,11 +273,11 @@
       state: restarted
 
 # Yum install dotnet dependencies from 3rd-Party dir
-  - name: install dotnet and dependencies from a local file
-    yum:
-      name: /var/tmp/3rd-Party/aspnetcore-runtime-2.2.4-x64.rpm, /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm, /var/tmp/3rd-Party/code-1.40.1-1573664332.el7.x86_64.rpm, /var/tmp/3rd-Party/dbeaver-ce-6.2.5-stable.x86_64.rpm, /var/tmp/3rd-Party/dotnet-host-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-hostfxr-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-deps-2.2.4-rhel.7-x64.rpm, /var/tmp/3rd-Party/dotnet-sdk-2.2.203-x64.rpm, /var/tmp/3rd-Party/code-1.41.1-1576681965.el7.x86_64.rpm
-      state: present
-      disable_gpg_check: yes
+#  - name: install dotnet and dependencies from a local file
+#    yum:
+#      name: /var/tmp/3rd-Party/aspnetcore-runtime-2.2.4-x64.rpm, /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm, /var/tmp/3rd-Party/code-1.40.1-1573664332.el7.x86_64.rpm, /var/tmp/3rd-Party/dbeaver-ce-6.2.5-stable.x86_64.rpm, /var/tmp/3rd-Party/dotnet-host-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-hostfxr-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-2.2.4-x64.rpm, /var/tmp/3rd-Party/dotnet-runtime-deps-2.2.4-rhel.7-x64.rpm, /var/tmp/3rd-Party/dotnet-sdk-2.2.203-x64.rpm, /var/tmp/3rd-Party/code-1.41.1-1576681965.el7.x86_64.rpm
+#      state: present
+#      disable_gpg_check: yes
 
 
 
