@@ -66,10 +66,10 @@
 
 
 ## RHN-Register clean up /var/tmp/RHN-Register working directory
-  - name: Clean-up remove /var/tmp/RHN-Register directory
-    file:
-     path: /var/tmp/RHN-Register
-     state: absent
+#  - name: Clean-up remove /var/tmp/RHN-Register directory
+#    file:
+#     path: /var/tmp/RHN-Register
+#     state: absent
 
 
 ## ADD FIREWALL RULES
@@ -83,7 +83,47 @@
       - ssh
 
 
-## ADD USERS AND GROUPS
+## ADD ADMIN USERS AND GROUPS
+# Add sp_users group
+  - name: Add sp_users group
+    group:
+     name: sp_users
+     state: present
+
+# Add sp_users accounts locally
+  - name: Add sp_users accounts locally
+    user:
+     name: "{{ item }}"
+     state: present
+     shell: /bin/bash
+     groups: sp_users,xrdpusers
+     append: yes
+    loop:
+      - stevene
+      - paul
+      - andrew
+      - charlie
+      - evansa
+      - krpa
+      - avpa
+
+# Add sp_users entries to /etc/sudoers
+  - name: Adding sp_users to /etc/sudoers
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## sp_users'
+      - 'Cmnd_Alias SP_USERS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/su -'
+      - '%sp_users      ALL=(ALL)        SP_USERS'
+
+
+## ADD NORMAL USERS AND GROUPS
 # Add devs group
   - name: Add devs group
     group:
@@ -147,7 +187,6 @@
     loop:
       - NickG
       - RuneS
-
 
 # Add Users to DevLead group
   - name:  Add users to DevLead Group
@@ -218,18 +257,56 @@
       - /home/NickG
       - /home/RuneS
 
+# Add devs entries to /etc/sudoers
+  - name: Adding devs to /etc/sudoers
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## Developers'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/update-ca-trust extract'
+      - '%devs          ALL = NOPASSWD: DEVS'
+
+
+
+## SETUP ECA SYSTEM UTILITES
+
+# yum install git @ latest
+  - name: YUM install snmp and dependencies @ latest
+    yum:
+      name:  net-snmp, net-snmp-utils, net-snmp-agent-libs, net-snmp-libs
+      state: present
+
 ## INSTALL 3RD-PARTY SOFTWARE
+# Copy 3rd-Party dir from spacewalk to host
+  - name:  Ansible copy /var/satellite/3rd-Party directority from Spacewalk to Target Server
+    copy:
+     src: /var/satellite/3rd-Party
+     dest: /var/tmp
+
 # yum install git @ latest
   - name: YUM install git @ latest
     yum:
       name:  git
       state: present
 
-# Copy 3rd-Party dir from spacewalk to host
-  - name:  Ansible copy /var/satellite/3rd-Party directority from Spacewalk to Target Server
-    copy:
-     src: /var/satellite/3rd-Party
-     dest: /var/tmp
+# yum install mariadb @ latest
+  - name: YUM install git @ latest
+    yum:
+      name:  mariadb
+      state: present
+
+# yum install bcompare @ latest
+  - name: install bcompare and its dependencies from local file
+    yum:
+      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm
+      state: present
+      disable_gpg_check: yes
 
 # Yum install XRDP and selinux files.
   - name: install XRDP and its dependencies from local file
@@ -397,3 +474,18 @@
      state: directory
      recurse: yes
      mode: '0757'
+
+
+## TIDY UP TEMPORARY WORKING DIRECTORIES
+## RHN-Register clean up /var/tmp/RHN-Register working directory
+  - name: Clean-up remove /var/tmp/RHN-Register directory
+    file:
+     path: /var/tmp/RHN-Register
+     state: absent
+
+## 3rd-Party clean up /var/tmp/3rd-Party working directory
+  - name: Clean-up remove /var/tmp/RHN-Register directory
+    file:
+     path: /var/tmp/3rd-Party
+     state: absent
+
