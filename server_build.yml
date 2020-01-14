@@ -1,7 +1,7 @@
 - hosts: lnlxgk01
   vars:
 
-
+  - import_playbook: snmp_config.yml
 
   tasks:
 ## REGISTER SERVER TO SPACEWALK
@@ -276,11 +276,15 @@
 
 ## SETUP ECA SYSTEM UTILITES
 
-# yum install git @ latest
-  - name: YUM install snmp and dependencies @ latest
-    yum:
-      name:  net-snmp, net-snmp-utils, net-snmp-agent-libs, net-snmp-libs
-      state: present
+#  - name: ECA snmp config
+#    include_tasks:
+#      import_playbook: snmp_config.yml
+
+# yum install snmp @ latest
+#  - name: YUM install snmp and dependencies @ latest
+#    yum:
+#      name:  net-snmp, net-snmp-utils, net-snmp-agent-libs, net-snmp-libs
+#      state: present
 
 ## INSTALL 3RD-PARTY SOFTWARE
 # Copy 3rd-Party dir from spacewalk to host
@@ -289,6 +293,38 @@
      src: /var/satellite/3rd-Party
      dest: /var/tmp
 
+# Yum install syslog-ng
+  - name: install syslog-ng and dependencies
+    yum:
+      name: syslog-ng
+      state: present
+      disable_gpg_check: yes
+
+# Yum install Crowdstrike RPM.
+  - name: install Crowdstrike from local file
+    yum:
+      name: /var/tmp/3rd-Party/falcon-sensor-5.23.0-8705.el7.x86_64.rpm
+      state: present
+      disable_gpg_check: yes
+
+# CrowdStrike - set customer number
+  - name: Crowstrike - set Customer ID CID
+    shell: /opt/CrowdStrike/falconctl -s -f --cid=ED53295E363C4DA4B8AC5B4E727E2337-7F
+    args:
+      executable: /bin/bash
+
+# Crowdstrike - enable service/start service
+#  - name:  Service Crowdstrike (falcon-sensor)enable/reload/start
+#    service:
+#      name: falcon-sensor
+#      state: reloaded
+
+# Crowdstrike - restart service/start service
+  - name:  Service Crowdstrike (falcon-sensor)enable/reload/start
+    service:
+      name: falcon-sensor
+      state: restarted
+
 # yum install git @ latest
   - name: YUM install git @ latest
     yum:
@@ -296,7 +332,7 @@
       state: present
 
 # yum install mariadb @ latest
-  - name: YUM install git @ latest
+  - name: YUM install mariadb @ latest
     yum:
       name:  mariadb
       state: present
@@ -330,7 +366,6 @@
       - 4300/tcp
       - 5003/tcp
       - 5103/tcp
-
 
 # Firewalld - enable XRDP services
   - name:  Firewalld enbable ports for XRDP
@@ -488,4 +523,3 @@
     file:
      path: /var/tmp/3rd-Party
      state: absent
-
