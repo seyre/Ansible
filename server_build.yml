@@ -32,9 +32,17 @@
 
   - name: YUM install RHN-Register and pre-requisites from local file
     yum:
-      name: /var/tmp/RHN-Register/libnl-1.1.4-3.el7.x86_64.rpm, /var/tmp/RHN-Register/m2crypto-0.21.1-17.el7.x86_64.rpm, /var/tmp/RHN-Register/pyOpenSSL-0.13.1-4.el7.x86_64.rpm, /var/tmp/RHN-Register/python-dmidecode-3.12.2-3.el7.x86_64.rpm, /var/tmp/RHN-Register/python-ethtool-0.8-8.el7.x86_64.rpm, /var/tmp/RHN-Register/python-gudev-147.2-7.el7.x86_64.rpm, /var/tmp/RHN-Register/python-hwdata-1.7.3-4.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhnlib-2.5.65-8.el7.noarch.rpm, /var/tmp/RHN-Register/rhnsd-5.0.13-10.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-setup-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/yum-rhn-plugin-2.0.1-10.el7.noarch.rpm
+      name: /var/tmp/RHN-Register/libnl-1.1.4-3.el7.x86_64.rpm, /var/tmp/RHN-Register/m2crypto-0.21.1-17.el7.x86_64.rpm, /var/tmp/RHN-Register/pyOpenSSL-0.13.1-4.el7.x86_64.rpm, /var/tmp/RHN-Register/python-dmidecode-3.12.2-3.el7.x86_64.rpm, /var/tmp/RHN-Register/python-ethtool-0.8-8.el7.x86_64.rpm, /var/tmp/RHN-Register/python-gudev-147.2-7.el7.x86_64.rpm, /var/tmp/RHN-Register/python-hwdata-1.7.3-4.el7.noarch.rpm, /var/tmp/RHN-Register/rhn-check-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-client-tools-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/rhnlib-2.5.65-8.el7.noarch.rpm, /var/tmp/RHN-Register/rhnsd-5.0.13-10.el7.x86_64.rpm, /var/tmp/RHN-Register/rhn-setup-2.0.2-24.el7.x86_64.rpm, /var/tmp/RHN-Register/yum-rhn-plugin-2.9.5-1.el7.noarch.rpm
       state: present
       disable_gpg_check: yes
+
+## yum-rhn-plugin - disable GPG check
+  - name: yum-rhn-plugin update GPG check 0 in /etc/yum/pluginconf.d/rhnplugin.conf
+    lineinfile:
+     path: /etc/yum/pluginconf.d/rhnplugin.conf
+     insertafter: '#gpgcheck = 0'
+     line: 'gpgcheck = 0'
+     backup: yes
 
 ## RHN-register
   - name: rhn-register as with activation key
@@ -301,7 +309,7 @@
 
 
 # rsyslog add eventengine target to rsyslog.conf
-  - name: Add target eventengine host to max_user_watch settings for Visual Studio
+  - name: Add target eventengine host to /etc/rsyslog.conf
     lineinfile:
      path: /etc/rsyslog.conf
      insertafter: '#*.* @@remote-host:514'
@@ -323,10 +331,11 @@
       disable_gpg_check: yes
 
 # CrowdStrike - set customer number
-  - name: Crowstrike - set Customer ID CID
+  - name: Crowdstrike - Register/set Customer ID CID
     shell: /opt/CrowdStrike/falconctl -s -f --cid=ED53295E363C4DA4B8AC5B4E727E2337-7F
     args:
       executable: /bin/bash
+      creates: /opt/CrowdStrike/Registry.bin
 
 # Crowdstrike - enable service/start service
 #  - name:  Service Crowdstrike (falcon-sensor)enable/reload/start
