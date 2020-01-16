@@ -1,0 +1,30 @@
+# yum install snmp @ latest
+  - name: YUM install snmp and dependencies @ latest
+    yum:
+      name:  net-snmp, net-snmp-utils, net-snmp-agent-libs, net-snmp-libs
+      state: present
+      disable_gpg_check: yes
+
+# Freiwalld - enable snmpd service/ports
+  - name:  Firewalld enbable ports for SNMPD
+    firewalld:
+       port: "{{ item }}"
+       permanent: yes
+       immediate: yes
+       state: enabled
+    loop:
+      - 161/tcp
+      - 161/udp
+
+##
+#  - name: Add max_user_watch settings for Visual Studio
+#    lineinfile:
+#     path: /etc/sysctl.conf
+#     line: fs.inotify.max_user_watches=524288
+#     create: yes
+
+  - name:  Add custom ECA snmpd.conf (adding ECA_international.com community and enable .1 tree access)
+    copy:
+     src: /var/satellite/custom-files/ECA_snmpd.conf
+     dest: /etc/snmp/snmpd.conf
+     backup: yes

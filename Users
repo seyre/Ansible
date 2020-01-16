@@ -1,0 +1,20 @@
+192.168.130.62	lnlxss01	SergejS	Sergej Sapalov  dev 
+192.168.130.61	lnlxng01	NickG	Nick Gray	DevMan
+192.168.130.60	lnlxrs01	RuneS	Rune Stamselberg        DevMan  
+192.168.130.60	lnlxwg01	WendyG	Wendy Gasperazzo        DevLead 
+192.168.130.58	lnlxrr01	RemyR	Remy Roux dit Buisson * dev 
+192.168.130.57	lnlxmm01	MikeM	Mike McAllistair *      DevLead 
+#lnlxik01	IstvanK	Istvan Kun *    Dev     
+#lnlxgk01	GlennK	Glenn Knight    dev 
+#lnlxap01	AlexP	Alexander Paskhin #     dev 
+#lnlxsh01	SajedH	Sajed Hussain # dev     
+
+
+192.168.130.76 lnlxspw01.domain1.starrate-intranet.co.uk lnlxspw01 spacewalk
+192.168.130.68 lnlxpoc01.domain1.starrate-intranet.co.uk lnlxpoc01
+192.168.130.75 lnlxpoc02.domain1.starrate-intranet.co.uk lnlxpoc02
+192.168.130.63 lnlxik01.domain1.starrate-intranet.co.uk lnlxik01	#lnlxik01       IstvanK Istvan Kun *    Dev
+192.168.130.64 lnlxgk01.domain1.starrate-intranet.co.uk lnlxgk01	#lnlxgk01       GlennK  Glenn Knight    dev
+192.168.130.66 lnlxsh01.domain1.starrate-intranet.co.uk lnlxsh01	#lnlxsh01       SajedH  Sajed Hussain # dev
+192.168.130.67 lnlxap01.domain01.starrate-intranet.co.uk lnlxap01	#lnlxap01       AlexP   Alexander Paskhin #     dev
+192.168.130.137 git01.domain01.starrate-intranet.co.uk git01
