@@ -1,4 +1,4 @@
-- hosts: lnlxrr01
+- hosts: lnlxrr01 lnlxwg01
   vars:
 
   - import_playbook: snmp_config.yml
@@ -16,15 +16,19 @@
      state: directory
      mode: '0755'
 
+  - name: Shell yum clean all
+    shell: /usr/bin/yum clean all
+    args:
+      executable: /bin/bash
+      warn: no
+      creates: /etc/yum.repos.d/CentOS-Base.repo
+
   - name: Shell copy repo files to BACKUP directory
     shell: /usr/bin/mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/BACKUP
     args:
       executable: /bin/bash
       warn: no
       creates: /etc/yum.repos.d/BACKUP/CentOS-Base.repo
-
-  - name: Shell yum clean all
-    shell: /usr/bin/yum clean all
 
 #  - name: Remove repository (and clean up left-over metadata)
 #    yum_repository:
@@ -200,7 +204,7 @@
       - KulaK
       - WendyG
       - MikeM
-      - RemyB
+      - RemyR
       - GlennK
       - IstvanK
       - SergejS
@@ -242,7 +246,7 @@
       - /home/SergejS
       - /home/AlexP
       - /home/SajedH
-      - /home/RemyB
+      - /home/RemyR
       - /home/IstvanK
       - /home/KulaK
 
@@ -259,7 +263,7 @@
       - /home/SergejS
       - /home/AlexP
       - /home/SajedH
-      - /home/RemyB
+      - /home/RemyR
       - /home/IstvanK
       - /home/KulaK
       - /home/MikeM
@@ -278,7 +282,7 @@
       - /home/SergejS
       - /home/AlexP
       - /home/SajedH
-      - /home/RemyB
+      - /home/RemyR
       - /home/IstvanK
       - /home/KulaK
       - /home/MikeM
@@ -397,7 +401,7 @@
       disable_gpg_check: yes
 
 # Firewalld - enable XRDP services
-  - name:  Firewalld enbable ports for XRDP
+  - name:  Firewalld enable ports for XRDP
     firewalld:
        port: "{{ item }}"
        permanent: yes
@@ -427,6 +431,7 @@
   - name:  Service XRDP enable/reload/start
     service:
       name: xrdp
+      enabled: yes
       state: restarted
 
 # Yum install dotnet dependencies from 3rd-Party dir
@@ -473,7 +478,7 @@
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
     yum_repository:
-      name: Google_chrome_latest
+      name: Google_chrome_latest.repo
       state: absent
 #    notify: yum-clean-metadata
 
@@ -483,7 +488,7 @@
 # Yum_repository add BeyondCompare ScooterSoft  Repository
   - name: Add ScotterSoft beyondcompare repository
     yum_repository:
-      name: beyond_compare_latest
+      name: scootersoftware
       description: ScooterSoft beyondcompare latest
       baseurl: http://www.scootersoftware.com/bcompare4
       gpgcheck: yes
@@ -500,7 +505,7 @@
 # Yum_repository BeyondCompare ScooterSoft Remove
   - name: Remove BeyondCompare ScooterSoft repository
     yum_repository:
-      name: beyond_compare_latest
+      name: scootersoftware
       state: absent
 #    notify: yum-clean-metadata
 
@@ -560,6 +565,37 @@
      state: directory
      recurse: yes
      mode: '0757'
+
+## NODEJS and then NPM GLOBAL modules install (should be 141 based up on software levels below)
+  - name:  NODEJS install (local/user install swill be completed by the developers
+    yum:
+      name: nodejs-10.17.0-1nodesource.x86_64
+      state: present
+      disable_gpg_check: yes
+
+  - name:  NPM Global module installs (local/user install swill be completed by the developers
+    npm:
+      name: "@angular/cli"
+      version: 7.3.9
+      global: yes
+      state: present
+      executable: /usr/bin/npm
+
+
+  - name:  NPM Global module installs (local/user install swill be completed by the developers
+    npm:
+      name: typescript
+      version: 3.4.5
+      global: yes
+      state: present
+      executable: /usr/bin/npm
+
+# npm list -g -depth=0
+# npm install -g @angular/cli@7.3.9
+# npm install -g typescript@3.4.5
+# npm list -g -depth=1 | wc -l     #  141 total
+
+
 
 
 ## TIDY UP TEMPORARY WORKING DIRECTORIES
