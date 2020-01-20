@@ -22,14 +22,7 @@
       - login: avpa
         groups: sp_users,xrdpusers
         password: $6$TMreZdDF$sV9G4WnMrv4FSPWJxAUbJflFg.prau6QDwNZ1JjvslSw9mMnwb1G7nkYGX1LJhbLIIEgPS6uJ4pWJizx71rwV1
-
-    dev_users
-#      - login: ECABuildRelease
-#        groups:
-#        password:
-#      - login: ECAReleaseBuilder
-#        groups:
-#        password:
+    dev_users:
       - login: NickG
         groups: devs,xrdpusers,ECA,DevMan
         password: $6$LSjGBEPC$5NPwAHr7WKHo3qV6sc3uftlhUUy3MYKaYZu0aFyS/.tr/h1IEYnMzhppEl8s4B8ajBf3Mh8jqe5c.8lATozOL/
@@ -41,7 +34,7 @@
         password: $6$ONnrSRxs$7FG8RAhoX2rWepUo42pn3wl2zMPI91KaSqMNq4gA8V55FJX8HV4tFOdfc9ifWvGCQb9l7xFJ6x3MbAxZ/3Kpy/
       - login: MikeM
         groups: devs,xrdpusers,ECA,DevLead
-        password: 
+        password:
       - login: AlexP
         groups: devs,xrdpusers,ECA
         password: $6$HAcZMuLj$SjaCaKDUWNitnPwodAsvYuJeJND2ugQhardupMfErGKa5/vpdAiQ2a93AH40yIRw7A.7GS0nGwCYx/0UPO/Sp0
@@ -54,7 +47,6 @@
       - login: RemyR
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
-
       - login: KulaK
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
@@ -65,6 +57,11 @@
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
 
+#      - login: ECABuildRelease
+#        groups:
+#        password:
+#      - login: ECAReleaseBuilder
+#        groups:
 
 #  - import_playbook: snmp_config.yml
 
@@ -267,28 +264,43 @@
      name: DevLead
      state: present
 
-# Add Developers accounts locally
-  - name: Add developers accounts locally
+# Add dev_users accounts locally
+  - name: Add dev_users accounts locally
     user:
-     name: "{{ item }}"
-     state: present
-     shell: /bin/bash
-     groups: devs,xrdpusers,ECA
-     append: yes
-    loop:
-      - ECABuildRelease
-      - giteca
-      - NickG
-      - AlexP
-      - SajedH
-      - KulaK
-      - WendyG
-      - MikeM
-      - RemyR
-      - GlennK
-      - IstvanK
-      - SergejS
-      - ECAReleaseBuilder
+      name: "{{ item.login }}"
+      groups: "{{ item.groups }}"
+      shell: /bin/bash
+      append: yes
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa.key
+      comment: "Development User"
+      append: yes
+      password: "{{ item.password }}"
+    loop: "{{ dev_users }}"
+
+# Add Developers accounts locally
+#  - name: Add developers accounts locally
+#    user:
+#     name: "{{ item }}"
+#     state: present
+#     shell: /bin/bash
+#     groups: devs,xrdpusers,ECA
+#     append: yes
+#    loop:
+#      - ECABuildRelease
+#      - giteca
+#      - NickG
+#      - AlexP
+#      - SajedH
+#      - KulaK
+#      - WendyG
+#      - MikeM
+#      - RemyR
+#      - GlennK
+#      - IstvanK
+#      - SergejS
+#      - ECAReleaseBuilder
 
 # Add Users to DevMan group
   - name:  Add users to DevMan Group
