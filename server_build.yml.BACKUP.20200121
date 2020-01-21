@@ -1,4 +1,4 @@
-- hosts: lnlxrs01
+- hosts: lnlxwg01 lnlxrr01
   vars:
     admin_users:
       - login: stevene
