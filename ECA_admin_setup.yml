@@ -1,6 +1,9 @@
 - hosts: lnlxspw01
   vars:
     admin_users:
+      - login: superlinux
+        groups: wheel
+        password: $6$U9YOVlh1$ULzP1yyjPl.tCDbpStoLaxMVy6dCFg10FvluL355h1eN6AFuP0HgCC5QSAdR6v4VmJrqh5tFEolp7klLYSUlJ1
       - login: stevene
         groups: sp_users
         password: $6$sGcYQwxn$JB6vMtam6I.ygu2M20vNA7dqGhPqW5UlLRAOl7Kl.hbcMg7bwxmJ6MbvwdgmhECCZ0sHRnoVYeRYVeWrwHCxN1
@@ -144,7 +147,6 @@
       name: "{{ item.login }}"
       groups: "{{ item.groups }}"
       shell: /bin/bash
-      append: yes
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa.key
@@ -255,4 +257,10 @@
   - name: Clean-up remove /var/tmp/RHN-Register directory
     file:
      path: /var/tmp/3rd-Party
+     state: absent
+
+## Remove the admin account used for initial POST OS build/replaced with Break Glass acocunt
+  - name: Remove the admin account used for initial POST OS build/replaced with Break Glass acocunt
+    user:
+     name: admin
      state: absent
