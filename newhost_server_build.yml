@@ -1,4 +1,4 @@
-- hosts: lnlxwg01
+- hosts: newhost
   vars:
     admin_users:
       - login: superlinux
@@ -236,7 +236,7 @@
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa.key
-      comment: "{{ item.login }}"
+      comment: "Privileged User"
       append: yes
       password: "{{ item.password }}"
 #      update_password: on_create
@@ -298,7 +298,7 @@
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa.key
-      comment: "{{ item.login }}"
+      comment: "Development User"
       append: yes
       password: "{{ item.password }}"
       update_password: on_create
