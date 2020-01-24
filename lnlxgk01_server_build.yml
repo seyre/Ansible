@@ -1,4 +1,4 @@
-- hosts: lnlxwg01
+- hosts: lnlxgk01
   vars:
     admin_users:
       - login: superlinux
@@ -421,7 +421,7 @@
     with_items:
       - ''
       - '## Developers'
-      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
+      - 'Cmnd_Alias DEVS =  /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
       - '%devs          ALL = NOPASSWD: DEVS'
 
 # Add devs entries to /etc/sudoers

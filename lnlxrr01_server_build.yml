@@ -1,4 +1,4 @@
-- hosts: host_name
+- hosts: lnlxrr01
   vars:
     admin_users:
       - login: superlinux
@@ -49,7 +49,7 @@
         password: $6$3keSVpCR$H1N5BP7TIywfAh8aMOI64ciWS/f7qlww4cL8r17HxlkDgKOyqDCUBh20AbVPWTHCzMhOOWeEfGaTG2vVQqcrb0
       - login: RemyR
         groups: devs,xrdpusers,ECA
-        password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
+        password: $6$vgVXUwEQ$..Y0SvO55HLQuvhYMZ1vzrTMYBXPHFktjFxkSO1PHGK.ecm4gyeVEahJAlOakyTfw7ghcCpDCqDx3UdhEH2lg1
       - login: KulaK
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
@@ -58,7 +58,7 @@
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
       - login: SergejS
         groups: devs,xrdpusers,ECA
-        password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
+        password: $6$SrAjlNnM$Pmkip8AAGbGiAlH1vJEOJxw8vdDYp8DboDOtKsYH9iKcyz89p6bmSZNWFoMJvs3rHqCMFcSOI7INT4EBWtLB90
 
 #      - login: ECABuildRelease
 #        groups:
@@ -407,6 +407,22 @@
       - /home/WendyG
       - /home/NickG
       - /home/RuneS
+
+# Add devs entries to /etc/sudoers
+  - name: removing legacy devs entry (used vi for /etc/hosts which is insecure)
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+      state: absent
+    with_items:
+      - ''
+      - '## Developers'
+      - 'Cmnd_Alias DEVS =  /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
+      - '%devs          ALL = NOPASSWD: DEVS'
 
 # Add devs entries to /etc/sudoers
   - name: Adding devs to /etc/sudoers
