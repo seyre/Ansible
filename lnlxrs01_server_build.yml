@@ -1,4 +1,4 @@
-- hosts: host_name
+- hosts: lnlxrs01
   vars:
     admin_users:
       - login: superlinux

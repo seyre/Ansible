@@ -1,4 +1,4 @@
-- hosts: host_name
+- hosts: lnlxwg01
   vars:
     admin_users:
       - login: superlinux
@@ -236,7 +236,7 @@
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa.key
-      comment: "{{ item.login }}"
+      comment: "Privileged User"
       append: yes
       password: "{{ item.password }}"
 #      update_password: on_create
@@ -298,7 +298,7 @@
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa.key
-      comment: "{{ item.login }}"
+      comment: "Development User"
       append: yes
       password: "{{ item.password }}"
       update_password: on_create
@@ -420,8 +420,8 @@
     with_items:
       - ''
       - '## Developers'
-      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
-      - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
+      - '%devs          ALL = NOPASSWD: DEVS'
 
 
 
