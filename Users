@@ -17,4 +17,6 @@
 192.168.130.64 lnlxgk01.domain1.starrate-intranet.co.uk lnlxgk01	#lnlxgk01       GlennK  Glenn Knight    dev
 192.168.130.66 lnlxsh01.domain1.starrate-intranet.co.uk lnlxsh01	#lnlxsh01       SajedH  Sajed Hussain # dev
 192.168.130.67 lnlxap01.domain01.starrate-intranet.co.uk lnlxap01	#lnlxap01       AlexP   Alexander Paskhin #     dev
+192.168.130.60 lnlxrs01.domain01.starrate-intranet.co.uk lnlxrs01 	#lnlxrs01	RuneS	Rune Stamselberg #       DevMan  
+192.168.130.58 lnlxrr01.domain01.starrate-intranet.co.uk lnlxrr01	#lnlxrr01	RemyR	Remy Roux dit Buisson * dev 
 192.168.130.137 git01.domain01.starrate-intranet.co.uk git01
