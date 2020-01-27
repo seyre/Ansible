@@ -1,25 +1,34 @@
 - hosts: lnlxwg01
   tasks:
+
+  - name: Copy Perl needs_restarting.py from GH to target server
+    copy: src=/var/satellite/3rd-Party/needs-restarting.py dest=/root/needs-restarting.py mode=0700
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
   - name: yum - upgrade all packages to latest
     yum:
+     name: '*'
      state: latest
+     update_cache: yes
 
   - name: Check for reboot hint.
-    shell: LAST_KERNEL=$(rpm -q --last kernel | awk 'NR==1{sub(/kernel-/,""); print $1}'); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
+    shell: 
+      cmd: LAST_KERNEL=$(rpm -q --last kernel | awk 'NR==1{sub(/kernel-/,""); print $1}'); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
     args:
-      ignore_errors: true
-      register: reboot_hint
+      warn: no
+    register: reboot_hint
 
   - name: Rebooting ...
     command: shutdown -r now "Reboot required for updated kernel"
-#    async: 0
-#    poll: 0
+    async: 0
+    poll: 0
 #    sudo: true
     ignore_errors: true
     when: reboot_hint.stdout.find("reboot") != -1
     register: rebooting
 
   - name: Wait for thing to reboot...
-    pause: seconds=120
-    when: rebooting|changed
+    pause: 
+      minutes: 2
+#    when: rebooting|changed
 
