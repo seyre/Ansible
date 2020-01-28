@@ -408,7 +408,7 @@
       - /home/NickG
       - /home/RuneS
 
-# Add devs entries to /etc/sudoers
+# Clean up old Development rules/entires in /etc/sudoers
   - name: removing legacy devs entry (used vi for /etc/hosts which is insecure)
     lineinfile:
       owner: root
@@ -766,9 +766,6 @@
 # npm install -g typescript@3.4.5
 # npm list -g -depth=1 | wc -l     #  141 total
 
-
-
-
 ## TIDY UP TEMPORARY WORKING DIRECTORIES
 ## RHN-Register clean up /var/tmp/RHN-Register working directory
   - name: Clean-up remove /var/tmp/RHN-Register directory
@@ -787,4 +784,3 @@
     user:
      name: admin
      state: absent
-

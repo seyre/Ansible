@@ -1,4 +1,4 @@
-- hosts: lnlxwg01
+- hosts: lnlxng01
   tasks:
 
   - name: Copy Perl needs_restarting.py from GH to target server
