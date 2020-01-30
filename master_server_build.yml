@@ -352,7 +352,8 @@
       - MikeM
 
 # Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
-  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users
+# 30/01/2020 - /etc/ECA added for devs ACL group
+  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
     acl:
       path: "{{ item }}"
       entity: devs
@@ -367,6 +368,7 @@
       - /home/RemyR
       - /home/IstvanK
       - /home/KulaK
+      - /etc/ECA
 
 # Setup ACL's for DevLead group(excludes read/write access to DevLead)
   - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
@@ -527,18 +529,18 @@
       state: present
 
 # yum install bcompare @ latest
-  - name: install bcompare and its dependencies from local file
-    yum:
-      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm
-      state: present
-      disable_gpg_check: yes
+#  - name: install bcompare and its dependencies from local file
+#    yum:
+#      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm
+#      state: present
+#      disable_gpg_check: yes
 
 # File - add Beyond Compare License key
 
 # Yum install XRDP and selinux files.
   - name: install XRDP and its dependencies from local file
     yum:
-      name: selinux-policy, selinux-policy-devel, selinux-policy-targeted, /var/tmp/3rd-Party/xrdp-selinux-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xorgxrdp-0.2.11-1.el7.x86_64.rpm, m4
+      name: /var/tmp/3rd-Party/selinux-policy-3.13.1-252.el7.1.noarch.rpm, /var/tmp/3rd-Party/selinux-policy-devel-3.13.1-252.el7_7.6.noarch.rpm, selinux-policy-targeted, /var/tmp/3rd-Party/xrdp-selinux-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xorgxrdp-0.2.11-1.el7.x86_64.rpm, m4
       state: present
       disable_gpg_check: yes
 
@@ -643,6 +645,12 @@
       state: absent
 #    notify: yum-clean-metadata
 
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome
+      state: absent
+#    notify: yum-clean-metadata
 
 ## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
 
