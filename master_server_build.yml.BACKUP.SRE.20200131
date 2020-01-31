@@ -26,46 +26,40 @@
         groups: sp_users,xrdpusers
         password: $6$TMreZdDF$sV9G4WnMrv4FSPWJxAUbJflFg.prau6QDwNZ1JjvslSw9mMnwb1G7nkYGX1LJhbLIIEgPS6uJ4pWJizx71rwV1
     dev_users:
-      - login: ngsd
+      - login: NickG
         groups: devs,xrdpusers,ECA,DevMan
         password: $6$LSjGBEPC$5NPwAHr7WKHo3qV6sc3uftlhUUy3MYKaYZu0aFyS/.tr/h1IEYnMzhppEl8s4B8ajBf3Mh8jqe5c.8lATozOL/
-      - login: rssd
+      - login: RuneS
         groups: devs,xrdpusers,ECA,DevMan
         password: $6$FNEvyJnR$2UPjtLV.spgsteetoQ1gLEUO93TG3FzjTByXWpXY5JK1qUVaVCZoxscvwcMDV672BxP14MV3r31ghMRLzkOc.0
-      - login: wgsd
+      - login: WendyG
         groups: devs,xrdpusers,ECA,DevLead
         password: $6$ONnrSRxs$7FG8RAhoX2rWepUo42pn3wl2zMPI91KaSqMNq4gA8V55FJX8HV4tFOdfc9ifWvGCQb9l7xFJ6x3MbAxZ/3Kpy/
-      - login: mmsd
+      - login: MikeM
         groups: devs,xrdpusers,ECA,DevLead
         password:
-      - login: apsd
+      - login: AlexP
         groups: devs,xrdpusers,ECA
         password: $6$HAcZMuLj$SjaCaKDUWNitnPwodAsvYuJeJND2ugQhardupMfErGKa5/vpdAiQ2a93AH40yIRw7A.7GS0nGwCYx/0UPO/Sp0
-      - login: shsd
+      - login: SajedH
         groups: devs,xrdpusers,ECA
         password: $6$VTUOdXcA$MtQ2UzWgLk4wxDj2Ny9F..TOT776B.WZNhDywoRb2fLZIs2Kzdzy5vFoqYR7Nype9UfHtKSdvOhuHgskIkgtD1
-      - login: iksd
+      - login: IstvanK
         groups: devs,xrdpusers,ECA
         password: $6$3keSVpCR$H1N5BP7TIywfAh8aMOI64ciWS/f7qlww4cL8r17HxlkDgKOyqDCUBh20AbVPWTHCzMhOOWeEfGaTG2vVQqcrb0
-      - login: ngsd
+      - login: RemyR
         groups: devs,xrdpusers,ECA
         password: $6$udnlzLCE$v.Tvpp1RJon3ZRNXzZ3KnUOrCGxhVVOZFqzqPo98ih0pZvEfw.A/qEAO5cF4mL84SZGL8vxf.RZfbCqORcAdg0
       - login: KulaK
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
-      - login: gksd
+      - login: GlennK
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
-      - login: sssd
+      - login: SergejS
         groups: devs,xrdpusers,ECA
         password: $6$SrAjlNnM$Pmkip8AAGbGiAlH1vJEOJxw8vdDYp8DboDOtKsYH9iKcyz89p6bmSZNWFoMJvs3rHqCMFcSOI7INT4EBWtLB90
 
-############################################
-# CHANGES
-# 2020/01/31 - new usernames for all dev accounts
-#
-#
-###########################################
 #      - login: ECABuildRelease
 #        groups:
 #        password:
@@ -321,16 +315,16 @@
 #    loop:
 #      - ECABuildRelease
 #      - giteca
-#      - ngsd
-#      - apsd
-#      - shsd
+#      - NickG
+#      - AlexP
+#      - SajedH
 #      - KulaK
-#      - wgsd
-#      - mmsd
-#      - ngsd
-#      - gksd
-#      - iksd
-#      - sssd
+#      - WendyG
+#      - MikeM
+#      - RemyR
+#      - GlennK
+#      - IstvanK
+#      - SergejS
 #      - ECAReleaseBuilder
 
 # Add Users to DevMan group
@@ -342,8 +336,8 @@
      groups: devs,xrdpusers,ECA,DevMan
      append: yes
     loop:
-      - ngsd
-      - rssd
+      - NickG
+      - RuneS
 
 # Add Users to DevLead group
   - name:  Add users to DevLead Group
@@ -354,8 +348,8 @@
      groups: devs,xrdpusers,ECA,DevLead
      append: yes
     loop:
-      - wgsd
-      - mmsd
+      - WendyG
+      - MikeM
 
 # Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
 # 30/01/2020 - /etc/ECA added for devs ACL group
@@ -367,12 +361,12 @@
       permissions: rwx
       state: present
     loop:
-      - /home/gksd
-      - /home/sssd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
+      - /home/GlennK
+      - /home/SergejS
+      - /home/AlexP
+      - /home/SajedH
+      - /home/RemyR
+      - /home/IstvanK
       - /home/KulaK
       - /etc/ECA
 
@@ -385,15 +379,15 @@
       permissions: rwx
       state: present
     loop:
-      - /home/gksd
-      - /home/sssd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
+      - /home/GlennK
+      - /home/SergejS
+      - /home/AlexP
+      - /home/SajedH
+      - /home/RemyR
+      - /home/IstvanK
       - /home/KulaK
-      - /home/mmsd
-      - /home/wgsd
+      - /home/MikeM
+      - /home/WendyG
 
 # Setup ACL's for DevLead group(read/write access to everything)
   - name:  Add ACL for DevLead group to all /home accounts
@@ -404,17 +398,17 @@
       permissions: rwx
       state: present
     loop:
-      - /home/gksd
-      - /home/sssd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
+      - /home/GlennK
+      - /home/SergejS
+      - /home/AlexP
+      - /home/SajedH
+      - /home/RemyR
+      - /home/IstvanK
       - /home/KulaK
-      - /home/mmsd
-      - /home/wgsd
-      - /home/ngsd
-      - /home/rssd
+      - /home/MikeM
+      - /home/WendyG
+      - /home/NickG
+      - /home/RuneS
 
 # Clean up old Development rules/entires in /etc/sudoers
   - name: removing legacy devs entry (used vi for /etc/hosts which is insecure)
