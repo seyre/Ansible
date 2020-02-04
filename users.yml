@@ -1,0 +1,81 @@
+---
+- hosts: "localhost"
+  connection: "local"
+  vars:
+    users:
+    dev_users:
+      - login: ngsd
+        groups: devs,xrdpusers,ECA,DevMan
+        password: $6$LSjGBEPC$5NPwAHr7WKHo3qV6sc3uftlhUUy3MYKaYZu0aFyS/.tr/h1IEYnMzhppEl8s4B8ajBf3Mh8jqe5c.8lATozOL/
+      - login: rssd
+        groups: devs,xrdpusers,ECA,DevMan
+        password: $6$FNEvyJnR$2UPjtLV.spgsteetoQ1gLEUO93TG3FzjTByXWpXY5JK1qUVaVCZoxscvwcMDV672BxP14MV3r31ghMRLzkOc.0
+      - login: wgsd
+        groups: devs,xrdpusers,ECA,DevLead
+        password: $6$ONnrSRxs$7FG8RAhoX2rWepUo42pn3wl2zMPI91KaSqMNq4gA8V55FJX8HV4tFOdfc9ifWvGCQb9l7xFJ6x3MbAxZ/3Kpy/
+      - login: mmsd
+        groups: devs,xrdpusers,ECA,DevLead
+        password:
+      - login: apsd
+        groups: devs,xrdpusers,ECA
+        password: $6$HAcZMuLj$SjaCaKDUWNitnPwodAsvYuJeJND2ugQhardupMfErGKa5/vpdAiQ2a93AH40yIRw7A.7GS0nGwCYx/0UPO/Sp0
+      - login: shsd
+        groups: devs,xrdpusers,ECA
+        password: $6$VTUOdXcA$MtQ2UzWgLk4wxDj2Ny9F..TOT776B.WZNhDywoRb2fLZIs2Kzdzy5vFoqYR7Nype9UfHtKSdvOhuHgskIkgtD1
+      - login: iksd
+        groups: devs,xrdpusers,ECA
+        password: $6$3keSVpCR$H1N5BP7TIywfAh8aMOI64ciWS/f7qlww4cL8r17HxlkDgKOyqDCUBh20AbVPWTHCzMhOOWeEfGaTG2vVQqcrb0
+      - login: ngsd
+        groups: devs,xrdpusers,ECA
+        password: $6$udnlzLCE$v.Tvpp1RJon3ZRNXzZ3KnUOrCGxhVVOZFqzqPo98ih0pZvEfw.A/qEAO5cF4mL84SZGL8vxf.RZfbCqORcAdg0
+      - login: gksd
+        groups: devs,xrdpusers,ECA
+        password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
+      - login: ssasd
+        groups: devs,xrdpusers,ECA
+        password: $6$SrAjlNnM$Pmkip8AAGbGiAlH1vJEOJxw8vdDYp8DboDOtKsYH9iKcyz89p6bmSZNWFoMJvs3rHqCMFcSOI7INT4EBWtLB90
+    remove_users:
+    - "WengyG"
+    - "GlennK"
+    - "NickG"
+    - "RuneS"
+    - "IstvanK"
+    - "SergeS"
+    - "AlexP"
+    - "RemyR"
+    - "MikeM"
+  handlers:
+  - name: "Restart sshd"
+    service:
+      name: "sshd"
+      state: "restarted"
+  tasks:
+  - name: "Create user accounts"
+    user:
+      name: "{{ item.username }}"
+      groups: "{{ item.groups }}"
+      state: "present"
+    with_items: "{{ dev_users }}"
+  - name: "Remove old user accounts in remove_users"
+    user:
+      name: "{{ item }}"
+      state: "absent"
+    with_items: "{{ remove_users }}"
+  - name: "Add authorized keys"
+    authorized_key:
+      user: "{{ item.username }}"
+      key: "{{ lookup('file', 'files/'+ item.username + '.key.pub') }}"
+    with_items: "{{ users }}"
+  - name: "Allow admin users to sudo without a password"
+    lineinfile:
+      dest: "/etc/sudoers" # path: in version 2.3
+      state: "present"
+      regexp: "^%admin"
+      line: "%admin ALL=(ALL) NOPASSWD: ALL"
+  - name: "Disable root login via SSH"
+    lineinfile:
+      dest: "/etc/ssh/sshd_config"
+      regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+    notify: "Restart sshd"
+...

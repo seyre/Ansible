@@ -665,6 +665,13 @@
       state: absent
 #    notify: yum-clean-metadata
 
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome-stable
+      state: absent
+#    notify: yum-clean-metadata
+
 ## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
 
 # Yum_repository add BeyondCompare ScooterSoft  Repository
