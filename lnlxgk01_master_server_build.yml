@@ -1,4 +1,4 @@
-- hosts: hostname
+- hosts: lnlxgk01
   vars:
     admin_users:
       - login: superlinux
@@ -250,9 +250,11 @@
       name: "{{ item.login }}"
       groups: "{{ item.groups }}"
       shell: /bin/bash
+      force: yes
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa
+      ssh_key_comment: "{{ item.login }}@{{ ansible_hostname }}"
       comment: "{{ item.login }}"
       append: yes
       password: "{{ item.password }}"
@@ -451,7 +453,7 @@
     with_items:
       - ''
       - '## Developers'
-      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
       - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
 
 
