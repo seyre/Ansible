@@ -2,7 +2,43 @@
 - hosts: "localhost"
   connection: "local"
   vars:
-    users:
+   admin_users:
+      - login: superlinux
+        groups: wheel
+        password: $6$U9YOVlh1$ULzP1yyjPl.tCDbpStoLaxMVy6dCFg10FvluL355h1eN6AFuP0HgCC5QSAdR6v4VmJrqh5tFEolp7klLYSUlJ1
+      - login: stevene
+        groups: sp_users,xrdpusers
+        password: $6$sGcYQwxn$JB6vMtam6I.ygu2M20vNA7dqGhPqW5UlLRAOl7Kl.hbcMg7bwxmJ6MbvwdgmhECCZ0sHRnoVYeRYVeWrwHCxN1
+      - login: andrew
+        groups: sp_users,xrdpusers
+        password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
+      - login: arpa
+        groups: sp_users,xrdpusers
+        password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
+      - login: paul
+        groups: sp_users,xrdpusers
+        password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
+      - login: pgpa
+        groups: sp_users,xrdpusers
+        password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
+      - login: charlie
+        groups: sp_users,xrdpusers
+        password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
+      - login: crpa
+        groups: sp_users,xrdpusers
+        password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
+      - login: evansa
+        groups: sp_users,xrdpusers
+        password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
+      - login: eapa
+        groups: sp_users,xrdpusers
+        password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
+      - login: krpa
+        groups: sp_users,xrdpusers
+        password: $6$qvVZHpRJ$CGx2PWcPi.lWtSzCb8tdMxV/ZWHQw7gXkWyvppZrU5pJAxCH.drbULL52InHr1bBU2OtL1zqoFOWDAGOSzpmk1
+      - login: avpa
+        groups: sp_users,xrdpusers
+        password: $6$TMreZdDF$sV9G4WnMrv4FSPWJxAUbJflFg.prau6QDwNZ1JjvslSw9mMnwb1G7nkYGX1LJhbLIIEgPS6uJ4pWJizx71rwV1
     dev_users:
       - login: ngsd
         groups: devs,xrdpusers,ECA,DevMan
