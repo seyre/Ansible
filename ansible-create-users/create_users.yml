@@ -1,0 +1,48 @@
+---
+- hosts: all
+  user: root
+
+#  vars:
+#    users:
+#      - username: galya
+#        use_sudo: no
+
+#      - username: kolya
+#        use_sudo: yes
+
+  tasks:
+  - include_vars: users.yml
+
+  - name: Add users | create users, shell, home dirs
+    user: name={{ item.login }}
+    shell: /bin/bash
+    createhome: yes 
+    comment: "{{ item.login }}"
+    with_items: '{{ dev_users }}'
+
+#  - name: Setup | authorized key upload
+#    authorized_key: user={{ item.username }}
+#      key="{{ lookup('file', 'pub_keys/{{ item.login }}.pub') }}"
+#      path='/home/{{ item.username }}/.ssh/authorized_keys'
+#      manage_dir: no
+#    with_items: '{{ dev_users }}'
+   - name: Adding devs_users to /etc/sudoers
+     lineinfile:
+       owner: root
+       group: root
+       dest: /etc/sudoers
+       backup: yes
+       validate: /usr/sbin/visudo -cf %s
+       line: '{{ item }}'
+     with_items:
+       - ''
+       - '## Developers'
+       - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
+       - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
+  - name: "Disable root login via SSH"
+    lineinfile:
+      dest: "/etc/ssh/sshd_config"
+      regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+    notify: "Restart sshd"
+...
