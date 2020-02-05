@@ -52,8 +52,15 @@
   tasks:
   - name: "Create user accounts"
     user:
-      name: "{{ item.username }}"
+      name: "{{ item.login }}"
       groups: "{{ item.groups }}"
+      comment: "{{ item.login }}"
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      ssh_key_comment: "{{ item.login }}@{{ ansible_hostname }}"
+      append: yes
+      password: "{{ item.password }}"
       state: "present"
     with_items: "{{ dev_users }}"
   - name: "Remove old user accounts in remove_users"
@@ -65,13 +72,20 @@
     authorized_key:
       user: "{{ item.username }}"
       key: "{{ lookup('file', 'files/'+ item.username + '.key.pub') }}"
-    with_items: "{{ users }}"
-  - name: "Allow admin users to sudo without a password"
+    with_items: "{{ dev_users }}"
+  - name: Adding devs_users to /etc/sudoers
     lineinfile:
-      dest: "/etc/sudoers" # path: in version 2.3
-      state: "present"
-      regexp: "^%admin"
-      line: "%admin ALL=(ALL) NOPASSWD: ALL"
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## Developers'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
+      - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
   - name: "Disable root login via SSH"
     lineinfile:
       dest: "/etc/ssh/sshd_config"
