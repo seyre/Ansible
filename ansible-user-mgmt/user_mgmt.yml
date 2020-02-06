@@ -36,7 +36,7 @@
   - name: Add sp_users accounts locally
     user:
       name: "{{ item.login }}"
-      groups: "{{ item.groups_member }}"
+      groups: "{{ item.groups }}"
       shell: /bin/bash
       generate_ssh_key: yes
       ssh_key_bits: 2048
@@ -57,23 +57,24 @@
 #      manage_dir: no
 #    with_items: '{{ dev_users }}'
 
-#   - name: Adding devs_users to /etc/sudoers
-#     lineinfile:
-#       owner: root
-#       group: root
-#       dest: /etc/sudoers
-#       backup: yes
-#       validate: /usr/sbin/visudo -cf %s
-#       line: '{{ item }}'
-#     with_items:
-#       - ''
-#       - '## Developers'
-#       - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
-#       - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
-#- name: "Disable root login via SSH"
-#  lineinfile:
-#    dest: "/etc/ssh/sshd_config"
-#    regexp: "^PermitRootLogin"
-#    line: "PermitRootLogin no"
-#  notify: "Restart sshd"
-#...
+  - name: Adding devs_users to /etc/sudoers
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## Developers'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
+      - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
+
+  - name: "Disable root login via SSH"
+    lineinfile:
+      dest: "/etc/ssh/sshd_config"
+      regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+    notify: "Restart sshd"
+...
