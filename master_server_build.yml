@@ -1,4 +1,4 @@
-- hosts: hostname
+- hosts: localhost
   vars:
     admin_users:
       - login: superlinux

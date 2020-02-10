@@ -1,4 +1,4 @@
-- hosts: lnlxng01
+- hosts: TARGET
   tasks:
 
   - name: Copy Perl needs_restarting.py from GH to target server
@@ -19,16 +19,19 @@
     register: reboot_hint
 
   - name: Rebooting ...
-    command: shutdown -r now "Reboot required for updated kernel"
-    async: 0
+    command: sleep 10 && shutdown -r now "Reboot required for updated kernel"
+    async: 1
     poll: 0
 #    sudo: true
     ignore_errors: true
-    when: reboot_hint.stdout.find("reboot") != -1
+    when: reboot_hint is changed
+#    when: reboot_hint.stdout.find("reboot") != -1
     register: rebooting
 
   - name: Wait for thing to reboot...
-    pause: 
-      minutes: 2
-#    when: rebooting|changed
-
+    wait_for_connection:
+      connect_timeout: 20
+      sleep: 5
+      delay: 5
+      timeout: 300
+    when: reboot_hint is changed

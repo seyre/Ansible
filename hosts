@@ -1,16 +1,3 @@
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-192.168.130.57  lnlxmm01.domain1.starrate-intranet.co.uk lnlxmm01
-192.168.130.58  lnlxrr01.domain1.starrate-intranet.co.uk lnlxrr01
-192.168.130.59  lnlxwg01.domain1.starrate-intranet.co.uk lnlxwg01
-192.168.130.60  lnlxrs01.domain1.starrate-intranet.co.uk lnlxrs01
-192.168.130.61  lnlxng01.domain1.starrate-intranet.co.uk lnlxng01
-192.168.130.62  lnlxss01.domain1.starrate-intranet.co.uk lnlxss01
-192.168.130.63 lnlxik01.domain1.starrate-intranet.co.uk lnlxik01
-192.168.130.64 lnlxgk01.domain1.starrate-intranet.co.uk lnlxgk01
-192.168.130.66 lnlxsh01.domain1.starrate-intranet.co.uk lnlxsh01
-192.168.130.67 lnlxap01.domain01.starrate-intranet.co.uk lnlxap01
-192.168.130.68 lnlxpoc01.domain1.starrate-intranet.co.uk lnlxpoc01
-192.168.130.75 lnlxpoc02.domain1.starrate-intranet.co.uk lnlxpoc02
-192.168.130.76 lnlxspw01.domain1.starrate-intranet.co.uk lnlxspw01 spacewalk
-192.168.130.137 git01.domain01.starrate-intranet.co.uk git01
+[TARGET]
+lnlxpoc01
+lnlxng01

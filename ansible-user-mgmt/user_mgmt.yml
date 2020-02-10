@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: TARGET
   user: root
   vars:
 

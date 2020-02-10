@@ -1,0 +1,34 @@
+- hosts: TARGET
+  tasks:
+
+  - name: Use uri to check t'internet
+    uri:
+      url: http://scootersoftware.com  
+      return_content: no
+      timeout: 10
+    register:  tinternet_disabled
+    ignore_errors: True
+
+
+  - name: Rebooting ...
+    command: sleep 10 && shutdown -r now "Reboot required for updated kernel"
+    async: 1
+    poll: 0
+#    sudo: true
+    ignore_errors: true
+    when: tinternet_disabled is changed
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    register: rebooting
+
+##
+#  - name: Add max_user_watch settings for Visual Studio
+#    lineinfile:
+#     path: /etc/sysctl.conf
+#     line: fs.inotify.max_user_watches=524288
+#     create: yes
+
+#  - name:  Add custom ECA snmpd.conf (adding ECA_international.com community and enable .1 tree access)
+#    copy:
+#     src: /var/satellite/custom-files/ECA_snmpd.conf
+#     dest: /etc/snmp/snmpd.conf
+#     backup: yes
