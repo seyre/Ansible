@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Enter username" 
+read USER
+DOMAIN="eca-international.local"
+smbpasswd -U $USER -r `nslookup _ldap._tcp.dc._msdcs.$DOMAIN | awk '{print $2;exit;}'`
