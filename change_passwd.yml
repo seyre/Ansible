@@ -1,4 +1,0 @@
-- hosts: lnlxwg01
-  vars:
-    admin_users:
-
