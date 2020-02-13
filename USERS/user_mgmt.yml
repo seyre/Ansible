@@ -86,10 +86,10 @@
       - 'Cmnd_Alias SP_USERS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/su -'
       - '%sp_users      ALL=(ALL)        SP_USERS'
 
-  - name: "Disable root login via SSH"
-    lineinfile:
-      dest: "/etc/ssh/sshd_config"
-      regexp: "^PermitRootLogin"
-      line: "PermitRootLogin yes"
-    notify: "Restart sshd"
+#  - name: "Disable root login via SSH"
+#    lineinfile:
+#      dest: "/etc/ssh/sshd_config"
+#      regexp: "^PermitRootLogin"
+#      line: "PermitRootLogin yes"
+#    notify: "Restart sshd"
 ...
