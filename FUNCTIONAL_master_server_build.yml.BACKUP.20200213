@@ -1,4 +1,4 @@
-- hosts: lnlxrs01
+- hosts: TARGET
   vars:
     admin_users:
       - login: superlinux
@@ -10,13 +10,25 @@
       - login: andrew
         groups: sp_users,xrdpusers
         password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
+      - login: arpa
+        groups: sp_users,xrdpusers
+        password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
       - login: paul
+        groups: sp_users,xrdpusers
+        password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
+      - login: pgpa
         groups: sp_users,xrdpusers
         password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
       - login: charlie
         groups: sp_users,xrdpusers
         password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
+      - login: crpa
+        groups: sp_users,xrdpusers
+        password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
       - login: evansa
+        groups: sp_users,xrdpusers
+        password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
+      - login: eapa
         groups: sp_users,xrdpusers
         password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
       - login: krpa
@@ -26,40 +38,45 @@
         groups: sp_users,xrdpusers
         password: $6$TMreZdDF$sV9G4WnMrv4FSPWJxAUbJflFg.prau6QDwNZ1JjvslSw9mMnwb1G7nkYGX1LJhbLIIEgPS6uJ4pWJizx71rwV1
     dev_users:
-      - login: NickG
+      - login: ngsd
         groups: devs,xrdpusers,ECA,DevMan
         password: $6$LSjGBEPC$5NPwAHr7WKHo3qV6sc3uftlhUUy3MYKaYZu0aFyS/.tr/h1IEYnMzhppEl8s4B8ajBf3Mh8jqe5c.8lATozOL/
-      - login: RuneS
+      - login: rssd
         groups: devs,xrdpusers,ECA,DevMan
         password: $6$FNEvyJnR$2UPjtLV.spgsteetoQ1gLEUO93TG3FzjTByXWpXY5JK1qUVaVCZoxscvwcMDV672BxP14MV3r31ghMRLzkOc.0
-      - login: WendyG
+      - login: wgsd
         groups: devs,xrdpusers,ECA,DevLead
         password: $6$ONnrSRxs$7FG8RAhoX2rWepUo42pn3wl2zMPI91KaSqMNq4gA8V55FJX8HV4tFOdfc9ifWvGCQb9l7xFJ6x3MbAxZ/3Kpy/
-      - login: MikeM
+      - login: mmsd
         groups: devs,xrdpusers,ECA,DevLead
         password:
-      - login: AlexP
+      - login: apsd
         groups: devs,xrdpusers,ECA
         password: $6$HAcZMuLj$SjaCaKDUWNitnPwodAsvYuJeJND2ugQhardupMfErGKa5/vpdAiQ2a93AH40yIRw7A.7GS0nGwCYx/0UPO/Sp0
-      - login: SajedH
+      - login: shsd
         groups: devs,xrdpusers,ECA
         password: $6$VTUOdXcA$MtQ2UzWgLk4wxDj2Ny9F..TOT776B.WZNhDywoRb2fLZIs2Kzdzy5vFoqYR7Nype9UfHtKSdvOhuHgskIkgtD1
-      - login: IstvanK
+      - login: iksd
         groups: devs,xrdpusers,ECA
         password: $6$3keSVpCR$H1N5BP7TIywfAh8aMOI64ciWS/f7qlww4cL8r17HxlkDgKOyqDCUBh20AbVPWTHCzMhOOWeEfGaTG2vVQqcrb0
-      - login: RemyR
+      - login: ngsd
         groups: devs,xrdpusers,ECA
-        password: $6$vgVXUwEQ$..Y0SvO55HLQuvhYMZ1vzrTMYBXPHFktjFxkSO1PHGK.ecm4gyeVEahJAlOakyTfw7ghcCpDCqDx3UdhEH2lg1
-      - login: KulaK
-        groups: devs,xrdpusers,ECA
-        password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
-      - login: GlennK
+        password: $6$udnlzLCE$v.Tvpp1RJon3ZRNXzZ3KnUOrCGxhVVOZFqzqPo98ih0pZvEfw.A/qEAO5cF4mL84SZGL8vxf.RZfbCqORcAdg0
+      - login: gksd
         groups: devs,xrdpusers,ECA
         password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
-      - login: SergejS
+      - login: ssasd
         groups: devs,xrdpusers,ECA
         password: $6$SrAjlNnM$Pmkip8AAGbGiAlH1vJEOJxw8vdDYp8DboDOtKsYH9iKcyz89p6bmSZNWFoMJvs3rHqCMFcSOI7INT4EBWtLB90
 
+############################################
+# CHANGES
+# 2020/01/31 - new usernames for all dev accounts
+# 2020/01/31 - added 2nd Admin accounts for Andre/Paul/Charlei/Evans - as these will match up in AD once they change them over
+# 2020/01/31 - account sssd matches system acocunt, hence new username ssasd
+# 2020/02/11 - t'internet check to allow yml to be omnipient/not dependency upion t'internet being enabled
+#
+###########################################
 #      - login: ECABuildRelease
 #        groups:
 #        password:
@@ -69,6 +86,14 @@
 #  - import_playbook: snmp_config.yml
 
   tasks:
+## TINTERNET CHECK
+  - name: Use uri to check t'internet
+    uri:
+      url: http://scootersoftware.com
+      return_content: no
+      timeout: 10
+    register:  tinternet_disabled
+
 ## REGISTER SERVER TO SPACEWALK
   - name: Ansible copy RHN-Register folder from Spacewalk to Target Server
     copy:
@@ -188,13 +213,13 @@
      path: /etc/profile.d/local.sh
      state: touch
 
-  - name: add TMOUT=1200 value to autologout a session after 20 mins of inactivty (value is read-only/has to be updated here)
+  - name: add TMOUT=28800 value to autologout a session after 20 mins of inactivty (value is read-only/has to be updated here)
     lineinfile:
      path: /etc/profile.d/local.sh
      backup: yes
      line: '{{ item }}'
     with_items:
-      - 'export TMOUT=1200'
+      - 'export TMOUT=28800'
       - 'readonly TMOUT'
 
 ## ADD ADMIN USERS AND GROUPS
@@ -235,7 +260,7 @@
       shell: /bin/bash
       generate_ssh_key: yes
       ssh_key_bits: 2048
-      ssh_key_file: .ssh/id_rsa.key
+      ssh_key_file: .ssh/id_rsa
       comment: "{{ item.login }}"
       append: yes
       password: "{{ item.password }}"
@@ -315,16 +340,15 @@
 #    loop:
 #      - ECABuildRelease
 #      - giteca
-#      - NickG
-#      - AlexP
-#      - SajedH
-#      - KulaK
-#      - WendyG
-#      - MikeM
-#      - RemyR
-#      - GlennK
-#      - IstvanK
-#      - SergejS
+#      - ngsd
+#      - apsd
+#      - shsd
+#      - wgsd
+#      - mmsd
+#      - ngsd
+#      - gksd
+#      - iksd
+#      - ssasd
 #      - ECAReleaseBuilder
 
 # Add Users to DevMan group
@@ -336,8 +360,8 @@
      groups: devs,xrdpusers,ECA,DevMan
      append: yes
     loop:
-      - NickG
-      - RuneS
+      - ngsd
+      - rssd
 
 # Add Users to DevLead group
   - name:  Add users to DevLead Group
@@ -348,11 +372,12 @@
      groups: devs,xrdpusers,ECA,DevLead
      append: yes
     loop:
-      - WendyG
-      - MikeM
+      - wgsd
+      - mmsd
 
 # Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
-  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users
+# 30/01/2020 - /etc/ECA added for devs ACL group
+  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
     acl:
       path: "{{ item }}"
       entity: devs
@@ -360,13 +385,13 @@
       permissions: rwx
       state: present
     loop:
-      - /home/GlennK
-      - /home/SergejS
-      - /home/AlexP
-      - /home/SajedH
-      - /home/RemyR
-      - /home/IstvanK
-      - /home/KulaK
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/ngsd
+      - /home/iksd
+      - /etc/ECA
 
 # Setup ACL's for DevLead group(excludes read/write access to DevLead)
   - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
@@ -377,15 +402,14 @@
       permissions: rwx
       state: present
     loop:
-      - /home/GlennK
-      - /home/SergejS
-      - /home/AlexP
-      - /home/SajedH
-      - /home/RemyR
-      - /home/IstvanK
-      - /home/KulaK
-      - /home/MikeM
-      - /home/WendyG
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/ngsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
 
 # Setup ACL's for DevLead group(read/write access to everything)
   - name:  Add ACL for DevLead group to all /home accounts
@@ -396,19 +420,18 @@
       permissions: rwx
       state: present
     loop:
-      - /home/GlennK
-      - /home/SergejS
-      - /home/AlexP
-      - /home/SajedH
-      - /home/RemyR
-      - /home/IstvanK
-      - /home/KulaK
-      - /home/MikeM
-      - /home/WendyG
-      - /home/NickG
-      - /home/RuneS
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/ngsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
+      - /home/ngsd
+      - /home/rssd
 
-# Add devs entries to /etc/sudoers
+# Clean up old Development rules/entires in /etc/sudoers
   - name: removing legacy devs entry (used vi for /etc/hosts which is insecure)
     lineinfile:
       owner: root
@@ -436,7 +459,7 @@
     with_items:
       - ''
       - '## Developers'
-      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
       - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
 
 
@@ -507,6 +530,7 @@
     service:
       name: falcon-sensor
       state: restarted
+      enabled: yes
 
 # yum remove older git 1.18
   - name: YUM remove git-1.8.3.1-20.el7.x86_642.22.2
@@ -527,18 +551,18 @@
       state: present
 
 # yum install bcompare @ latest
-  - name: install bcompare and its dependencies from local file
-    yum:
-      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm
-      state: present
-      disable_gpg_check: yes
+#  - name: install bcompare and its dependencies from local file
+#    yum:
+#      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm
+#      state: present
+#      disable_gpg_check: yes
 
 # File - add Beyond Compare License key
 
 # Yum install XRDP and selinux files.
   - name: install XRDP and its dependencies from local file
     yum:
-      name: selinux-policy, selinux-policy-devel, selinux-policy-targeted, /var/tmp/3rd-Party/xrdp-selinux-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xorgxrdp-0.2.11-1.el7.x86_64.rpm, m4
+      name: /var/tmp/3rd-Party/selinux-policy-3.13.1-252.el7.1.noarch.rpm, /var/tmp/3rd-Party/selinux-policy-devel-3.13.1-252.el7_7.6.noarch.rpm, selinux-policy-targeted, /var/tmp/3rd-Party/xrdp-selinux-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xrdp-0.9.11-5.el7.x86_64.rpm, /var/tmp/3rd-Party/xorgxrdp-0.2.11-1.el7.x86_64.rpm, m4
       state: present
       disable_gpg_check: yes
 
@@ -628,6 +652,8 @@
       gpgcheck: yes
       gpgkey: https://dl.google.com/linux/linux_signing_key.pub
       enabled: yes
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find ('Status code was -1 and not') != -1
 
 # Yum install Google Chrome
   - name:  Yum install Google Chrome Latest from repo
@@ -635,6 +661,8 @@
       name: google-chrome-stable
       state: present
       disable_gpg_check: yes
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
 
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
@@ -642,6 +670,29 @@
       name: Google_chrome_latest
       state: absent
 #    notify: yum-clean-metadata
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome
+      state: absent
+#    notify: yum-clean-metadata
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
+
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome-stable
+      state: absent
+#    notify: yum-clean-metadata
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
 
 
 ## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
@@ -655,6 +706,9 @@
       gpgcheck: yes
       gpgkey: http://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
       enabled: yes
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
 
 # Yum install beyondcompare from ScooterSfot
   - name:  Yum install beyondcompare latest from ScooterSoft repo
@@ -662,6 +716,8 @@
       name: bcompare
       state: present
       disable_gpg_check: yes
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
 
 
 # Yum add license key file (plain text)
@@ -676,6 +732,9 @@
       name: scootersoftware
       state: absent
 #    notify: yum-clean-metadata
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
 
 
 ## Install/enable via systemctl osad service
@@ -686,13 +745,6 @@
 #     enabled=yes
 # RPMS /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
 
-
-## Configure BASH for users better history
-#  - name: Add better BASH settings for history
-#    lineinfile:
-#     path: /etc/sysctl.conf
-#     line: fs.inotify.max_user_watches=524288
-#     create: yes
 
 
 ## USER/GROUP SETUP
@@ -709,7 +761,6 @@
      create: yes
 
 
-## removed after discussing with Nick as not needed 2020/02/21
   - name: Add dotnet shared library directory
     file:
      path: /usr/share/dotnet/sdk/NuGetFallbackFolder
@@ -751,6 +802,9 @@
       global: yes
       state: present
       executable: /usr/bin/npm
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
 
 
   - name:  NPM Global module installs (local/user install swill be completed by the developers
@@ -760,14 +814,14 @@
       global: yes
       state: present
       executable: /usr/bin/npm
+#    when: tinternet_disabled is changed
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+
 
 # npm list -g -depth=0
 # npm install -g @angular/cli@7.3.9
 # npm install -g typescript@3.4.5
 # npm list -g -depth=1 | wc -l     #  141 total
-
-
-
 
 ## TIDY UP TEMPORARY WORKING DIRECTORIES
 ## RHN-Register clean up /var/tmp/RHN-Register working directory
@@ -787,4 +841,3 @@
     user:
      name: admin
      state: absent
-

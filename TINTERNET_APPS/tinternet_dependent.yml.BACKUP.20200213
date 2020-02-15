@@ -1,0 +1,99 @@
+- hosts: TARGET
+  tasks:
+
+  - name: Use uri to check t'internet
+    uri:
+      url: http://scootersoftware.com
+      return_content: no
+      timeout: 10
+    register:  tinternet_disabled
+    failed_when: "{{ tinternet_disabled.msg == 'Status code was -1 and not [200]:' }}"
+    ignore_errors: true
+  - debug:
+#      msg: "{{ tinternet_disabled.status }}"
+      msg: "{{ tinternet_disabled }}"
+
+# Yum_repository add Google Chrome Repository
+  - name: Add Google Chrome repository
+    yum_repository:
+      name: Google_chrome_latest
+      description: Google Chrome Latest
+      baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+      gpgcheck: yes
+      gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+      enabled: yes
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: Google_chrome_latest
+
+# Yum install Google Chrome
+  - name:  Yum install Google Chrome Latest from repo
+    yum:
+      name: google-chrome-stable
+      state: present
+      disable_gpg_check: yes
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: google_chrome_stable
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: Google_chrome_latest
+      state: absent
+    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: Google_chrome_latest_remove
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome
+      state: absent
+#    when: tinternet_disabled is changed
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: google_chrome_remove
+
+# Yum_repository Google Chrome Remove
+  - name: Remove Google Chrome repository
+    yum_repository:
+      name: google_chrome-stable
+      state: absent
+#    notify: yum-clean-metadata
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: google_chrome_stable_remove
+
+
+## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
+
+# Yum_repository add BeyondCompare ScooterSoft  Repository
+  - name: Add ScotterSoft beyondcompare repository
+    yum_repository:
+      name: scootersoftware
+      description: ScooterSoft beyondcompare latest
+      baseurl: http://www.scootersoftware.com/bcompare4
+      gpgcheck: yes
+      gpgkey: http://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
+      enabled: yes
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: google_chrome_stable_remove
+
+
+  - name: Rebooting ...
+    reboot:
+      post_reboot_delay: 60
+      reboot_timeout: 180
+      test_command: uptime
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+    register: rebooting
+
+
+
+#    command: sleep 10 && shutdown -r now "Reboot required for updated kernel"
+##    command: shutdown -r now "Reboot required for updated kernel"
+##    async: 0
+##    poll: 0
+#    sudo: true
+##    ignore_errors: true
+#    failed_when: ( tinternet_disabled.status not in [ 0, 200 ] )
+##    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+##    register: rebooting

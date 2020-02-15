@@ -1,4 +1,4 @@
-- hosts: TARGET
+- hosts: localhost
   vars:
     admin_users:
       - login: superlinux
@@ -72,9 +72,9 @@
 ############################################
 # CHANGES
 # 2020/01/31 - new usernames for all dev accounts
-# 2020/01/31 - added 2nd Admin accounts for Andre/Paul/Charlei/Evans - as these will match up in AD once they change them over
+# 2020/01/31 - added 2nd Admin acocunts for Andre/Paul/Charlei/Evans - as these will match up in AD once they change them over
 # 2020/01/31 - account sssd matches system acocunt, hence new username ssasd
-# 2020/02/11 - t'internet check to allow yml to be omnipient/not dependency upion t'internet being enabled
+#
 #
 ###########################################
 #      - login: ECABuildRelease
@@ -86,14 +86,6 @@
 #  - import_playbook: snmp_config.yml
 
   tasks:
-## TINTERNET CHECK
-  - name: Use uri to check t'internet
-    uri:
-      url: http://scootersoftware.com
-      return_content: no
-      timeout: 10
-    register:  tinternet_disabled
-
 ## REGISTER SERVER TO SPACEWALK
   - name: Ansible copy RHN-Register folder from Spacewalk to Target Server
     copy:
@@ -213,13 +205,13 @@
      path: /etc/profile.d/local.sh
      state: touch
 
-  - name: add TMOUT=28800 value to autologout a session after 20 mins of inactivty (value is read-only/has to be updated here)
+  - name: add TMOUT=1200 value to autologout a session after 20 mins of inactivty (value is read-only/has to be updated here)
     lineinfile:
      path: /etc/profile.d/local.sh
      backup: yes
      line: '{{ item }}'
     with_items:
-      - 'export TMOUT=28800'
+      - 'export TMOUT=1200'
       - 'readonly TMOUT'
 
 ## ADD ADMIN USERS AND GROUPS
@@ -530,7 +522,6 @@
     service:
       name: falcon-sensor
       state: restarted
-      enabled: yes
 
 # yum remove older git 1.18
   - name: YUM remove git-1.8.3.1-20.el7.x86_642.22.2
@@ -652,8 +643,6 @@
       gpgcheck: yes
       gpgkey: https://dl.google.com/linux/linux_signing_key.pub
       enabled: yes
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find ('Status code was -1 and not') != -1
 
 # Yum install Google Chrome
   - name:  Yum install Google Chrome Latest from repo
@@ -661,8 +650,6 @@
       name: google-chrome-stable
       state: present
       disable_gpg_check: yes
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
 
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
@@ -670,9 +657,6 @@
       name: Google_chrome_latest
       state: absent
 #    notify: yum-clean-metadata
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
@@ -680,10 +664,6 @@
       name: google_chrome
       state: absent
 #    notify: yum-clean-metadata
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
-
 
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
@@ -691,9 +671,6 @@
       name: google_chrome-stable
       state: absent
 #    notify: yum-clean-metadata
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 ## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
 
@@ -706,9 +683,6 @@
       gpgcheck: yes
       gpgkey: http://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
       enabled: yes
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 # Yum install beyondcompare from ScooterSfot
   - name:  Yum install beyondcompare latest from ScooterSoft repo
@@ -716,8 +690,6 @@
       name: bcompare
       state: present
       disable_gpg_check: yes
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
 
 
 # Yum add license key file (plain text)
@@ -732,9 +704,6 @@
       name: scootersoftware
       state: absent
 #    notify: yum-clean-metadata
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 
 ## Install/enable via systemctl osad service
@@ -745,6 +714,13 @@
 #     enabled=yes
 # RPMS /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
 
+
+## Configure BASH for users better history
+#  - name: Add better BASH settings for history
+#    lineinfile:
+#     path: /etc/sysctl.conf
+#     line: fs.inotify.max_user_watches=524288
+#     create: yes
 
 
 ## USER/GROUP SETUP
@@ -761,6 +737,7 @@
      create: yes
 
 
+## removed after discussing with Nick as not needed 2020/02/21
   - name: Add dotnet shared library directory
     file:
      path: /usr/share/dotnet/sdk/NuGetFallbackFolder
@@ -802,9 +779,6 @@
       global: yes
       state: present
       executable: /usr/bin/npm
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 
   - name:  NPM Global module installs (local/user install swill be completed by the developers
@@ -814,9 +788,6 @@
       global: yes
       state: present
       executable: /usr/bin/npm
-#    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
 
 # npm list -g -depth=0
 # npm install -g @angular/cli@7.3.9
