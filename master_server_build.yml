@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: TARGET
   vars:
     admin_users:
       - login: superlinux
