@@ -466,9 +466,9 @@
 
 ## SETUP ECA SYSTEM UTILITES
 
-#  - name: ECA snmp config
-#    include_tasks:
-#      import_playbook: snmp_config.yml
+  - name: ECA snmp config
+    include_tasks:
+      import_playbook: snmp_config.yml
 
 # yum install snmp @ latest
   - name: YUM install snmp and dependencies @ latest

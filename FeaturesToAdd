@@ -1,14 +1,14 @@
-#TinyMCE - NPM module
+#TinyMCE - NPM module			
 
-npm install acorn-dynamic-import@4.0.0
-npm install acorn@^6.0.0
-npm install tinymce
-
-
-#GitLens - Visual Studio addon
-Ctrl+Shift K - search Gitlens
+npm install acorn-dynamic-import@4.0.0	DEVS NOW MANAGE LOCAL NPMS
+npm install acorn@^6.0.0		DEVS NOW MANAGE LOCAL NPMS
+npm install tinymce			DEVS NOW MANAGE LOCAL NPMS
 
 
-# Visual Code Chrome Extensions
+#GitLens - Visual Studio addon		DONE
+Ctrl+Shift K - search Gitlens		DONE
+
+
+# Visual Code Chrome Extensions		DONE
 
 

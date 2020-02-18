@@ -1,17 +1,22 @@
 ---
-- hosts: TARGET
-  user: root
-  vars:
+tasks:
+  - name: include groups and users
+    include_vars:
+      file: groups.yml
+      name: groups
+      file: users.yml
+      name: users
 
-  handlers:
+handlers:
   - name: "Restart sshd"
     service:
       name: "sshd"
       state: "restarted"
 
-  tasks:
-  - include_vars: groups.yml
-  - include_vars: users.yml
+#  - name: include groups and users files
+#    include_vars: groups.yml
+#    include_vars: users.yml
+
 
   - name: Create groups ahead of accounts
     group:
@@ -22,7 +27,7 @@
       - "{{ dev_groups }}"
 
 #  - name: Add users | create users, shell, home dirs
-#    user: 
+#    user:
 #     name: "{{ item.login }}"
 #     shell: /bin/bash
 #     groups: "{{ item.groups_member }}"
@@ -32,7 +37,9 @@
 #      - "{{ admin_users }}"
 #      - "{{ dev_users }}"
 
+  - name: Include groups and users files
   - include_vars: users.yml
+
   - name: Add sp_users accounts locally
     user:
       name: "{{ item.login }}"
@@ -48,6 +55,62 @@
     with_items:
       - "{{ admin_users }}"
       - "{{ dev_users }}"
+
+## Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
+## 30/01/2020 - /etc/ECA added for devs ACL group
+  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
+    acl:
+      path: "{{ item }}"
+      entity: devs
+      etype: group
+      permissions: rw
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/iksd
+      - /etc/ECA
+
+# Setup ACL's for DevLead group(excludes read/write access to DevMan)
+  - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
+    acl:
+      path: "{{ item }}"
+      entity: DevLead
+      etype: group
+      permissions: rw
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
+      - /etc/ECA
+
+# Setup ACL's for DevMan group(read/write access to everything)
+  - name:  Add ACL for DevMan group to all /home accounts
+    acl:
+      path: "{{ item }}"
+      entity: DevMan
+      etype: group
+      permissions: rwx
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/ngsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
+      - /home/ngsd
+      - /home/rssd
+      - /etc/ECA
 
 
 #  - name: Setup | authorized key upload
@@ -92,4 +155,3 @@
 #      regexp: "^PermitRootLogin"
 #      line: "PermitRootLogin yes"
 #    notify: "Restart sshd"
-...

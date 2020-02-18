@@ -1,0 +1,654 @@
+
+
+[ECAReleaseBuilder@lnlxpoc02 ~]$ history 10000
+    1  ssh-keygen
+    2  pwd
+    3  clear
+    4  cd .ssh
+    5  cat id_rsa.pub
+    6  exit
+    7  npm list
+    8  npm install tinymce
+    9  npm list -l
+   10  npm list
+   11  npm install angular
+   12  npm install typescript
+   13  npm list
+   14  pin git01
+   15  ping git01
+   16  pwd
+   17  clear
+   18  npm install sass
+   19  npm list
+   20  npm audit
+   21  npm audit fix
+   22  exit
+   23  sudo -l
+   24  ls -altr /var/tmp
+   25  tar -xvf /var/tmp/Postman-linux-x64-7.14.0.tar.gz
+   26  pwd
+   27  clear
+   28  exit
+   29  npm audit fix
+   30  npm install sass
+   31  npm update npm
+   32  npm update
+   33  npm update -v
+   34  npm --help
+   35  showmount -e
+   36  showmount -e 192.168.130.67
+   37  showmount 192.168.130.67
+   38  exit
+   39  pwd
+   40  ls -altr
+   41  df -h .
+   42  pwd
+   43  ls -altr
+   44  npm install @angular-devkit/build-angular
+   45  npm install @angular-devkit/build-ng-packagr
+   46  npm install @angular-devkit/core
+   47  npm install @angular-devkit/schematics
+   48  npm install @angular/animations
+   49  npm install @angular/cdk
+   50  npm install @angular/cli
+   51  npm install @angular/common
+   52  npm install @angular/compiler
+   53  npm install @angular/compiler-cli
+   54  npm install @angular/core
+   55   npm install @angular/forms
+   56  npm install @angular/language-service
+   57  npm install @angular/material
+   58  npm install @angular/platform-browser
+   59  npm install @angular/platform-browser npm install @angular/platform-server
+   60   npm install @angular/platform-server
+   61  npm install @angular/pwa
+   62  npm install @angular/router
+   63  npm install @angular/service-worker
+   64  npm install @angular/upgrade
+   65  npm install @ckeditor/ckeditor5-autosave
+   66   npm install @ckeditor/ckeditor5-build-inline
+   67  npm install @ng-bootstrap/ng-bootstrap
+   68   npm install @ng-select/ng-select
+   69  npm install @ngx-pwa/local-storage
+   70  npm install angular-in-memory-web-api
+   71   npm install Async
+   72   npm install async
+   73   npm install asyncnpm install bourbon
+   74   npm install  bourbon
+   75  npm install codelyzer
+   76  npm install core-js
+   77  npm install highcharts
+   78  npm install karma-chrome-launcher
+   79  npm install ngx-bootstrap
+   80   npm install screenfull
+   81  npm install ngx-toastr
+   82  npm install sweetalert2
+   83  npm install ts-node
+   84  npm install tsickle
+   85  npm install typescript
+   86  npm install zone.js
+   87  exit
+   88  cd TestProject/
+   89  ng -help
+   90  angular -help
+   91  npm -help
+   92  npm init
+   93  npm instal angular
+   94  npm install angular
+   95  npm uninstal angular
+   96  npm install @angular
+   97  npm install @angular/cli
+   98  npm uninstal @angular/cli
+   99  npm install @angular/cli -dev
+  100  npm uninstal @angular/cli
+  101  npm install @angular/cli --dev
+  102  npm uninstal @angular/cli
+  103  npm install --div  @angular/cli
+  104  npm uninstal @angular/cli
+  105  npm install --dev @angular/cli
+  106  npm uninstal @angular/cli
+  107  npm install @angular/cli --save-dev
+  108  ng new test-app
+  109  npm ng new test-app
+  110  npm run ng new test-app
+  111  npm run ng serve
+  112  npm run ng serve test-app
+  113  cd test-app/
+  114  npm run ng serve
+  115  npm run ng generate component hello-world
+  116  npm run ng serve
+  117  cd..
+  118  cd ~
+  119  cd TestProject/
+  120  npm init
+  121  npm install @angular/cli --save-dev
+  122  code .
+  123  npm run ng new test-app
+  124  ng start
+  125  npm run start
+  126  cd test-app
+  127  ng run start
+  128  npm run start
+  129  cd ECAProjects/
+  130  code .
+  131  cd TestProject/
+  132  cd test-app
+  133  npm run ng generate component hello-world
+  134  cd ..
+  135  cd~
+  136  git clone giteca@git01:/var/git/giteca/eca-angular.git
+  137  CD ~
+  138  cd ~
+  139  cd eca-angular/
+  140  git checkout ecaapps-dev
+  141  cd ~
+  142  git clone giteca@git01:/var/git/giteca/eca-angular.git
+  143  cd eca-angular/
+  144  git checkout ecaapps-dev
+  145  git fetch
+  146  git pull
+  147  ng-serve --project=webdocs-viewer
+  148  ng serve --project=webdocs-viewer
+  149  cd
+  150  pwd
+  151  git clone giteca@git01:/var/git/giteca/ECAProjects.git
+  152  cd ECAProjects/
+  153  git checkout ecaapps-dev
+  154  git status
+  155  git fetch
+  156  git pull
+  157  cd PcsApi
+  158  dotnet run
+  159  cd
+  160  cd ECAProjects/
+  161  git checkout eca-enterprise-dev
+  162  git checkout ecaenterprise-dev
+  163  git status
+  164  git fetch
+  165  git pull
+  166  cd
+  167  cd eca-angular/
+  168  git checkout dev
+  169  git status
+  170  git fethc
+  171  git fetch
+  172  git pull
+  173  cd
+  174  ./RunUserPortal.sh
+  175  chmod 777 RunUserPortal.sh
+  176  chmod 777 RunReporting.sh
+  177  ./RunUserPortal.sh
+  178  vi /tmp/steve2
+  179  for i in `cat /tmp/steve2`; do npm install $i; done
+  180  npm list  --depth=0 | grep ├── | wc -l
+  181  npm list | grep -i async
+  182   npm install @angular/common@8.2.14 @angular/core@7.2.15 @angular/platform-browser@7.2.15 async@3.1.0
+  183  npm audit fix
+  184  npm audit
+  185  pwd
+  186  clear
+  187  pw
+  188  clear
+  189  npm list | grep -i typescript
+  190  dotnet run
+  191  cd ..
+  192  dotnet run
+  193  cd PcsApi
+  194  dotnet run
+  195  cd ..
+  196  cd AssignBase
+  197  dotnet build
+  198  cd ..
+  199  dontnet build
+  200  dotnet build
+  201  cd AuthenticationApi/
+  202  dotnet build
+  203  dotnet -v
+  204  dotnet --version
+  205  dotnet build
+  206  dotnet list
+  207  dotnet list package
+  208  cd ECAProjects/ECAUserPortalAPI/
+  209  dotnet build
+  210   dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 3.1.0
+  211  cd ECAProjects/ECAUserPortalAPI/
+  212   dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 3.1.0
+  213  cd ECAProjects/
+  214  cd ECAUserPortalAPI/
+  215  code .
+  216  ls
+  217  history 10000
+
+
+
+LNLXTST01
+
+   1  ls -altr
+    2  mv package.json package.json.BACKUP
+    3  npm list
+    4  ls -altr
+    5  npm install
+    6  ls -altr
+    7  cat package-lock.json
+    8  exit
+    9  npm list -g
+   10  ls -altr
+   11  mv package.json.BACKUP package.json
+   12  npm list
+   13  npmaudit
+   14  npm audit
+   15  npm install
+   16  npm list
+   17  npm list typescript
+   18  npm install typescript@3.2.4
+   19  npm list | more
+   20
+   21  pwd
+   22  exit
+   23  git clone giteca@git01:/var/git/giteca/eca-angular.git
+   24  cd eca-angular/
+   25  ng serve --project=webdocs-viewer
+   26  exit
+   27  cd eca-angular/
+   28  git checkout ecaapps-dev
+   29  git fetch
+   30   git pull
+   31  ng serve --project=webdocs-viewer
+   32  bg
+   33  curl  http://localhost:4200/
+   34  npm list typescript
+   35  cd
+   36  npm list typescript
+   37  pwd
+   38  history 100
+   39  pwd
+   40  cd eca-angular/
+   41  ls
+   42  ls -altr
+   43  cd projects/
+   44  ls
+   45  pwd
+   46  cd ..
+   47  ls projects/
+   48  cd apps/ECAProjects/CollatorApi/
+   49  pwd
+   50  git checkout ecaapps-dev
+   51  git fetch
+   52  git pull
+   53    106  ls
+   54   ls projects/
+   55  ping lnlxsh01
+   56  code .
+   57  ng serve --project=webdocs-viewer
+   58  ps
+   59  fg
+   60  ng serve --project=webdocs-viewer
+   61  code .
+   62  exit
+   63  cd eca-angular/
+   64  pwd
+   65  ls
+   66  cd apps/ECAProjects/CollatorApi/
+   67  pwd
+   68  cd ..
+   69  ls
+   70  pwd
+   71  git clone giteca@git01:/var/git/giteca/ECAProjects.git
+   72  git status
+   73  git checkout ecaapps-dev
+   74  pwd
+   75  cd ECAProjects/
+   76  git status
+   77  git fetch
+   78  git status
+   79  git checkout ecaapps-dev
+   80  git status
+   81  git fetch
+   82  git pull
+   83  cd PcsApi/
+   84  dotnet run
+   85  bg
+   86  curl http://0.0.0.0:5053
+   87  wget http://0.0.0.0:5053
+   88  exit
+   89  pwd
+   90  ls
+   91  pwd
+   92  ls -altr
+   93  passwd
+   94  pwd
+   95  clear
+   96  ip addr show
+   97  exit
+   98  history
+   99  npm outdated -l
+  100  pwd
+  101  exit
+  102  pwd
+  103  clear
+  104  pwd
+  105  exit
+  106  ls -altr
+  107  tar -xvf /var/tmp/RPMs/Postman-linux-x64-7.11.0.tar
+  108  exit
+  109  cd ECAProjects/CollatorApi/
+  110  dotnet run
+  111  cd eca-angular/
+  112  ng serve --project=webdocs-viewer
+  113  cd ECAProjects/CollatorApi/
+  114  code .
+  115  cd ../../eca-angular/
+  116  code .
+  117  pm
+  118  npm list -g --depth=1
+  119  ng --version
+  120  cd ..
+  121  ng --version
+  122  dotnet version
+  123  dotnet --version
+  124  dotnet --info
+  125  ls
+  126  cd ECAProjects/
+  127  ls
+  128  git status
+  129  cd PcsApi/
+  130  dotnet run
+  131  code .
+  132  dotnet run
+  133  cd ..
+  134  ls
+  135  cd EducationAPI/
+  136  ls
+  137  dotnet run
+  138  free
+  139  dotnet run
+  140  sudo -l
+  141  exit
+  142  :124
+  143  exit
+  144  sudo -l
+  145  sudo firewall-cmd
+  146  exit
+  147  sudo -l
+  148  exit
+  149  sudo -l
+  150  exit
+  151  sudo firewall-cmd --list
+  152  sudo firewall-cmd --list-all
+  153  pwd
+  154  cd ECAProjects/
+  155  cd DataUnifierAPI/
+  156  code .
+  157  dotnet run
+  158  code .
+  159  dotnet run
+  160  cd ..
+  161  mkdir node
+  162  cd node/
+  163  git clone giteca@git01:/var/git/giteca/eca-node.git
+  164  sl
+  165  ls
+  166  cd eca-node/
+  167  ls
+  168  git status
+  169  git branch -av
+  170  git checkout ecaapps-dev
+  171  ls
+  172  cd EducationHtmlAPI/
+  173  ls
+  174  cd dist/
+  175  ls
+  176  cd ..
+  177  ls
+  178  cat ReadMe_apps.txt
+  179  cd EducationHtmlAPI/
+  180  ls
+  181  code .
+  182  git status
+  183  cd ECAProjects/
+  184  git status
+  185  checkout ecaenterprise-dev
+  186  git checkout ecaenterprise-dev
+  187  git checkout CollatorApi/appsettings.json
+  188  git status
+  189  git checkout DataUnifierAPI/DataUnifierClient.cs
+  190  git checkout DataUnifierAPI
+  191  git status
+  192  git checkout ecaenterprise-dev
+  193  cd ~
+  194  cd eca-angular/
+  195  git checkout dev
+  196  git status
+  197  git checkout projects/webdocs-viewer/src/app/webdocs-service.service.ts
+  198  git checkout dev
+  199  git status
+  200  cd ~
+  201  code -v
+  202  ls
+  203  ./RunUserPortal.sh
+  204  chmod 777 RunUserPortal.sh
+  205  ./RunUserPortal.sh
+  206  dotnet run
+  207  cd ECAProjects/
+  208  code .
+  209  cd /home
+  210  ls
+  211  cd steven
+  212  ls
+  213  cd ..
+  214  cd stevene
+  215  cd ~
+  216  cd home
+  217  cd /home
+  218  cd steven
+  219  cd certificates/
+  220  cat localhost.conf
+  221  cat >localhost.conf
+  222  openssl req -config localhost.conf -new -x509 -sha256 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -days 365
+  223  openssl pkcs12 -export -out localhost.pfx -inkey localhost.key -in localhost.crt
+  224  cat >localhost.crt
+  225  openssl pkcs12 -export -out localhost.pfx -inkey localhost.key -in localhost.crt
+  226  cp localhost.crt /etc/pki/ca-trust/source/anchors/
+  227  openssl pkcs12 -export -out localhost.pfx -inkey localhost.key -in localhost.crt
+  228  openssl req -config localhost.conf -new -x509 -sha256 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -days 365
+  229  openssl pkcs12 -export -out localhost.pfx -inkey localhost.key -in localhost.crt
+  230  cp localhost.crt /etc/pki/ca-trust/source/anchors/
+  231  pwd
+  232  exit
+  233  sudo -l
+  234  exit
+  235  sudo -l
+  236  exit
+  237  sudo -l
+  238  exit
+  239  sudo -l
+  240  exit
+  241  sudo -l
+  242  exit
+  243  sudo -l
+  244  cat /etc/sudoers
+  245  ls -altr /etc/pki/ca-trust/source/anchors/
+  246  exit
+  247  touch /etc/pki/ca-trust/source/anchors/hello
+  248  ls -altr /etc/pki/ca-trust/source/anchors/hello
+  249  rm /etc/pki/ca-trust/source/anchors/hello
+  250  ls -altr /etc/pki/ca-trust/extracted/
+  251  chmod -R 757 /etc/pki/ca-trust/extracted
+  252  exit
+  253  ls -altr /etc/pki/ca-trust/extracted
+  254  touch /etc/pki/ca-trust/extracted/pem/hello.steven
+  255  rm /etc/pki/ca-trust/extracted/pem/hello.steven
+  256  exit
+  257  ls -ald /etc/systemd/system
+  258  ls -altr /etc/systemd/system
+  259  exit
+  260  update-ca-trust extract
+  261  systemctl enable nameofapp.service
+  262  ls /etc/systemd/system/
+  263  cp localhost.crt /etc/pki/ca-trust/source/anchors/
+  264  cd /home
+  265  cd steven
+  266  cd certificates/
+  267  cp localhost.crt /etc/pki/ca-trust/source/anchors/
+  268  update-ca-trust extract
+  269  cd ~
+  270  ./RunUserPortal.sh
+  271  chmod 777 RunReporting.sh
+  272  ./RunReporting.sh
+  273  cd ECAProjects/
+  274  cd ~
+  275  cd eca-angular
+  276  ls
+  277  cd projects/
+  278  ls
+  279  cd ecareportingui
+  280  ng build -prod
+  281  ng build - -prod
+  282  ng build --prod
+  283  cd ..
+  284  cd ecauserportal/
+  285  ng build --prod
+  286  ./RunUserPortal.sh
+  287  cd ECAProjects/ECAUserPortalAPI/
+  288  code .
+  289  free
+  290  npm install tinymce
+  291  npm install acorn
+  292  npm install tinymce
+  293  npm list | grep -i acorn
+  294  npm install acorn-dynamic-import@4.0.0
+  295  npm install acorn@^6.0.0
+  296  npm list | grep -i acorn
+  297  npm install tinymce
+  298  npm list | grep -i tinymce
+  299  history | grep -i npm
+  300  pwd
+  301  ip addr show
+  302  cat /etc/resolv.conf
+  303  nslookup 192.168.130.66
+  304  nslookup 192.168.130.67
+  305  pwd
+  306  exit
+  307  npm list
+  308  du -sh *
+  309  pwd
+  310  ls -altr
+  311  pwd
+  312  w
+  313  pwd
+  314  exit
+  315  npm list
+  316  npm --help
+  317  npm update npm
+  318  npm -v
+  319  pwd
+  320  history | grep -i git
+  321  pwd
+  322  ip addr show
+  323  pwd
+  324  exit
+  325  ls -altr
+  326  tar -xvf /var/tmp/3rd-Party/Postman-linux-x64-7.14.0.tar.gz
+  327  pwd
+  328  ls -altr
+  329  pwd
+  330  cd /var/tmp
+  331  cd 3rd
+  332  cd 3rd-Party/
+  333  ls -altr
+  334  rpm -qa | grep -i bcompare
+  335  npm list
+  336  cd
+  337  pwd
+  338  npm list
+  339  pwd
+  340  df -h
+  341  pwd
+  342  du -sh *
+  343  ls -altr
+  344  npm list
+  345  npm update
+  346  npm list | grep -i angular/compiler-cli
+  347  npm install @angular-devkit/build-angular
+  348  npm list | grep -i compiler-cli
+  349  npm install @angular/compiler-cli@8.2.14
+  350  npm list | grep -i compiler-cli
+  351  npm install @angular-devkit/build-optimizer@0.803.21
+  352  npm install @angular-devkit/build-webpack@0.803.21
+  353  npm install @angular-devkit/core@8.3.21
+  354  npm install @babel/core@7.7.5
+  355  npm install @babel/generator@7.7.7
+  356  npm install @babel/helpers@7.7.4
+  357  npm install @babel/parser@7.7.7
+  358  npm install  @babel/core@7.7.5
+  359  npm audit
+  360   npm install --save-dev @angular-devkit/build-angular@0.803.21
+  361   npm update terser-webpack-plugin --depth 3
+  362  npm audit
+  363  npm update lodash
+  364  npm audit
+  365  yum update ng2-canvas-whiteboard
+  366  npm update ng2-canvas-whiteboard
+  367  npm audit
+  368  yum install lodash
+  369  npm install lodash
+  370  npm audit fix
+  371  vi /tmp/steve1
+  372  rm /tmp/steve1
+  373  vi /tmp/steve1
+  374  pwd
+  375  for i in `cat /tmp/steve1`; do npm install $i; done
+  376  npm audit
+  377  for i in `cat /tmp/steve1`; do npm install $i; done
+  378  npm list
+  379  pwd
+  380  uptime
+  381  w
+  382  pwd
+  383  clear
+  384  pwd
+  385  cd node_modules/
+  386  ls -altr
+  387  cd .bin
+  388  ls
+  389  ls -altr
+  390  cd ..
+  391  pwd
+  392  cd ..
+  393  ls -altrR
+  394  clear
+  395  ls -altr
+  396  pwd
+  397  ls -altr
+  398  npm list
+  399  npm list | grep -i protractor
+  400  npm list
+  401  npm list  --depth=1
+  402  npm list  --depth=0
+  403  npm list  --depth=0 | grep ├── | wc -l
+  404  npm list  --depth=0 | grep ├── | sed s'/ //g'
+  405  npm list  --depth=0 | grep ├── | sed s'/ //g' | sed s'/├──//g'
+  406  npm list | grep @angular/common@8.2.14
+  407  npm list  --depth=0 | grep ├── | sed s'/ //g' | sed s'/├──//g' | grep -i UNMETPEER
+  408  npm install @angular/platform-browser-dynamic@8.2.14 @angular/compiler@8.2.14 @angular/core@8.2.14 @angular/platform-browser@8.2.14  async@3.1.0 typescript@3.5.3
+  409  npm list  --depth=0 | grep ├── | sed s'/ //g' | sed s'/├──//g' | grep -i UNMETPEER
+  410  npm audit fix
+  411  npm install zone.js@~0.9.1 @angular/core@7.2.15 @angular/platform-browser@7.2.15
+  412  npm audit fix
+  413  npm list  --depth=0 | grep ├── | sed s'/ //g' | sed s'/├──//g'
+  414  npm list  --depth=0 | grep ├── | wc -l
+  415  pwd
+  416  du -sh *
+  417  pwd
+  418  npm list  --depth=0 | grep ├── | wc -l
+  419  npm list | grep -i typescript
+  420  y @ng-select/ng-select@3.7.0
+  421  npm list  --depth=0 | grep ├── | wc -l
+  422  clear
+  423  pwd
+  424  clear
+
+
+
+
+
