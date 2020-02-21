@@ -1,0 +1,64 @@
+- hosts: TARGET
+  vars:
+
+############################################
+# CHANGES:
+# 2020/02/21 - Initial draft of playbook to install Ivanti agent onto target servers
+#
+###########################################
+
+  tasks:
+
+# Copy Ivanti directory to target hosts
+  - name:  Ansible copy /var/satellite/3rd-Party/ directory from Spacewalk to Target Server
+    copy:
+     src: /var/satellite/3rd-Party/Ivanti
+     dest: /var/tmp
+
+#  - name:  set executable
+#    copy:
+#     src: /var/satellite/3rd-Party/Ivanti/install.sh
+#     dest: /var/tmp/Ivanti/install.sh
+#     mode: u=rwx,g=r,o=r
+
+
+## ADD FIREWALL RULES
+# Firewalld - enable sftp/ssh services
+  - name:  Firewalld enable 3121
+    firewalld:
+       port: "{{ item }}"
+       permanent: yes
+       state: enabled
+    loop:
+      - 3121/tcp
+
+  - name: systemd restart firewalld
+    systemd:
+      state: restarted
+      name: firewalld
+
+
+  - name: YUM install Ivanti RPM
+    yum:
+      name: /var/tmp/Ivanti/ISecAgent-9.4.410536-1.x86_64.rpm
+      state: present
+      disable_gpg_check: yes
+
+  - name: Ivanti - install/register the agent back to the Server
+    shell: /opt/ivanti/isec/bin/stagentctl register  --host lnisc1.eca-international.local --port 3121 --passphrase 88NYyWwDRWHXVYKEaR8pbgYncpdExm6V --issuer-certificate /var/tmp/Ivanti/ISECCert.cer --selected-policy ECALinux
+    args:
+      executable: /bin/bash
+      creates: /opt/ivanti/isec/ECAControlFile
+
+## TIDY UP TEMPORARY WORKING DIRECTORIES
+  - name: Clean-up remove /var/tmp/Ivanti
+    file:
+     path: /var/tmp/Ivanti
+     state: absent
+
+##  IF we've got this far Ivanti is registered - touch control file to ensure it doesnt run again
+  - name:  Ivanti install/registere contorl file (stops registration being re-run)
+    file:
+     path: /opt/ivanti/isec/ECAControlFile
+     state: touch
+     mode: 0744

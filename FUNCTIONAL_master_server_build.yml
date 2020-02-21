@@ -8,7 +8,7 @@
 # 2020/01/31 - account sssd matches system acocunt, hence new username ssasd
 # 2020/02/11 - t'internet check to remove dependency upon t'internet being enabled
 # 2020/02/17 - Groups/Users/ moved out to USERS/user_mgmt.yml
-# 2020/02/17 - moved T'INTERNET dependent into TINTERNEa_APPS/tinternet_dependent.yml 
+# 2020/02/17 - moved T'INTERNET dependent into T'INTERNET_APPS/tinternet_dependent.yml
 #
 ###########################################
 #      - login: ECABuildRelease

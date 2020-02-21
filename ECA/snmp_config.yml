@@ -1,3 +1,4 @@
+  - tasks
 # yum install snmp @ latest
   - name: YUM install snmp and dependencies @ latest
     yum:

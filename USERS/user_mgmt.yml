@@ -4,6 +4,7 @@ tasks:
     include_vars:
       file: groups.yml
       name: groups
+
       file: users.yml
       name: users
 
@@ -37,8 +38,8 @@ handlers:
 #      - "{{ admin_users }}"
 #      - "{{ dev_users }}"
 
-  - name: Include groups and users files
-  - include_vars: users.yml
+##  - name: Include groups and users files
+##  - include_vars: users.yml
 
   - name: Add sp_users accounts locally
     user:
