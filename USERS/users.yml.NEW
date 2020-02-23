@@ -1,0 +1,63 @@
+---
+users:
+
+admin_users:
+   - login: superlinux
+     groups: wheel
+   - login: stevene
+     groups: sp_users,xrdpusers
+   - login: andrew
+     groups: sp_users,xrdpusers
+   - login: arpa
+     groups: sp_users,xrdpusers
+   - login: paul
+     groups: sp_users,xrdpusers
+   - login: pgpa
+     groups: sp_users,xrdpusers
+   - login: charlie
+     groups: sp_users,xrdpusers
+   - login: crpa
+     groups: sp_users,xrdpusers
+   - login: evansa
+     groups: sp_users,xrdpusers
+   - login: eapa
+     groups: sp_users,xrdpusers
+   - login: krpa
+     groups: sp_users,xrdpusers
+   - login: avpa
+     groups: sp_users,xrdpusers
+dev_users:
+   - login: ngsd
+     groups: devs,xrdpusers,ECA,DevMan
+   - login: rssd
+     groups: devs,xrdpusers,ECA,DevMan
+   - login: wgsd
+     groups: devs,xrdpusers,ECA,DevLead
+   - login: mmsd
+     groups: devs,xrdpusers,ECA,DevLead
+     password:
+   - login: apsd
+     groups: devs,xrdpusers,ECA
+   - login: shsd
+     groups: devs,xrdpusers,ECA
+   - login: iksd
+     groups: devs,xrdpusers,ECA
+   - login: ngsd
+     groups: devs,xrdpusers,ECA
+   - login: gksd
+     groups: devs,xrdpusers,ECA
+   - login: ssasd
+     groups: devs,xrdpusers,ECA
+remove_users:
+   - login: WengyG
+   - login: GlennK
+   - login: NickG
+   - login: RuneS
+   - login: IstvanK
+   - login: SergeS
+   - login: AlexP
+   - login: RemyR
+   - login: MikeM
+   - login: andrew
+   - login: charlie
+   - login: paul
