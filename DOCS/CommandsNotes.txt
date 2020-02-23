@@ -1,0 +1,39 @@
+
+
+yum install -y net-snmp  net-snmp-utils  net-snmp-agent-libs  net-snmp-libs
+
+cd /etc/snmp/
+ls -altr
+mv snmpd.conf snmpd.conf.BACKUP
+cp /var/tmp/snmpd.conf .			# SOURCE:	/var/satellite/custom-files/ECA_snmpd.conf
+						# DESTINATION:	/etc/snmp/snmpd.conf
+
+
+firewall-cmd --permanent --zone=public --add-port=161/tcp
+firewall-cmd --permanent --zone=public --add-port=161/udp
+
+systemctl enable snmpd
+systemctl start snmpd
+systemctl status snmpd
+
+systemctl restart firewalld
+
+
+
+yum install rsyslog
+
+add line 
+*.*  @@192.168.33.23:514
+
+After
+#*.* @@remote-host:514
+*.*  @@192.168.33.23:514
+
+And Before
+# ### end of the forwarding rule ###
+
+So looks like this
+#*.* @@remote-host:514
+*.*  @@192.168.33.23:514
+# ### end of the forwarding rule ###
+

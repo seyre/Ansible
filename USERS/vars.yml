@@ -1,0 +1,98 @@
+---
+users:
+  - username: maruna
+    use_sudo: no
+
+  - username: jaroslav
+    use_sudo: yes
+
+admin_users:
+   - login: superlinux
+     groups: wheel
+     password: $6$U9YOVlh1$ULzP1yyjPl.tCDbpStoLaxMVy6dCFg10FvluL355h1eN6AFuP0HgCC5QSAdR6v4VmJrqh5tFEolp7klLYSUlJ1
+   - login: stevene
+     groups: sp_users,xrdpusers
+     password: $6$sGcYQwxn$JB6vMtam6I.ygu2M20vNA7dqGhPqW5UlLRAOl7Kl.hbcMg7bwxmJ6MbvwdgmhECCZ0sHRnoVYeRYVeWrwHCxN1
+   - login: andrew
+     groups: sp_users,xrdpusers
+     password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
+   - login: arpa
+     groups: sp_users,xrdpusers
+     password: $6$GaXceflm$Xaw3meaIcNLzFlxQf9266WwBVmx/Qf.IDaLr5ugKTMG2If9gwFnyZg4GY5JGObfRJQPXb2PxX5u/K3U8Kr6jn1
+   - login: paul
+     groups: sp_users,xrdpusers
+     password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
+   - login: pgpa
+     groups: sp_users,xrdpusers
+     password: $6$drqlyTQF$ooqOYEvRyNOo4vhCrgAITWAF2c.gBCk.yNvmtenKqmnHtuuFF18kk6WKQhBaMaBp7H2CJoG4.KmpNfZ6BeIZ2/
+   - login: charlie
+     groups: sp_users,xrdpusers
+     password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
+   - login: crpa
+     groups: sp_users,xrdpusers
+     password: $6$VnYmZPXa$/fZiLUFGgLrEL8EQimbcreBYtZOsSsM0PdlOUlHTX1uS/vkEDulebFQo8KiY3N.q28UQm0WJZ.5xdGBfP9qSh1
+   - login: evansa
+     groups: sp_users,xrdpusers
+     password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
+   - login: eapa
+     groups: sp_users,xrdpusers
+     password: $6$EfwPtaTe$NFa/KLM0V58JmQtgfkfmNwv/cmIv0iEV0OuwAYNEEHT8cZHbHq0L5HRjr5br9TC8RezzFOy7v2xdlTmsZfhoR.
+   - login: krpa
+     groups: sp_users,xrdpusers
+     password: $6$qvVZHpRJ$CGx2PWcPi.lWtSzCb8tdMxV/ZWHQw7gXkWyvppZrU5pJAxCH.drbULL52InHr1bBU2OtL1zqoFOWDAGOSzpmk1
+   - login: avpa
+     groups: sp_users,xrdpusers
+     password: $6$TMreZdDF$sV9G4WnMrv4FSPWJxAUbJflFg.prau6QDwNZ1JjvslSw9mMnwb1G7nkYGX1LJhbLIIEgPS6uJ4pWJizx71rwV1
+dev_users:
+   - login: ngsd
+     groups: devs,xrdpusers,ECA,DevMan
+     password: $6$LSjGBEPC$5NPwAHr7WKHo3qV6sc3uftlhUUy3MYKaYZu0aFyS/.tr/h1IEYnMzhppEl8s4B8ajBf3Mh8jqe5c.8lATozOL/
+   - login: rssd
+     groups: devs,xrdpusers,ECA,DevMan
+     password: $6$FNEvyJnR$2UPjtLV.spgsteetoQ1gLEUO93TG3FzjTByXWpXY5JK1qUVaVCZoxscvwcMDV672BxP14MV3r31ghMRLzkOc.0
+   - login: wgsd
+     groups: devs,xrdpusers,ECA,DevLead
+     password: $6$ONnrSRxs$7FG8RAhoX2rWepUo42pn3wl2zMPI91KaSqMNq4gA8V55FJX8HV4tFOdfc9ifWvGCQb9l7xFJ6x3MbAxZ/3Kpy/
+   - login: mmsd
+     groups: devs,xrdpusers,ECA,DevLead
+     password:
+   - login: apsd
+     groups: devs,xrdpusers,ECA
+     password: $6$HAcZMuLj$SjaCaKDUWNitnPwodAsvYuJeJND2ugQhardupMfErGKa5/vpdAiQ2a93AH40yIRw7A.7GS0nGwCYx/0UPO/Sp0
+   - login: shsd
+     groups: devs,xrdpusers,ECA
+     password: $6$VTUOdXcA$MtQ2UzWgLk4wxDj2Ny9F..TOT776B.WZNhDywoRb2fLZIs2Kzdzy5vFoqYR7Nype9UfHtKSdvOhuHgskIkgtD1
+   - login: iksd
+     groups: devs,xrdpusers,ECA
+     password: $6$3keSVpCR$H1N5BP7TIywfAh8aMOI64ciWS/f7qlww4cL8r17HxlkDgKOyqDCUBh20AbVPWTHCzMhOOWeEfGaTG2vVQqcrb0
+   - login: ngsd
+     groups: devs,xrdpusers,ECA
+     password: $6$udnlzLCE$v.Tvpp1RJon3ZRNXzZ3KnUOrCGxhVVOZFqzqPo98ih0pZvEfw.A/qEAO5cF4mL84SZGL8vxf.RZfbCqORcAdg0
+   - login: gksd
+     groups: devs,xrdpusers,ECA
+     password: $6$56ZsHxUt$IOg/gQYoRAF1op8uQ4Z186OH.603.0rBjSCvv66QN.ErnyZzbuXpWY.AIrw7CFNdC0mNvVVm/IkVejdvql5xC.
+   - login: ssasd
+     groups: devs,xrdpusers,ECA
+     password: $6$SrAjlNnM$Pmkip8AAGbGiAlH1vJEOJxw8vdDYp8DboDOtKsYH9iKcyz89p6bmSZNWFoMJvs3rHqCMFcSOI7INT4EBWtLB90
+remove_users:
+   - "WengyG"
+   - "GlennK"
+   - "NickG"
+   - "RuneS"
+   - "IstvanK"
+   - "SergeS"
+   - "AlexP"
+   - "RemyR"
+   - "MikeM"
+---
+admin_groups:
+   - groups: sp_users
+dev_groups:
+   - groups: devs
+   - groups: xrdpusers
+   - groups: ECA
+   - groups: DevMan
+   - groups: DevLead
+remove_groups:
+## Example format - remove "#" to make live
+#   - "admin"

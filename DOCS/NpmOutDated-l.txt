@@ -1,0 +1,122 @@
+[steven@lnlxtst01 ~]$ npm outdated -l							
+Package	Current	Wanted	Latest	Location	Package	Type	
+@angular-devkit/build-angular	0.13.9	0.13.9	0.803.20	delme	devDependencies	https://github.com/angular/angular-cli	
+@angular-devkit/build-ng-packagr	0.800.6	0.800.6	0.803.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular-devkit/core	7.3.9	7.3.9	8.3.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular-devkit/schematics	7.3.9	7.3.9	8.3.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular/animations	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/cdk	7.3.7	7.3.7	8.2.3	delme	dependencies	https://github.com/angular/material2#readme	
+@angular/cli	7.3.9	7.3.9	8.3.20	delme	devDependencies	https://github.com/angular/angular-cli	
+@angular/common	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/compiler	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/compiler-cli	7.2.15	7.2.15	8.2.14	delme	devDependencies	https://github.com/angular/angular/tree/master/packages/compiler-cli	
+@angular/core	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/forms	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/language-service	7.2.15	7.2.15	8.2.14	delme	devDependencies	https://github.com/angular/angular#readme	
+@angular/material	7.3.7	7.3.7	8.2.3	delme	dependencies	https://github.com/angular/material2#readme	
+@angular/platform-browser	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/platform-browser-dynamic	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/platform-server	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/pwa	0.800.6	0.800.6	0.803.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular/router	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular/tree/master/packages/router	
+@angular/service-worker	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/upgrade	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@ckeditor/ckeditor5-autosave	11.0.5	11.0.5	16.0.0	delme	dependencies	https://ckeditor.com/ckeditor-5	
+@ckeditor/ckeditor5-build-inline	12.4.0	12.4.0	16.0.0	delme	dependencies	https://ckeditor.com/ckeditor-5	
+@ng-bootstrap/ng-bootstrap	4.2.2	4.2.2	5.1.4	delme	dependencies	https://github.com/ng-bootstrap/ng-bootstrap#readme	
+@ng-select/ng-select	2.20.5	2.20.5	3.7.0	delme	dependencies	https://github.com/ng-select/ng-select#readme	
+@ngx-pwa/local-storage	7.4.2	7.4.2	8.2.3	delme	dependencies	https://github.com/cyrilletuzi/angular-async-local-storage	
+angular-in-memory-web-api	0.8.0	0.8.0	0.9.0	delme	dependencies	https://github.com/angular/in-memory-web-api#readme	
+async	2.6.3	2.6.3	3.1.0	delme	dependencies	https://caolan.github.io/async/	
+bourbon	5.1.0	5.1.0	6.0.0	delme	dependencies	https://www.bourbon.io/	
+codelyzer	4.5.0	4.5.0	5.2.0	delme	devDependencies	https://github.com/mgechev/codelyzer#readme	
+core-js	2.6.11	2.6.11	3.5.0	delme	dependencies	https://github.com/zloirock/core-js#readme	
+highcharts	7.2.1	7.2.1	8.0.0	delme	dependencies	http://www.highcharts.com	
+karma-chrome-launcher	2.2.0	2.2.0	3.1.0	delme	devDependencies	https://github.com/karma-runner/karma-chrome-launcher#readme	
+ngx-bootstrap	4.3.0	4.3.0	5.2.0	delme	dependencies	https://github.com/valor-software/ngx-bootstrap#readme	
+ngx-toastr	10.2.0	10.2.0	11.2.1	delme	dependencies	https://github.com/scttcper/ngx-toastr	
+screenfull	4.2.1	4.2.1	5.0.0	delme	dependencies	https://github.com/sindresorhus/screenfull.js#readme	
+sweetalert2	8.19.0	8.19.0	9.5.3	delme	dependencies	https://sweetalert2.github.io/	
+ts-node	7.0.1	7.0.1	8.5.4	delme	devDependencies	https://github.com/TypeStrong/ts-node	
+tsickle	0.34.3	0.34.3	0.37.1	delme	dependencies	https://github.com/angular/tsickle	
+typescript	3.2.4	3.7.3	3.7.3	delme	devDependencies	https://www.typescriptlang.org/	
+zone.js	0.8.29	0.8.29	0.10.2	delme	dependencies	https://github.com/angular/zone.js#readme	
+							
+							
+							
+[SajedH@lnlxsh01 ~]$ npm outdated -l							
+Package	Current	Wanted	Latest	Location	Package	Type	Homepage
+@agm/core	1.0.0-beta.6	1.1.0	1.1.0	delme	dependencies	https://angular-maps.com	
+@angular-devkit/build-angular	0.13.9	0.13.9	0.803.20	delme	devDependencies	https://github.com/angular/angular-cli	
+@angular-devkit/build-ng-packagr	0.800.1	0.800.6	0.803.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular-devkit/core	7.3.9	7.3.9	8.3.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular-devkit/schematics	7.3.9	7.3.9	8.3.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular/animations	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/cdk	7.3.7	7.3.7	8.2.3	delme	dependencies	https://github.com/angular/material2#readme	
+@angular/cli	7.3.9	7.3.9	8.3.20	delme	devDependencies	https://github.com/angular/angular-cli	
+@angular/common	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/compiler	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/compiler-cli	7.2.15	7.2.15	8.2.14	delme	devDependencies	https://github.com/angular/angular/tree/master	/packages/compiler-cli
+@angular/core	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/forms	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/language-service	7.2.15	7.2.15	8.2.14	delme	devDependencies	https://github.com/angular/angular#readme	
+@angular/material	7.3.7	7.3.7	8.2.3	delme	dependencies	https://github.com/angular/material2#readme	
+@angular/platform-browser	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/platform-browser-dynamic	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/platform-server	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/pwa	0.800.1	0.800.6	0.803.20	delme	dependencies	https://github.com/angular/angular-cli	
+@angular/router	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular/tree/master	/packages/router
+@angular/service-worker	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@angular/upgrade	7.2.15	7.2.15	8.2.14	delme	dependencies	https://github.com/angular/angular#readme	
+@ckeditor/ckeditor5-angular	1.1.0	1.1.2	1.1.2	delme	dependencies	https://ckeditor.com	
+@ckeditor/ckeditor5-autosave	11.0.2	11.0.5	16.0.0	delme	dependencies	https://ckeditor.com/ckeditor-5	
+@ckeditor/ckeditor5-build-inline	12.2.0	12.4.0	16.0.0	delme	dependencies	https://ckeditor.com/ckeditor-5	
+@fortawesome/fontawesome-free	5.9.0	5.12.0	5.12.0	delme	dependencies	https://fontawesome.com	
+@ng-bootstrap/ng-bootstrap	4.2.1	4.2.2	5.1.4	delme	dependencies	https://github.com/ng-bootstrap/ng-bootstrap#r	eadme
+@ng-select/ng-select	2.20.0	2.20.5	3.7.0	delme	dependencies	https://github.com/ng-select/ng-select#readme	
+@ngx-pwa/local-storage	7.4.2	7.4.2	8.2.3	delme	dependencies	https://github.com/cyrilletuzi/angular-async-l	ocal-storage
+@ngxs/store	3.4.3	3.6.0	3.6.0	delme	dependencies	https://github.com/ngxs/store#readme	
+@tinymce/tinymce-angular	3.0.1	3.3.1	3.3.1	delme	dependencies	https://github.com/tinymce/tinymce-angular#rea	dme
+@types/jasmine	3.3.13	3.5.0	3.5.0	delme	devDependencies	https://github.com/DefinitelyTyped/DefinitelyT	yped#readme
+@types/jasminewd2	2.0.6	2.0.8	2.0.8	delme	devDependencies	https://github.com/DefinitelyTyped/DefinitelyT	yped#readme
+@types/jquery	3.3.29	3.3.31	3.3.31	delme	dependencies	https://github.com/DefinitelyTyped/DefinitelyT	yped#readme
+@types/node	12.0.4	12.12.18	12.12.18	delme	devDependencies	https://github.com/DefinitelyTyped/DefinitelyT	yped#readme
+ajv	6.10.0	6.10.2	6.10.2	delme	dependencies	https://github.com/epoberezkin/ajv	
+angular-froala-wysiwyg	3.0.0-rc.1	3.0.6	3.0.6	delme	dependencies	https://github.com/froala/angular-froala-wysiw	yg#readme
+angular-in-memory-web-api	0.8.0	0.8.0	0.9.0	delme	dependencies	https://github.com/angular/in-memory-web-api#r	eadme
+angular-maps	6.0.1	6.0.3	6.0.3	delme	dependencies	https://github.com/infusion-code/angular-maps/	wiki
+angular2-signaturepad	2.8.0	2.9.0	2.9.0	delme	dependencies	https://github.com/wulfsolter/angular2-signatu	repad#readme
+async	2.6.2	2.6.3	3.1.0	delme	dependencies	https://caolan.github.io/async/	
+bootstrap	4.3.1	4.4.1	4.4.1	delme	dependencies	https://getbootstrap.com/	
+bourbon	5.1.0	5.1.0	6.0.0	delme	dependencies	https://www.bourbon.io/	
+chart.js	2.8.0	2.9.3	2.9.3	delme	dependencies	https://www.chartjs.org	
+chartist	0.11.2	0.11.4	0.11.4	delme	dependencies	https://gionkunz.github.io/chartist-js	
+codelyzer	4.5.0	4.5.0	5.2.0	delme	devDependencies	https://github.com/mgechev/codelyzer#readme	
+core-js	2.6.9	2.6.11	3.5.0	delme	dependencies	https://github.com/zloirock/core-js#readme	
+highcharts	7.1.2	7.2.1	8.0.0	delme	dependencies	http://www.highcharts.com	
+jasmine-core	3.4.0	3.5.0	3.5.0	delme	devDependencies	https://jasmine.github.io	
+jqwidgets-scripts	8.0.0	8.3.2	8.3.2	delme	dependencies	https://www.jqwidgets.com/	
+karma	4.0.1	4.4.1	4.4.1	delme	devDependencies	http://karma-runner.github.io/	
+karma-chrome-launcher	2.2.0	2.2.0	3.1.0	delme	devDependencies	https://github.com/karma-runner/karma-chrome-l	auncher#readme
+karma-coverage-istanbul-reporter	2.0.5	2.1.1	2.1.1	delme	devDependencies	https://github.com/mattlewis92/karma-coverage-	istanbul-reporter#readme
+lodash	4.17.11	4.17.15	4.17.15	delme	dependencies	https://lodash.com/	
+ng-block-ui	2.1.3	2.1.8	2.1.8	delme	dependencies	https://github.com/kuuurt13/ng-block-ui#readme	
+ng-packagr	5.3.0	5.7.1	5.7.1	delme	dependencies	https://github.com/ng-packagr/ng-packagr	
+ngx-bootstrap	4.2.0	4.3.0	5.2.0	delme	dependencies	https://github.com/valor-software/ngx-bootstra	p#readme
+ngx-device-detector	1.3.5	1.3.20	1.3.20	delme	dependencies	https://github.com/KoderLabs/ngx-device-detect	or#readme
+ngx-toastr	10.0.4	10.2.0	11.2.1	delme	dependencies	https://github.com/scttcper/ngx-toastr	
+node-sass	4.12.0	4.13.0	4.13.0	delme	dependencies	https://github.com/sass/node-sass	
+popper.js	1.15.0	1.16.0	1.16.0	delme	dependencies	https://popper.js.org	
+postcss	7.0.17	7.0.25	7.0.25	delme	dependencies	https://postcss.org/	
+rxjs	6.5.2	6.5.3	6.5.3	delme	dependencies	https://github.com/ReactiveX/RxJS	
+rxjs-compat	6.5.2	6.5.3	6.5.3	delme	dependencies		
+screenfull	4.2.0	4.2.1	5.0.0	delme	dependencies	https://github.com/sindresorhus/screenfull.js#	readme
+sweetalert2	8.11.7	8.19.0	9.5.3	delme	dependencies	https://sweetalert2.github.io/	
+ts-md5	1.2.4	1.2.7	1.2.7	delme	dependencies	https://github.com/cotag/ts-md5	
+ts-node	7.0.1	7.0.1	8.5.4	delme	devDependencies	https://github.com/TypeStrong/ts-node	
+tsickle	0.34.0	0.34.3	0.37.1	delme	dependencies	https://github.com/angular/tsickle	
+tslib	1.9.3	1.10.0	1.10.0	delme	dependencies	http://typescriptlang.org/	
+tslint	5.11.0	5.20.1	5.20.1	delme	devDependencies	https://github.com/palantir/tslint#readme	
+typescript	3.2.4	3.7.3	3.7.3	delme	devDependencies	https://www.typescriptlang.org/	
+web-animations-js	2.3.1	2.3.2	2.3.2	delme	dependencies	https://github.com/web-animations	
+zone.js	0.8.29	0.8.29	0.10.2	delme	dependencies	https://github.com/angular/zone.js#readme	

@@ -1,0 +1,40 @@
+SPACEWALK
+Child Channel centos7_patch - left syncing repos overnight (DONE)
+Check status/completed/space on lnlxspw01:/var/satellite   (DONE)
+
+
+
+ANSIBLE
+Keep working on  Tinternet SKIP functionality   ~/Ansible/ping_check.yml  (DONE)
+
+retrofit to tasks in the master_server_build.yml				(DOING)
+
+
+
+AD registration
+test/create playbook based upon your notes  \\eca-international.local\london\users\stevene\Documents\WORK\ActiveDirectory*.txt     (MMM MANUAL AT MOMENT)
+
+
+
+
+HANDOVER NOTES
+Finsh techStack					(DOING)
+
+
+Ansible Plays
+USERS/ansible-user-mgmt.yml			(DOING - but ../master_server_build.yml needs modifying to do a include_tasks:   USERS/user_mgmt.yml)
+
+TINTERNET_APPS/tinternet_dependent.yml		(DOING - need to moduify to include_tasks: in ../master_server_build.yml only runs it if TINTERNET_ENABLED is working)
+ansible-patch-host
+
+
+
+
+CODE PACKAGE INSTALLS/COPY   			(NICK TO CLARIFY)
+
+SRC: /var/satellite/custom-files/.vscode		
+to: /home/$MAIN_USER/.vscode
+Owner:   $MAIN_USER:MAIN_USER
+
+
+POSTMAN tar into manin user on the gnome desktop (defined in /etc/ansible/hosts (dev_user)		(TO DO)

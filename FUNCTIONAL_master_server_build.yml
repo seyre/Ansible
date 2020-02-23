@@ -6,7 +6,9 @@
 # 2020/01/31 - new usernames for all dev accounts
 # 2020/01/31 - added 2nd Admin accounts for Andre/Paul/Charlei/Evans - as these will match up in AD once they change them over
 # 2020/01/31 - account sssd matches system acocunt, hence new username ssasd
-# 2020/02/11 - t'internet check to allow yml to be omnipient/not dependency upion t'internet being enabled
+# 2020/02/11 - t'internet check to remove dependency upon t'internet being enabled
+# 2020/02/17 - Groups/Users/ moved out to USERS/user_mgmt.yml
+# 2020/02/17 - moved T'INTERNET dependent into T'INTERNET_APPS/tinternet_dependent.yml
 #
 ###########################################
 #      - login: ECABuildRelease
@@ -15,7 +17,7 @@
 #      - login: ECAReleaseBuilder
 #        groups:
 
-#  - import_playbook: snmp_config.yml
+  - import_playbook: ECA/snmp_config.yml
 
   tasks:
 ## TINTERNET CHECK
@@ -25,12 +27,18 @@
       return_content: no
       timeout: 10
     register:  tinternet_disabled
-
+    failed_when: "{{ tinternet_disabled.msg == 'Status code was -1 and not [200]:' }}"
+    ignore_errors: true
   - debug:
-      msg: "{{ tinternet_disabled.failed }}"
+#      msg: "{{ tinternet_disabled.status }}"
       msg: "{{ tinternet_disabled }}"
 
 
+# Handler to clean up yum metadata
+  - name: yum-clean-metadata
+    command: yum clean metadata
+    args:
+      warn: no
 
 ## REGISTER SERVER TO SPACEWALK
   - name: Ansible copy RHN-Register folder from Spacewalk to Target Server
@@ -81,7 +89,6 @@
       state: present
       disable_gpg_check: yes
 
-
 ## yum-rhn-plugin - disable GPG check
   - name: yum-rhn-plugin update GPG check 0 in /etc/yum/pluginconf.d/rhnplugin.conf
     lineinfile:
@@ -91,19 +98,21 @@
      backup: yes
 
 ## RHN-register
-  - name: rhn-register as with activation key
-    rhn_register:
-      state: present
-      activationkey: 1-21ad0fddf8f510baf82b58788f384190
-      server_url:  http://192.168.130.76/XMLRPC
-#      channels: centos-7-base-x86_64
-
-## RHN-register add software channels
-#  - name: rhn-register add software base channels
+#  - name: rhn-register as with activation key
 #    rhn_register:
 #      state: present
 #      activationkey: 1-21ad0fddf8f510baf82b58788f384190
-#      channels: 'Centos 7 Base x86_64'
+#      server_url:  http://192.168.130.76/XMLRPC
+#      channels: centos-7-base-x86_64
+
+
+## RHN-register host with Spacewalk PATCH Release updated Quarterely
+  - name: rhn-register with activation key to centos7_patch - updated quarterely
+    rhn_register:
+      state: present
+      activationkey: 1-95fb7c0dea1266fb8d89a3b3bb82c57f
+      server_url:  http://192.168.130.76/XMLRPC
+#      channels: centos-7-base-x86_64
 
 
 ## Spacewalk osad packages install
@@ -145,7 +154,7 @@
     loop:
       - ssh
 
-## Add TMOUT 1200 (20 minutes) of inactivity
+## Add TMOUT 28800 (8 hrs) of inactivity (as agreed with Paul (ECA 20 mins of activity provided from desktop PC as well as Power on the gnome desktop as well))
   - name: Create /etc/profile.d/local.sh file
     file:
      path: /etc/profile.d/local.sh
@@ -160,217 +169,235 @@
       - 'export TMOUT=28800'
       - 'readonly TMOUT'
 
+#####################
+##
+## ADD GROUSP/USERS
+##
+####################
 
-## ADD ADMIN USERS AND GROUPS
-# Add sp_users group
-  - name: Add sp_users group
-    group:
-     name: sp_users
-     state: present
+## Add AD script to change password for users
+  - name: Ansible copy SpaceWalk SSL cert to target server
+    copy:
+     src: /var/satellite/custom-files/AD_PasswdChange
+     dest: /usr/bin/AD_PasswdChange
 
-# Add xrdpusers group
-  - name: Add xrdpusers group
-    group:
-     name: xrdpusers
-     state: present
+##
+  - name: Include Users Tasks
+    import_tasks: USERS/user_mgmt.yml
 
-# Add sp_users accounts locally
+  - debug:
+       msg: user_tasks
+
+
+## Add sp_users group
+#  - name: Add sp_users group
+#    group:
+#     name: sp_users
+#     state: present
+
+## Add xrdpusers group
+#  - name: Add xrdpusers group
+#    group:
+#     name: xrdpusers
+#     state: present
+
+## Add sp_users accounts locally
+##  - name: Add sp_users accounts locally
+##    user:
+##     name: "{{ item }}"
+##     state: present
+##     shell: /bin/bash
+##     groups: sp_users,xrdpusers
+##     append: yes
+##    loop:
+##      - stevene
+##      - paul
+##      - andrew
+##      - charlie
+##      - evansa
+##      - krpa
+##      - avpa
+
+### Add sp_users accounts locally
 #  - name: Add sp_users accounts locally
 #    user:
+#      name: "{{ item.login }}"
+#      groups: "{{ item.groups }}"
+#      shell: /bin/bash
+#      generate_ssh_key: yes
+#      ssh_key_bits: 2048
+#      ssh_key_file: .ssh/id_rsa
+#      comment: "{{ item.login }}"
+#      append: yes
+#      password: "{{ item.password }}"
+##      update_password: on_create
+#    loop: "{{ admin_users }}"
+
+## Add sp_users entries to /etc/sudoers
+#  - name: Adding sp_users to /etc/sudoers
+#    lineinfile:
+#      owner: root
+#      group: root
+#      dest: /etc/sudoers
+#      backup: yes
+#      validate: /usr/sbin/visudo -cf %s
+#      line: '{{ item }}'
+#    with_items:
+#      - ''
+#      - '## sp_users'
+#      - 'Cmnd_Alias SP_USERS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/su -'
+#      - '%sp_users      ALL=(ALL)        SP_USERS'
+
+
+### ADD NORMAL USERS AND GROUPS
+## Add devs group
+#  - name: Add devs group
+#    group:
+#     name: devs
+#     state: present
+
+## Add xrdpusers group
+#  - name: Add xrdpusers group
+#    group:
+#     name: xrdpusers
+#     state: present
+
+## Add ECA user/group
+#  - name: Add ECA user and Group
+#    user:
+#     name: ECA
+#     state: present
+
+## Add DevMan user/group
+#  - name: Add DevMan ACL Group
+#    group:
+#     name: DevMan
+#     state: present
+
+## Add DevLead user/group
+#  - name: Add DevLead ACL Group
+#    group:
+#     name: DevLead
+#     state: present
+
+## Add dev_users accounts locally
+#  - name: Add dev_users accounts locally
+#    user:
+#      name: "{{ item.login }}"
+#      groups: "{{ item.groups }}"
+#      shell: /bin/bash
+#      generate_ssh_key: yes
+#      ssh_key_bits: 2048
+#      ssh_key_file: .ssh/id_rsa.key
+#      comment: "{{ item.login }}"
+#      append: yes
+#      password: "{{ item.password }}"
+#      update_password: on_create
+#    loop: "{{ dev_users }}"
+
+## Add Developers accounts locally
+##  - name: Add developers accounts locally
+##    user:
+##     name: "{{ item }}"
+##     state: present
+##     shell: /bin/bash
+##     groups: devs,xrdpusers,ECA
+##     append: yes
+##    loop:
+##      - ECABuildRelease
+##      - giteca
+##      - ngsd
+##      - apsd
+##      - shsd
+##      - wgsd
+##      - mmsd
+##      - ngsd
+##      - gksd
+##      - iksd
+##      - ssasd
+##      - ECAReleaseBuilder
+
+## Add Users to DevMan group
+#  - name:  Add users to DevMan Group
+##    user:
 #     name: "{{ item }}"
 #     state: present
 #     shell: /bin/bash
-#     groups: sp_users,xrdpusers
+#     groups: devs,xrdpusers,ECA,DevMan
 #     append: yes
 #    loop:
-#      - stevene
-#      - paul
-#      - andrew
-#      - charlie
-#      - evansa
-#      - krpa
-#      - avpa
+#      - ngsd
+#      - rssd
 
-# Add sp_users accounts locally
-  - name: Add sp_users accounts locally
-    user:
-      name: "{{ item.login }}"
-      groups: "{{ item.groups }}"
-      shell: /bin/bash
-      generate_ssh_key: yes
-      ssh_key_bits: 2048
-      ssh_key_file: .ssh/id_rsa
-      comment: "{{ item.login }}"
-      append: yes
-      password: "{{ item.password }}"
-#      update_password: on_create
-    loop: "{{ admin_users }}"
-
-# Add sp_users entries to /etc/sudoers
-  - name: Adding sp_users to /etc/sudoers
-    lineinfile:
-      owner: root
-      group: root
-      dest: /etc/sudoers
-      backup: yes
-      validate: /usr/sbin/visudo -cf %s
-      line: '{{ item }}'
-    with_items:
-      - ''
-      - '## sp_users'
-      - 'Cmnd_Alias SP_USERS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/su -'
-      - '%sp_users      ALL=(ALL)        SP_USERS'
-
-
-## ADD NORMAL USERS AND GROUPS
-# Add devs group
-  - name: Add devs group
-    group:
-     name: devs
-     state: present
-
-# Add xrdpusers group
-  - name: Add xrdpusers group
-    group:
-     name: xrdpusers
-     state: present
-
-# Add ECA user/group
-  - name: Add ECA user and Group
-    user:
-     name: ECA
-     state: present
-
-# Add DevMan user/group
-  - name: Add DevMan ACL Group
-    group:
-     name: DevMan
-     state: present
-
-# Add DevLead user/group
-  - name: Add DevLead ACL Group
-    group:
-     name: DevLead
-     state: present
-
-# Add dev_users accounts locally
-  - name: Add dev_users accounts locally
-    user:
-      name: "{{ item.login }}"
-      groups: "{{ item.groups }}"
-      shell: /bin/bash
-      generate_ssh_key: yes
-      ssh_key_bits: 2048
-      ssh_key_file: .ssh/id_rsa.key
-      comment: "{{ item.login }}"
-      append: yes
-      password: "{{ item.password }}"
-      update_password: on_create
-    loop: "{{ dev_users }}"
-
-# Add Developers accounts locally
-#  - name: Add developers accounts locally
+## Add Users to DevLead group
+#  - name:  Add users to DevLead Group
 #    user:
 #     name: "{{ item }}"
 #     state: present
 #     shell: /bin/bash
-#     groups: devs,xrdpusers,ECA
+#     groups: devs,xrdpusers,ECA,DevLead
 #     append: yes
 #    loop:
-#      - ECABuildRelease
-#      - giteca
-#      - ngsd
-#      - apsd
-#      - shsd
 #      - wgsd
 #      - mmsd
-#      - ngsd
-#      - gksd
-#      - iksd
-#      - ssasd
-#      - ECAReleaseBuilder
 
-# Add Users to DevMan group
-  - name:  Add users to DevMan Group
-    user:
-     name: "{{ item }}"
-     state: present
-     shell: /bin/bash
-     groups: devs,xrdpusers,ECA,DevMan
-     append: yes
-    loop:
-      - ngsd
-      - rssd
+### Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
+### 30/01/2020 - /etc/ECA added for devs ACL group
+#  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
+#    acl:
+#      path: "{{ item }}"
+#      entity: devs
+#      etype: group
+#      permissions: rwx
+#      state: present
+#    loop:
+#      - /home/gksd
+#      - /home/ssasd
+#      - /home/apsd
+#      - /home/shsd
+#      - /home/ngsd
+#      - /home/iksd
+#      - /etc/ECA
 
-# Add Users to DevLead group
-  - name:  Add users to DevLead Group
-    user:
-     name: "{{ item }}"
-     state: present
-     shell: /bin/bash
-     groups: devs,xrdpusers,ECA,DevLead
-     append: yes
-    loop:
-      - wgsd
-      - mmsd
+## Setup ACL's for DevLead group(excludes read/write access to DevLead)
+#  - name:  Add ACL for DevLead group to /home accounts excluding DevLead users
+#    acl:
+#      path: "{{ item }}"
+#      entity: DevLead
+#      etype: group
+#      permissions: rwx
+#      state: present
+#    loop:
+#      - /home/gksd
+#      - /home/ssasd
+#      - /home/apsd
+#      - /home/shsd
+#      - /home/ngsd
+#      - /home/iksd
+#      - /home/mmsd
+#      - /home/wgsd
 
-# Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
-# 30/01/2020 - /etc/ECA added for devs ACL group
-  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
-    acl:
-      path: "{{ item }}"
-      entity: devs
-      etype: group
-      permissions: rwx
-      state: present
-    loop:
-      - /home/gksd
-      - /home/ssasd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
-      - /etc/ECA
+## Setup ACL's for DevMan group(read/write access to everything)
+#  - name:  Add ACL for DevMan group to all /home accounts
+#    acl:
+#      path: "{{ item }}"
+#      entity: DevMan
+#      etype: group
+#      permissions: rwx
+#      state: present
+#    loop:
+#      - /home/gksd
+#      - /home/ssasd
+#      - /home/apsd
+#      - /home/shsd
+#      - /home/ngsd
+#      - /home/iksd
+#      - /home/mmsd
+#      - /home/wgsd
+#      - /home/ngsd
+#      - /home/rssd
 
-# Setup ACL's for DevLead group(excludes read/write access to DevLead)
-  - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
-    acl:
-      path: "{{ item }}"
-      entity: DevLead
-      etype: group
-      permissions: rwx
-      state: present
-    loop:
-      - /home/gksd
-      - /home/ssasd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
-      - /home/mmsd
-      - /home/wgsd
-
-# Setup ACL's for DevLead group(read/write access to everything)
-  - name:  Add ACL for DevLead group to all /home accounts
-    acl:
-      path: "{{ item }}"
-      entity: DevMan
-      etype: group
-      permissions: rwx
-      state: present
-    loop:
-      - /home/gksd
-      - /home/ssasd
-      - /home/apsd
-      - /home/shsd
-      - /home/ngsd
-      - /home/iksd
-      - /home/mmsd
-      - /home/wgsd
-      - /home/ngsd
-      - /home/rssd
-
-# Clean up old Development rules/entires in /etc/sudoers
+## Clean up old Development rules/entires in /etc/sudoers
   - name: removing legacy devs entry (used vi for /etc/hosts which is insecure)
     lineinfile:
       owner: root
@@ -402,7 +429,6 @@
       - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
 
 
-
 ## SETUP ECA SYSTEM UTILITES
 
 #  - name: ECA snmp config
@@ -427,7 +453,6 @@
     yum:
       name: rsyslog
       state: present
-
 
 # rsyslog add eventengine target to rsyslog.conf
   - name: Add target eventengine host to /etc/rsyslog.conf
@@ -569,7 +594,7 @@
 # Yum install starrate 3rd-Party software
   - name: install BeyondCompare DBeaver
     yum:
-      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm, /var/tmp/3rd-Party/code-1.40.1-1573664332.el7.x86_64.rpm, /var/tmp/3rd-Party/dbeaver-ce-6.2.5-stable.x86_64.rpm
+      name: /var/tmp/3rd-Party/bcompare-4.3.2.24472.x86_64.rpm, /var/tmp/3rd-Party/dbeaver-ce-6.2.5-stable.x86_64.rpm
       state: present
       disable_gpg_check: yes
 
@@ -592,7 +617,9 @@
       gpgkey: https://dl.google.com/linux/linux_signing_key.pub
       enabled: yes
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find ('Status code was -1 and not') != -1
+#    when: tinternet_disabled.stdout.find ('Status code was -1 and not') != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+
 
 # Yum install Google Chrome
   - name:  Yum install Google Chrome Latest from repo
@@ -601,16 +628,20 @@
       state: present
       disable_gpg_check: yes
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+
 
 # Yum_repository Google Chrome Remove
   - name: Remove Google Chrome repository
     yum_repository:
       name: Google_chrome_latest
       state: absent
-#    notify: yum-clean-metadata
+    notify: yum-clean-metadata
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+
 
 
 # Yum_repository Google Chrome Remove
@@ -618,10 +649,10 @@
     yum_repository:
       name: google_chrome
       state: absent
-#    notify: yum-clean-metadata
+    notify: yum-clean-metadata
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
 
 # Yum_repository Google Chrome Remove
@@ -629,9 +660,11 @@
     yum_repository:
       name: google_chrome-stable
       state: absent
-#    notify: yum-clean-metadata
+    notify: yum-clean-metadata
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+
 
 
 ## INSTALL BEYONDCOMPARE - SCOOTERSOFTWARE
@@ -646,7 +679,9 @@
       gpgkey: http://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
       enabled: yes
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
+
 
 
 # Yum install beyondcompare from ScooterSfot
@@ -656,8 +691,8 @@
       state: present
       disable_gpg_check: yes
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
-
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
 # Yum add license key file (plain text)
   - name: Beyond Compare - add license key
@@ -670,9 +705,10 @@
     yum_repository:
       name: scootersoftware
       state: absent
-#    notify: yum-clean-metadata
+    notify: yum-clean-metadata
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
 
 
@@ -684,13 +720,6 @@
 #     enabled=yes
 # RPMS /var/tmp/RHN-Register/python2-osad-5.11.107-1.el7.noarch.rpm /var/tmp/RHN-Register/osad-5.11.107-1.el7.noarch.rpm
 
-
-
-## USER/GROUP SETUP
-  - name: Add devs group
-    group:
-     name: devs
-     state: present
 
 ##
   - name: Add max_user_watch settings for Visual Studio
@@ -742,7 +771,8 @@
       state: present
       executable: /usr/bin/npm
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
 
 
@@ -754,13 +784,15 @@
       state: present
       executable: /usr/bin/npm
 #    when: tinternet_disabled is changed
-    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+#    when: tinternet_disabled.stdout.find("Status code was -1 and not") != -1
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
 
-# npm list -g -depth=0
-# npm install -g @angular/cli@7.3.9
-# npm install -g typescript@3.4.5
-# npm list -g -depth=1 | wc -l     #  141 total
+
+## npm list -g -depth=0
+## npm install -g @angular/cli@7.3.9
+## npm install -g typescript@3.4.5
+## npm list -g -depth=1 | wc -l     #  141 total
 
 ## TIDY UP TEMPORARY WORKING DIRECTORIES
 ## RHN-Register clean up /var/tmp/RHN-Register working directory

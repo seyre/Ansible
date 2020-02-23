@@ -1,0 +1,325 @@
+
+
+Questions/clarifications around LINUX build need to pose to Gordon Refell
+
+
+
+
+100mb vFat disk on build
+
+Line in anaconda-ks.cfg
+/dev/sdb  mounted on /mnt/sdb1  at boot
+
+Script  
+echo '@reboot bash /mnt/sdb1/CustomSetupRunFromDVD.sh >> CustomSetupRunFromDVD.log 2>&1' > cron_admin.cfg
+
+
+SetupDesktop.sh
+
+SetupHttpProxy.sh
+
+EnableSSH.sh
+
+InstallNodeAndNpm.sh
+Running as:
+root
+Tue  4 Jun 09:19:13 BST 2019
+==================================================
+INSTALL NODE + NPM
+node: /usr/local/bin/node
+v10.15.3
+npm: /usr/local/bin/npm
+6.4.1
+==================================================
+IMPORTANT: REMEMBER TO SET NPM PROXY USING SetupNpmProxy.sh
+No proxy set for npm
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:19:17 BST 2019
+root
+==================================================
+SetupNpmProxy.sh
+Tue  4 Jun 09:19:17 BST 2019
+==================================================
+CONFIGURE PROXY FOR NPM
+Setting npm proxy for this user:
+root
+npm: /usr/local/bin/npm
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:19:19 BST 2019
+==================================================
+SetupNpmProxy.sh
+Tue  4 Jun 09:19:19 BST 2019
+==================================================
+CONFIGURE PROXY FOR NPM
+Setting npm proxy for this user:
+admin
+npm: /usr/local/bin/npm
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:19:21 BST 2019
+==================================================
+SetupNpmProxy.sh
+Tue  4 Jun 09:19:21 BST 2019
+==================================================
+CONFIGURE PROXY FOR NPM
+Setting npm proxy for this user:
+NickG
+npm: /usr/local/bin/npm
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+http://192.168.20.9:3128/
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:19:24 BST 2019
+==================================================
+InstallDotNetCore.sh
+
+InstallNodeAndNpm.sh
+
+
+INSTALL NPM-BASED TOOLS
+/usr/local/bin/ng -> /usr/local/lib/node_modules/@angular/cli/bin/ng
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/@angular/cli/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ @angular/cli@7.3.9
+added 295 packages from 180 contributors in 9.785s
+/usr/local/bin/tsc -> /usr/local/lib/node_modules/typescript/bin/tsc
+/usr/local/bin/tsserver -> /usr/local/lib/node_modules/typescript/bin/tsserver
++ typescript@3.4.5
+added 1 package from 1 contributor in 1.582s
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:30:42 BST 2019
+
+
+
+==================================================
+InstallChrome.sh
+Running as:
+root
+Tue  4 Jun 09:30:42 BST 2019
+$HOME=
+/root
+==================================================
+INSTALL CHROME
+Loaded plugins: fastestmirror
+Examining /mnt/DVD3/Downloads/libdbusmenu-16.04.0-2.el7.x86_64.rpm: libdbusmenu-16.04.0-2.el7.x86_64
+Marking /mnt/DVD3/Downloads/libdbusmenu-16.04.0-2.el7.x86_64.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package libdbusmenu.x86_64 0:16.04.0-2.el7 will be installed
+--> Finished Dependency Resolution
+
+
+
+
+CreateSshKey.sh
+Running as:
+NickG
+Tue  4 Jun 09:31:32 BST 2019
+$HOME=
+/home/NickG
+==================================================
+CREATE SSH KEY FOR SILENT-LOGON TO REMOTE MACHINES
+-rw-------. 1 NickG NickG 1679 Jun  4 09:31 /home/NickG/.ssh/id_rsa
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:31:32 BST 2019
+==================================================
+ProvideCommonFixes.sh
+Running as:
+NickG
+Tue  4 Jun 09:31:32 BST 2019
+$HOME=
+/home/NickG
+==================================================
+PROVIDE COPY OF LATEST NODE-SASS BINDING.NODE
+Copy binding.node to every $HOME/<APPLICATION>/node_modules/node-sass/vendor/linux-x64-<VERSION>/binding.node
+==================================================
+PROVIDE ADVICE TO FIX NUGET ERROR DURING BUILD
+For every .csproj and Startup.cs ensure TargetFramework is set to same version as command "dotnet --version"
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:31:33 BST 2019
+==================================================
+
+
+
+InstallNuGetPackages.sh
+Running as:
+NickG
+Tue  4 Jun 09:31:33 BST 2019
+$HOME=
+/home/NickG
+
+
+
+InstallNodeModules.sh
+Running as:
+NickG
+Tue  4 Jun 09:31:36 BST 2019
+$HOME=
+/home/NickG
+==================================================
+CONFIGURE TOP-LEVEL /NODE_MODULES FOR DEVELOPER
+total 44
+drwxr-xr-x.   4 NickG NickG    36 Jun  4 09:31 fixes
+drwxr-xr-x. 807 NickG NickG 24576 May 30 16:07 node_modules
+-r--r--r--.   1 NickG NickG  3044 Jun  4 09:31 package.json
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:31:51 BST 2019
+==================================================
+
+
+InstallPostman.sh
+Running as:
+NickG
+Tue  4 Jun 09:31:51 BST 2019
+$HOME=
+/home/NickG
+==================================================
+INSTALL POSTMAN FOR DEVELOPER
+total 44
+drwxr-xr-x.   4 NickG NickG    36 Jun  4 09:31 fixes
+drwxr-xr-x. 807 NickG NickG 24576 May 30 16:07 node_modules
+-r--r--r--.   1 NickG NickG  3044 Jun  4 09:31 package.json
+drwxr-xr-x.   3 NickG NickG    32 May 20 11:10 Postman
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:31:56 BST 2019
+
+
+DisableGnomeKeyringForSsh.sh
+Running as:
+root
+Tue  4 Jun 09:31:56 BST 2019
+$HOME=
+/root
+==================================================
+DISABLE GNOME KEYRING FOR SSH (EG SILENT GIT ACCESS TO REMOTE REPO)
+(ONCE DISABLED USES OPENSSH KEY AGENT INSTEAD)
+-rw-r--r--. 1 root root 6468 Oct 30  2018 /etc/xdg/autostart/gnome-keyring-ssh.desktop
+Hidden=true
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:31:56 BST 2019
+==================================================
+SetupPrinterMF9280Cdn.sh
+
+
+
+
+InstallApacheWebServer.sh
+Running as:
+root
+Tue  4 Jun 09:32:40 BST 2019
+$HOME=
+/root
+
+
+
+
+InstallMariaDB.sh
+Running as:
+root
+Tue  4 Jun 09:32:53 BST 2019
+$HOME=
+/root
+
+REMEMBER TO RUN SCRIPT mysql_secure_installation!!
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:33:18 BST 2019
+==================================================
+
+
+
+INSTALL JAVA SDK
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+Resolving Dependencies
+--> Running transaction check
+---> Package java-1.8.0-openjdk-devel.x86_64 1:1.8.0.181-7.b13.el7 will be installed
+
+
+
+InstallDBeaver.sh
+Running as:
+root
+Tue  4 Jun 09:33:34 BST 2019
+$HOME=
+/root
+==================================================
+INSTALL DBEAVER GRAPHICAL DB ADMIN TOOL
+Preparing...                          ########################################
+Updating / installing...
+dbeaver-ce-0:6.0.5-stable             ########################################
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:33:36 BST 2019
+==================================================
+ALL DONE!
+==================================================
+Tue  4 Jun 09:33:36 BST 2019
+[sudo] password for admin: root
+==================================================
+
+
+InstallCertificates.sh
+Running as:
+root
+Tue  4 Jun 09:34:01 BST 2019
+$HOME=
+/root
+==================================================
+INSTALL CERTIFICATES
+==================================================
+ALL DONE!
+
+
+
+
+InstallBeyondCompare.sh
+Running as:
+root
+Tue  4 Jun 09:33:36 BST 2019
+$HOME=
+/root
+
+
+
+ 	Steven Eyre 
+	Linux Consultant
+	+44 (0)7710 121913
+	steven.eyre@eca-international.com 
+
+	eca-international.com
+
+	  
+
+
