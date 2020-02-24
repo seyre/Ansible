@@ -241,6 +241,14 @@
       - "{{ admin_users }}"
       - "{{ dev_users }}"
 
+# Remove users specified
+  - name: Rmeove users specified in remove_users list
+    user:
+      name:  "{{ item.login }}"
+      state: absent
+    with_items:
+      - "{{ remove_users }}"
+
 # Add sp_users entries to /etc/sudoers
   - name: Adding sp_users to /etc/sudoers
     lineinfile:
@@ -465,7 +473,7 @@
       disable_gpg_check: yes
 
   - name: Ivanti - install/register the agent back to the Server
-    shell: /opt/ivanti/isec/bin/stagentctl register  --host lnisc1.eca-international.local --port 3121 --passphrase 88NYyWwDRWHXVYKEaR8pbgYncpdExm6V --issuer-certificate /var/tmp/Ivanti/ISECCert.cer --selected-policy ECALinux
+    shell: /opt/ivanti/isec/bin/stagentctl register  --host lnisc1.eca-international.local --port 3121 --passphrase 88NYyWwDRWHXVYKEaR8pbgYncpdExm6V --issuer-certificate /var/tmp/3rd-Party/Ivanti/ISECCert.cer --selected-policy ECALinux
     args:
       executable: /bin/bash
       creates: /opt/ivanti/isec/ECAControlFile
@@ -747,6 +755,7 @@
       name: nodejs-10.17.0-1nodesource.x86_64
       state: present
       disable_gpg_check: yes
+    when: not ( tinternet_disabled.status not in [ 0, 200 ] )
 
   - name:  NPM Global module installs (local/user install swill be completed by the developers
     npm:
