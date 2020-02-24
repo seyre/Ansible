@@ -49,7 +49,6 @@ dev_users:
    - login: ssasd
      groups: devs,xrdpusers,ECA
 remove_users:
-<<<<<<< HEAD
    - login: WengyG
    - login: GlennK
    - login: NickG
@@ -62,17 +61,3 @@ remove_users:
    - login: andrew
    - login: charlie
    - login: paul
-=======
-   - "WengyG"
-   - "GlennK"
-   - "NickG"
-   - "RuneS"
-   - "IstvanK"
-   - "SergeS"
-   - "AlexP"
-   - "RemyR"
-   - "MikeM"
-   - "andrew"
-   - "charlie"
-   - "paul"
->>>>>>> d89e7bc1dce5438d3eb522c16260860dc3349229

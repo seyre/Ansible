@@ -40,7 +40,7 @@
 
   - name: YUM install Ivanti RPM
     yum:
-      name: /var/tmp/Ivanti/ISecAgent-9.4.410536-1.x86_64.rpm
+      name: /var/tmp/Ivanti/ISecAgent-9.4.410536-1.x86_64.rpm, /var/tmp/Ivanti/ISecAgentPatchCent7-9.4.410536-1.x86_64.rpm
       state: present
       disable_gpg_check: yes
 
@@ -57,7 +57,7 @@
      state: absent
 
 ##  IF we've got this far Ivanti is registered - touch control file to ensure it doesnt run again
-  - name:  Ivanti install/registere contorl file (stops registration being re-run)
+  - name:  Ivanti install/registered control file (stops registration being re-run)
     file:
      path: /opt/ivanti/isec/ECAControlFile
      state: touch
