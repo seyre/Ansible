@@ -1,0 +1,349 @@
+SSSD / AD INTEGRATION
+
+PACKAGES
+
+libselinux-python
+realmd
+oddjob
+oddjob-mkhomedir
+sssd
+adcli
+samba-common-tools
+samba-libs
+pytalloc
+pam_krb5
+
+
+
+CONFIG FILES (BACKUP) ?
+
+  - /etc/krb5.keytab
+  - /var/lib/sss/db/*
+  - /var/log/sssd/*
+  - /etc/sssd/sssd.conf
+  - /etc/sudoers.d/installSssd
+
+
+
+JOIN AD REALM
+
+WORKED EXAMPLE
+realm join --user=administrator@yallalabs.local --computer-ou=OU=Linux,OU=Servers,DC=YALLALABS,DC=LOCAL yallalabs.local
+Password for administrator@yallalabs.local:
+
+
+
+# realm join --user=zlinux@eca-international.local --computer-ou=OU=Linux,OU=Servers,OU=London,DC=eca-international,DC=local  eca-international.local
+
+
+
+
+[root@lnlxwg01 etc]# realm join --user=zlinux@eca-international.local --computer-ou=OU=Linux,OU=Servers,OU=London,DC=eca-international,DC=local eca-international.local --automatic-id-mapping=no -v
+
+ * Resolving: _ldap._tcp.eca-international.local
+ * Performing LDAP DSE lookup on: 192.168.39.3
+ * Performing LDAP DSE lookup on: 192.168.35.3
+ * Performing LDAP DSE lookup on: 192.168.33.58
+ * Successfully discovered: eca-international.local
+Password for zlinux@eca-international.local:
+ * Required files: /usr/sbin/oddjobd, /usr/libexec/oddjob/mkhomedir, /usr/sbin/sssd, /usr/bin/net
+ * LANG=C LOGNAME=root /usr/bin/net -s /var/cache/realmd/realmd-smb-conf.70IHF0 -U zlinux@eca-international.local ads join eca-international.local createcomputer=London/Servers/Linux
+Enter zlinux@eca-international.local's password:uJ3sf@cdXv&8
+DNS update failed: NT_STATUS_UNSUCCESSFUL
+
+Using short domain name -- INTERNAL
+Joined 'LNLXWG01' to dns domain 'eca-international.local'
+DNS Update for lnlxwg01.domain01.starrate-intranet.co.uk failed: ERROR_DNS_GSS_ERROR
+ * LANG=C LOGNAME=root /usr/bin/net -s /var/cache/realmd/realmd-smb-conf.70IHF0 -U zlinux@eca-international.local ads keytab create
+Enter zlinux@eca-international.local's password:uJ3sf@cdXv&8
+ * /usr/bin/systemctl enable sssd.service
+Created symlink from /etc/systemd/system/multi-user.target.wants/sssd.service to /usr/lib/systemd/system/sssd.service.
+ * /usr/bin/systemctl restart sssd.service
+ * /usr/bin/sh -c /usr/sbin/authconfig --update --enablesssd --enablesssdauth --enablemkhomedir --nostart && /usr/bin/systemctl enable oddjobd.service && /usr/bin/systemctl start oddjobd.service
+ * Successfully enrolled machine in realm
+
+
+
+
+
+
+
+https://randomadult.com/active-directory-authentication-with-centos/
+
+1.  Update
+
+	1.1  cat /etc/sysconfig/network
+		HOSTNAME=lnlxng01.eca-international.local
+
+		# echo "HOSTNAME=`hostname`.eca-international.local" > /etc/sysconfig/network
+
+
+	1.2  vi /etc/sysconfig/network-scripts/ifcfg-eth0
+		DNS1=192.168.33.3
+		DNS2=192.168.33.6
+		DNS3=192.168.130.2
+		DOMAIN="eca-international.local domain01.starrate-intranet.co.uk"
+
+
+	1.2a	
+
+
+	# systemctl restart network
+	# systemctl restart NetworkManager
+
+
+
+	# yum -y install authconfig krb5-workstation pam_krb5 samba-common oddjob-mkhomedir libselinux-python realmd oddjob sssd adcli samba-common-tools pytalloc samba-winbind-modules 
+
+	# authconfig --disablecache --enablewinbind --enablewinbindauth --smbsecurity=ads --smbworkgroup=DOMAIN --smbrealm=ECA-INTERNATIONAL.LOCAL --enablewinbindusedefaultdomain --winbindtemplatehomedir=/home/%U --winbindtemplateshell=/bin/bash --enablekrb5 --krb5realm=ECA-INTERNATIONAL.LOCAL --enablekrb5kdcdns --enablekrb5realmdns --enablelocauthorize --enablemkhomedir --enablepamaccess --updateall
+
+
+
+
+	1.3  grep ECA /etc/krb5.conf
+		Ensure  default_realm = ECA-INTERNATIONAL.LOCAL		is UPPERCASE
+		
+	1.4	grep winbind /etc/nsswitch.conf
+		This will get updated with winbind as authentification method
+
+
+nmcli con mod eth0 ipv4.dns-search "eca-international.local,domain01.starrate-intranet.co.uk"
+nmcli con show eth0 | grep dns-search
+systemctl restart NetworkManager
+nmcli con show eth0 | grep dns-search
+
+
+
+
+Check/update /etc/krb5.conf
+
+Change line
+ default_realm = eca-international.local
+to
+ default_realm = ECA-INTERNATIONAL.LOCAL
+
+
+# systemctl restart network
+
+
+
+
+# realm join --user=zlinux@ECA-INTERNATIONAL.LOCAL --computer-ou=OU=Linux,OU=Servers,OU=London,DC=eca-international,DC=local ECA-INTERNATIONAL.LOCAL --automatic-id-mapping=no -v
+
+
+
+realm join --user=zlinux@ECA-INTERNATIONAL.LOCAL --computer-ou=OU=Linux,OU=Servers,OU=London,DC=eca-international,DC=local ECA-INTERNATIONAL.LOCAL --automatic-id-mapping=no -v
+OLD uJ3sf@cdXv&8
+
+D1guABNeAhJE
+
+
+
+Restart
+
+uJ3sf@cdXv&8
+
+
+
+
+
+SECURITY GROUPS
+
+
+DL-LinuxUser
+
+
+# realm permit LinuxAdmin@eca-interntional.local
+# realm permit LinuxUser@eca-international.local
+
+
+setfacl -m g:devs:rwx /etc/ECA
+
+
+
+
+
+
+SSH KEYGEN FOR THE USERS - COMMENTS
+
+https://docs.ansible.com/ansible/latest/modules/user_module.html
+
+ssh_key_comment 
+string 
+Default:
+"ansible-generated on $HOSTNAME"
+Optionally define the comment for the SSH key.
+
+
+
+
+
+
+
+[root@lnlxsh01 ~]# realm join --user=zlinux@ECA-INTERNATIONAL.LOCAL --computer-ou=OU=Linux,OU=Servers,OU=London,DC=eca-international,DC=local ECA-INTERNATIONAL.LOCAL --automatic-id-mapping=no -v
+ * Resolving: _ldap._tcp.eca-international.local
+ * Performing LDAP DSE lookup on: 192.168.33.6
+ * Performing LDAP DSE lookup on: 192.168.35.3
+ * Successfully discovered: eca-international.local
+Password for zlinux@ECA-INTERNATIONAL.LOCAL:
+ * Required files: /usr/sbin/oddjobd, /usr/libexec/oddjob/mkhomedir, /usr/sbin/sssd, /usr/bin/net
+ * LANG=C LOGNAME=root /usr/bin/net -s /var/cache/realmd/realmd-smb-conf.XV07E0 -U zlinux@ECA-INTERNATIONAL.LOCAL ads join eca-international.local createcomputer=London/Servers/Linux
+Enter zlinux@ECA-INTERNATIONAL.LOCAL's password:D1guABNeAhJE
+DNS update failed: NT_STATUS_INVALID_PARAMETER
+
+Using short domain name -- INTERNAL
+Joined 'LNLXSH01' to dns domain 'eca-international.local'
+No DNS domain configured for lnlxsh01. Unable to perform DNS Update.
+ * LANG=C LOGNAME=root /usr/bin/net -s /var/cache/realmd/realmd-smb-conf.XV07E0 -U zlinux@ECA-INTERNATIONAL.LOCAL ads keytab create
+Enter zlinux@ECA-INTERNATIONAL.LOCAL's password:D1guABNeAhJE
+
+ * /usr/bin/systemctl enable sssd.service
+Created symlink from /etc/systemd/system/multi-user.target.wants/sssd.service to /usr/lib/systemd/system/sssd.service.
+ * /usr/bin/systemctl restart sssd.service
+ * /usr/bin/sh -c /usr/sbin/authconfig --update --enablesssd --enablesssdauth --enablemkhomedir --nostart && /usr/bin/systemctl enable oddjobd.service && /usr/bin/systemctl start oddjobd.service
+ * Successfully enrolled machine in realm
+
+
+
+
+
+Playbook Walkthrough
+
+T'Internet Check
+
+COPY RHN files to server
+
+Move *.repo to BACKUP
+
+Register Server To Spacewalk
+	Install Files I
+	Install Files II
+	yum-rhn-plugin - disable GPG check
+	rhnreg_ks
+	osad Package
+	Spacewalk SSL Certificate
+	Spacewalk openscap client
+	Firewall Rules		
+
+TMOUT FOR LOGINS
+
+USERS
+	ADD sp_users group
+	ADD xrdpusers group
+
+	include USERS/group.yml
+	include USERS/users.yml
+
+	Create Groups Ahead of accounts
+		Add Users admin_users
+		add Users dev_users
+		Remove_users
+
+	sp_users sudo entries
+
+	ACL's:
+		devs
+		DevLead
+		DevMan
+		/etc/ECA
+	
+	Clean up old DEVS sudo rules
+	Add new DEVS sudo entries
+
+
+Install snmp latest
+
+Install 3rd-Party Copy over /var/satellite/3rd-Party
+
+Install rsyslog
+	Add eventEngine hosts to rsyslog
+	Restart Rsyslog
+
+Install CrowdStrike
+	Set Customer Number
+	REstart CrowdStrike
+	Firewalld Add 3121/tcp
+	resatrt Firewalld
+
+IVANTI
+	Copy Ivanti Over
+	YUM install Ivanti RPM
+	Ivanti - install/register the agent back to the Server
+	Clean up /tmp/Ivanti dir
+
+GIT
+	Remove older Git
+	Install Git 2.22.2
+
+MariaDB
+	yum install MariaDB
+
+XRDP
+	Yum install XRDP and selinux files
+	Firewalld enable ports for XRDP
+	Firewalld enable ports for XRDP
+	Systemctl restart XRDP
+
+
+DOTNET
+	Yum install DotNet 3.1
+		SRC:  /var/tmp/3rd-Party
+		Install DotNet Dependencies
+		Install DotNet
+
+STARATE
+	yum install starrate 3rd-Party
+		BeyondCompare-4.3.2.24472
+		Code 1.40.1
+		dbeaver-ce-6.2.5
+
+Google Chrome Dependencies
+	yum install dependnecies
+	yum add Google Chrome Repo
+	yum add Google Chrome
+	yum remove Google Chrome repo
+
+
+BeyondCompare
+	yum add Scootersoft repo
+	yum install bcompare 
+	copy bcompare License key
+
+
+max_user Settings for Visual Studio
+
+File Directory create NuGetFallBackFolder
+
+user perms Ca-Certificates
+
+Install nodejs
+	Install npm @angular/cli 8.3.21
+	Install npm typescript 3.7.4
+
+
+Tidy Up tmp working directories
+		/var/tmp/RHN-Register
+		/var/tmp/3rd-Party
+
+Remove Admin User
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

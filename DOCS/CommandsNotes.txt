@@ -1,0 +1,57 @@
+
+
+yum install -y net-snmp  net-snmp-utils  net-snmp-agent-libs  net-snmp-libs
+
+cd /etc/snmp/
+ls -altr
+mv snmpd.conf snmpd.conf.BACKUP
+cp /var/tmp/snmpd.conf .			# SOURCE:	/var/satellite/custom-files/ECA_snmpd.conf
+						# DESTINATION:	/etc/snmp/snmpd.conf
+
+
+
+yum install -y net-snmp  net-snmp-utils  net-snmp-agent-libs  net-snmp-libs  --nogpg
+ls -altr /etc/snmp/snmpd.conf
+firewall-cmd --permanent --zone=public --add-port=161/tcp
+firewall-cmd --permanent --zone=public --add-port=161/udp
+firewall-cmd --zone=public --add-port=161/tcp
+firewall-cmd --zone=public --add-port=161/udp
+systemctl restart firewalld; systemctl enable snmpd; systemctl start snmpd; systemctl status snmpd
+
+
+
+
+
+
+systemctl start snmpd
+systemctl status snmpd
+
+
+
+
+
+yum install rsyslog
+
+add line 
+*.*  @@192.168.33.23:514
+
+After
+#*.* @@remote-host:514
+*.*  @@192.168.33.23:514
+
+And Before
+# ### end of the forwarding rule ###
+
+So looks like this
+#*.* @@remote-host:514
+*.*  @@192.168.33.23:514
+# ### end of the forwarding rule ###
+
+
+
+
+
+QUAD BIKE
+
+AT25-10-12
+  25-8.00-12

@@ -1,0 +1,14 @@
+New Servers
+
+
+
+NickG Nick Gray				lnlxng01		# useradd -c "Nick Gray" -d /home/NickG  -s /bin/bash NickG
+SajedH Sajed Hussain			lnlxsh01		# useradd -c "Sajed Hussain" -d /home/SajedH -u 1001 -s /bin/bash SajedH
+AlexP Alexander Paskhin			lnlxap01		# useradd -c "Alex Pashkin" -d /home/AlexP -u 1001 -s /bin/bash AlexP
+
+
+
+
+passwd username		ChangeM3
+passwd -e username		#	Force change on 1st login
+

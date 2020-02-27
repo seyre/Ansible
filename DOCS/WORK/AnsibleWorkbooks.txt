@@ -1,0 +1,315 @@
+ANSIBLE TASKS
+
+Playbook ideas
+
+rhn-register servers against Spacewalk
+
+# Register server with --activationkey against a spacewalk
+# server specified by (server_url).
+- rhn_register:
+    state: present
+    activationkey: 1-21ad0fddf8f510baf82b58788f384190
+    server_url: https://192.168.130.76/XMLRPM
+
+
+
+- rhn_register:
+    state: present
+    activationkey: 1-222333444
+
+
+
+
+
+
+
+
+USEFUL YUM TOOLING
+
+# yum --downloadonly --downloaddir=/root/myrpm update
+##  Now change following steps in Kickstart USB Creation process
+## Copy all rpms from myrpm to ~/kickstart/isolinux/Packages/
+# cd ~/kickstart/isolinux
+# createrepo -g ~/kickstart/comps.xml .
+
+
+
+
+
+
+
+
+
+[root@lnlxtst01 ~]# history 10000
+    1  pwd
+    2  clear
+    3  uptime
+    4  pwd
+    5  clear
+    6  pwd
+    7  clear
+    8  pwd
+    9  clear
+   10  ls -altr
+   11  pwd
+   12  clear
+   13  yum provides rhn-register
+   14  cd /etc/yum.repos.d
+   15  df -h
+   16  mkdir -p /mnt/DVD
+   17  pwd
+   18  ls -altr
+   19  mkdir -p BACKUP
+   20  mv *.repo BACKUP
+   21  pwd
+   22  clear
+   23  yum clean all
+   24  pwd
+   25  clear
+   26  vi Centos-DVD.repo
+   27  ip addr show
+   28  cp /var/tmp/CentOS-DVD.repo .
+   29  yum repolist
+   30  cat /var/tmp/CentOS-DVD.repo
+   31  vi /var/tmp/CentOS-DVD.repo
+   32  mount /dev/sr0 /tmp/DVD
+   33  mkdir -p /tmp/DVD
+   34  mount /dev/sr0 /tmp/DVD
+   35  yum repolist
+   36  yum clear all
+   37  cd
+   38  yum repolist
+   39  ls -altr
+   40  cd /etc/yum.repos.d/
+   41  vi CentOS-DVD.repo
+   42  yum repolist
+   43  ls -altr /mnt/DVD
+   44  cd /
+   45  df -h
+   46  umount /tmp/DVD
+   47  mount /dev/sr0 /mnt/DVD
+   48  yum repolist
+   49  yum provides rhn-register
+   50  pwd
+   51  clear
+   52  subscription-manager
+   53  pwd
+   54  clear
+   55  history 10000 | grep -i rhn
+   56  yum install rhn-client-tools rhn-check rhn-setup rhnsd m2crypto yum-rhn-plugin
+   57  cd /var/tmp
+   58  mkdir -p RHN
+   59  ls -altr
+   60  chmod 754 RHN
+   61  chmod 755 RHN
+   62  chmod 777 RHN
+   63  cd RHN
+   64  ls -altr
+   65  yum install python-gudev-147.2-7.el7.x86_64.rpm python-hwdata-1.7.3-4.el7.noarch.rpm rhn-check-2.0.2-24.el7.x86_64.rpm rhn-client-tools-2.0.2-24.el7.x86_64.rpm rhnlib-2.5.65-8.el7.noarch.rpm rhnsd-5.0.13-10.el7.x86_64.rpm rhn-setup-2.0.2-24.el7.x86_64.rpm yum-rhn-plugin-2.0.1-10.el7.noarch.rpm pyOpenSSL-0.13.1-4.el7.x86_64.rpm python-ethtool-0.8-8.el7.x86_64.rpm libnl-1.1.4-3.el7.x86_64.rpm python-dmidecode-3.12.2-3.el7.x86_64.rpm
+   66  ls -altr /pub/RHN-ORG-TRUSTED-SSL-CERT
+   67  scp admin@192.168.130.68::/pub/RHN-ORG-TRUSTED-SSL-CERT /usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
+   68  rhnreg_ks --activationkey 1-21ad0fddf8f510baf82b58788f384190 --serverUrl http://192.168.130.76/XMLRPC
+   69  cd /etc/yum.repos.d
+   70  ls -altr
+   71  yum clean all
+   72  mv CentOS-DVD.repo BACKUP
+   73  yum clean all
+   74  yum repolist
+   75  pwd
+   76  ls -altr
+   77  cd
+   78  pwd
+   79  yum provides rhn-register
+   80  rpm -ql rhncfg
+   81  rpm -ql rhncfg*
+   82  yum provides rhncfg
+   83  pwd
+   84  cd /var/tmp
+   85  ls -altr
+   86  yum repolist
+   87  pwd
+   88  cd RHN/
+   89  scp admin@192.168.130.76:/var/satellite/RHN-Register/lnlxpoc01.rpmList .
+   90  clear
+   91  history
+   92  for i in `cat /var/satellite/RHN-Register/lnlxpoc01.rpmList`; do yum install -y $i
+   93  cd /var/tmp/RHN
+   94  pwd
+   95  ls
+   96  for i in `cat lnlxpoc01.rpmList`; dp
+   97  for i in `cat lnlxpoc01.rpmList`; do yum install -y $i; done
+   98  clear
+   99  for i in `cat lnlxpoc01.rpmList`; do yum install -y $i; done
+  100  rpm -qa --qf '%{name}\n'
+  101  rpm -qa --qf '%{name}\n' mtdev
+  102  for i in `cat lnlxpoc01.rpmList`; do RPM=`rpm -qa --qf '%{name}\n' $i`; echo $i = $RPM; done
+  103  for i in `cat lnlxpoc01.rpmList`; do RPM=`rpm -qa --qf '%{name}\n' $i`; echo $i = $RPM 2>&1 >> /tmp/rpmQuery.out; done
+  104  yup provides nodejs
+  105  yum provides nodejs-10.15.3-1nodesource.x86_64
+  106  pwd
+  107  yum repolist
+  108  clear
+  109  yum clean all
+  110  yum repolist
+  111  cd /etc/yum.repos.d
+  112  ls
+  113  ls -altr
+  114  rm *.repo
+  115  pwd
+  116  clear
+  117  yum clean all
+  118  kill -9 67145
+  119  yum clean all
+  120  yum repolist
+  121  yum provides nodejs
+  122  yum install nodejs-10.15.3-1nodesource.x86_64
+  123  cat /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+  124  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+  125  yum install nodejs-10.15.3-1nodesource.x86_64
+  126  rpm -q gpg-pubkey
+  127  ls -altr /etc/pki/rpm-gpg/
+  128  cd /etc/pki/rpm-gpg/
+  129  scp admin@192.168.130.76://etc/pki/rpm-gpg/* .
+  130  yum install nodejs-10.15.3-1nodesource.x86_64
+  131  yum clean all
+  132  yum repolist
+  133  yum install nodejs-10.15.3-1nodesource.x86_64
+  134  mv ///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 ///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7.BACKUP
+  135  yum install nodejs-10.15.3-1nodesource.x86_64 -y
+  136  mv ///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7.BACKUP ///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+  137  yum install nodejs-10.15.3-1nodesource.x86_64 -y
+  138  pwd
+  139  cd
+  140  yum repolist
+  141  cd /etc/yum.repos.d/
+  142  ls
+  143  ls -altr
+  144  yum clean all
+  145  yum repolist
+  146  cd /etc/yum.repos.d
+  147  ls
+  148  ls -altr
+  149  pwd
+  150  clear
+  151  history 100000 | grep -i gpg
+  152  pwd
+  153  history | grep -i for
+  154  for i in `cat lnlxpoc01.rpmList`; do yum install -y $i --nogpgcheck; done
+  155  pwd
+  156  hisotry
+  157  history
+  158  cd /var/tmp
+  159  cd RHN
+  160  ls -altr
+  161  for i in `cat lnlxpoc01.rpmList`; do yum install -y $i --nogpgcheck; done
+  162  pwd
+  163  rm /tmp/rpmQuery.out
+  164  for i in `cat lnlxpoc01.rpmList`; do RPM=`rpm -qa --qf '%{name}\n' $i`; echo $i = $RPM 2>&1 >> /tmp/rpmQuery.out; done
+  165  pwd
+  166  cd
+  167  ls -altr
+  168  cat anaconda-ks.cfg
+  169  pwd
+  170  rpm -qa | grep -i rdp
+  171  rpm -qa | grep -i xrd
+  172  yum provides xrdp
+  173  yum install xrdp-selinux
+  174  yum install xorgxrdp
+  175  pwd
+  176  clear
+  177  yum clean all
+  178  yum repolist
+  179  yum provides :xrdp
+  180  yum provides xrdp
+  181  yum clean all
+  182  yum provides xrdp
+  183  yum clean all
+  184  yum provides xrdp
+  185  clear
+  186  yum clean all
+  187  yum provides xrdp
+  188  pwd
+  189  clear
+  190  yum repolist
+  191  pwd
+  192  yum clean all
+  193  yum repolist
+  194  yum provides anaible
+  195  yum provides ansible
+  196  pwd
+  197  clear
+  198  ls -altr
+  199  df -h
+  200  pwd
+  201  clear
+  202  rpm -qa | grep -i node
+  203  ip addr show
+  204  pwd
+  205  cd
+  206  pwd
+  207  ls
+  208  ls -altr
+  209  ssh-keygen
+  210  pwd
+  211  clear
+  212  pwd
+  213  ls -altr
+  214  cd .ssh
+  215  ls
+  216  ls -altr
+  217  cat known_hosts
+  218  pwd
+  219  vi authorized_keys
+  220  ip addr show
+  221  pwd
+  222  clear
+  223  yum repolist
+  224  pwd
+  225  clear
+  226  rpm -qa | grep -i rhn
+  227  rpm -ql | grep -i rhn-register
+  228  rpm -ql rhn-client-tools-2.0.2-24.el7.x86_64 | grep -i rhn-register
+  229  rpm -ql rhn-client-tools-2.0.2-24.el7.x86_64
+  230  rhn-register
+  231  which rhn-register
+  232  yum repolist
+  233  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+  234  yum install nodejs-10.15.3-1nodesource.x86_64
+  235  man yum
+  236  tail -f /tmp/rpmQuery.out
+  237  pwd
+  238  rpm -qa | wc -l
+  239  cd /var/tmp/RHN
+  240  cat lnlxpoc01.rpmList | wc -l
+  241  yum clean all
+  242  yum provides xrdp
+  243  yum provides xrdp-0.9.11-5.el7.x86_64
+  244  yum provides xrdp
+  245  yum install xrdp
+  246  man yum
+  247  yum install xrdp --nogpgcheck
+  248  rpm -qa | grep -i xrdp
+  249  yum install xrdp-selinux xordxrdp --nogpgcheck
+  250  yum install xrdp-selinux xorgxrdp --nogpgcheck
+  251  pwd
+  252  cd /var/tmp/RHN
+  253  ls
+  254  ls -altr
+  255  for i in `cat lnlxpoc01.rpmList`; do REPO=`yum provides $i | grep Repo" | head -1`; echo $i = $REPO; done
+  256  for i in `cat lnlxpoc01.rpmList`; do REPO=`yum provides $i | grep Repo | head -1`; echo $i = $REPO; done
+  257  for i in `cat lnlxpoc01.rpmList`; do REPO=`yum provides $i | grep Repo | head -1`; echo $i = $REPO 2>&1 >> /var/tmp/SoftWareRepoCheck.out; done
+  258  cat /var/tmp/SoftWareRepoCheck.out | more
+  259  cat /var/tmp/SoftWareRepoCheck.out | grep -v centos-7-base-x86_64
+  260  rpm -qa | grep -i python-ethtool-0.8-8.el7.x86_64.rpm
+  261  rpm -qa | grep -i python-ethtool
+  262  yum provides python-ethtool
+  263  init 0
+  264  yum repolist
+  265  pwd
+  266  ls -altr
+  267  cd /var/spool
+  268  ls -altr
+  269  cd
+  270  pwd
+  271  clear
+  272  history 10000

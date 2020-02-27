@@ -1,0 +1,9 @@
+
+[group_spacewalkproject-java-packages]
+name=Copr repo for java-packages owned by @spacewalkproject
+baseurl=https://copr-be.cloud.fedoraproject.org/results/@spacewalkproject/java-packages/epel-7-x86_64/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-spacewalk-java-packages
+gpgcheck=1
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1

@@ -114,16 +114,15 @@
   - name: rhn-register as with activation key
     rhn_register:
       state: present
-      activationkey: 1-21ad0fddf8f510baf82b58788f384190
+      activationkey: 1-95fb7c0dea1266fb8d89a3b3bb82c57f
       server_url:  http://192.168.130.76/XMLRPC
-#      channels: centos-7-base-x86_64
 
 ## RHN-register add software channels
 #  - name: rhn-register add software base channels
 #    rhn_register:
 #      state: present
 #      activationkey: 1-21ad0fddf8f510baf82b58788f384190
-#      channels: 'Centos 7 Base x86_64'
+##      channels: 'Centos 7 Base x86_64'
 
 
 ## Spacewalk osad packages install

@@ -61,3 +61,4 @@ remove_users:
    - login: andrew
    - login: charlie
    - login: paul
+   - login: evansa

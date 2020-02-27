@@ -1,0 +1,6 @@
+[Centos7]
+name=Centos7
+baseurl=http://mirror.centos.org/centos/7/os/x86_64/Packages/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-spacewalk-2.9
+enabled=0
+gpgcheck=0

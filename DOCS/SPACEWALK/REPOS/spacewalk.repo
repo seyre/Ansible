@@ -1,0 +1,6 @@
+[spacewalk]
+name=Spacewalk
+baseurl=https://copr-be.cloud.fedoraproject.org/results/@spacewalkproject/spacewalk-2.9/epel-7-$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-spacewalk-2.9
+enabled=1
+gpgcheck=1

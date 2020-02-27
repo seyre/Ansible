@@ -1,0 +1,6 @@
+[spacewalk-nightly]
+name=Spacewalk nightly
+baseurl=https://copr-be.cloud.fedoraproject.org/results/@spacewalkproject/nightly/epel-7-$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-spacewalk-nightly
+enabled=0
+gpgcheck=1

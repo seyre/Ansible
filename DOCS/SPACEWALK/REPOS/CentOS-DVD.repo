@@ -1,0 +1,5 @@
+[CentOS-DVD]
+name=CentOS DVD
+baseurl=file:///mnt/DVD
+gpgcheck=0
+enabled=1
