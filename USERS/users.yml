@@ -62,3 +62,18 @@ remove_users:
    - login: charlie
    - login: paul
    - login: evansa
+
+
+groups:
+
+admin_groups:
+   - groups: sp_users
+dev_groups:
+   - groups: devs
+   - groups: xrdpusers
+   - groups: ECA
+   - groups: DevMan
+   - groups: DevLead
+remove_groups:
+## Example format - remove "#" to make live
+#   - "admin"

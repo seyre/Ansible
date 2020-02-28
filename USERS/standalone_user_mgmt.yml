@@ -1,0 +1,182 @@
+---
+- hosts: TARGET
+##  debugger: on_failed
+  user: root
+
+  vars:
+
+  handlers:
+  - name: "Restart sshd"
+    service:
+      name: "sshd"
+      state: "restarted"
+
+  tasks:
+##  - name: include groups and users
+##    include_vars:
+##      file: groups.yml
+##      name: groups
+##      file: users.yml
+##      name: users
+
+#  - name: Print debug message
+#  - debug:
+#      verbosity: 2
+
+  - name: include groups and users
+    include_vars:
+      file: groups.yml
+      name: groups
+
+  - name: Create groups ahead of accounts
+    group:
+     name: "{{ item.groups }}"
+     state: present
+    with_items:
+      - "{{ admin_groups }}"
+      - "{{ dev_groups }}"
+
+
+#  - name: Add users | create users, shell, home dirs
+#    user:
+#     name: "{{ item.login }}"
+#     shell: /bin/bash
+#     groups: "{{ item.groups_member }}"
+#     createhome: yes
+#     comment: "{{ item.login }}"
+#    with_items:
+#      - "{{ admin_users }}"
+#      - "{{ dev_users }}"
+
+##  - name: Include groups and users files
+##  - include_vars: users.yml
+
+  - name: include groups and users
+    include_vars:
+      file: users.yml
+      name: users
+
+  - name: Add sp_users accounts locally
+    user:
+      name: "{{ item.login }}"
+      groups: "{{ item.groups }}"
+      shell: /bin/bash
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      comment: "{{ item.login }}"
+      append: yes
+#      password: "{{ item.password }}"
+#      update_password: on_create
+    with_items:
+      - "{{ admin_users }}"
+      - "{{ dev_users }}"
+
+## Setup ACL's for devs group (excludes read/write access to DevMan and DevLead)
+## 30/01/2020 - /etc/ECA added for devs ACL group
+  - name:  Add ACL for devs group to /home accounts excluding DevMan and DevLead users + /etc/ECA
+    acl:
+      path: "{{ item }}"
+      entity: devs
+      etype: group
+      permissions: rw
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/iksd
+      - /etc/ECA
+
+# Setup ACL's for DevLead group(excludes read/write access to DevMan)
+  - name:  Add ACL for DevMan group to /home accounts excluding DevLead users
+    acl:
+      path: "{{ item }}"
+      entity: DevLead
+      etype: group
+      permissions: rw
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
+      - /etc/ECA
+
+# Setup ACL's for DevMan group(read/write access to everything)
+  - name:  Add ACL for DevMan group to all /home accounts
+    acl:
+      path: "{{ item }}"
+      entity: DevMan
+      etype: group
+      permissions: rwx
+      state: present
+    loop:
+      - /home/gksd
+      - /home/ssasd
+      - /home/apsd
+      - /home/shsd
+      - /home/ngsd
+      - /home/iksd
+      - /home/mmsd
+      - /home/wgsd
+      - /home/ngsd
+      - /home/rssd
+      - /etc/ECA
+
+
+#  - name: Setup | authorized key upload
+#    authorized_key: user={{ item.username }}
+#      key="{{ lookup('file', 'pub_keys/{{ item.login }}.pub') }}"
+#      path='/home/{{ item.username }}/.ssh/authorized_keys'
+#      manage_dir: no
+#    with_items: '{{ dev_users }}'
+
+  - name: Adding devs_users to /etc/sudoers
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## Developers'
+      - 'Cmnd_Alias DEVS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/update-ca-trust extract, /usr/bin/cp *.crt /etc/pki/tls/certs, /usr/bin/ln -sv /etc/pki/tls/certs/*.crt /etc/pki/tls/certs/*.0, /bin/openssl x509 -in /etc/pki/tls/certs/*.crt -noout -hash, /usr/bin/cp *.crt /etc/pki/ca-trust/source/anchors/'
+      - '%devs          ALL = NOPASSWD: DEVS, sudoedit /etc/hosts'
+
+# Add sp_users entries to /etc/sudoers
+  - name: Adding sp_users to /etc/sudoers
+    lineinfile:
+      owner: root
+      group: root
+      dest: /etc/sudoers
+      backup: yes
+      validate: /usr/sbin/visudo -cf %s
+      line: '{{ item }}'
+    with_items:
+      - ''
+      - '## sp_users'
+      - 'Cmnd_Alias SP_USERS = /bin/firewall-cmd, /bin/systemctl, /sbin/reboot, /usr/bin/vi /etc/hosts, /bin/vim /etc/hosts, /usr/bin/su -'
+      - '%sp_users      ALL=(ALL)        SP_USERS'
+
+
+# Remove users specified
+  - name: Rmeove users specified in remove_users list
+    user:
+      name:  "{{ item.login }}"
+      state: absent
+    with_items:
+      - "{{ remove_users }}"
+
+#  - name: "Disable root login via SSH"
+#    lineinfile:
+#      dest: "/etc/ssh/sshd_config"
+#      regexp: "^PermitRootLogin"
+#      line: "PermitRootLogin yes"
+#    notify: "Restart sshd"
