@@ -1,0 +1,131 @@
+Playbook Walkthrough
+
+T'Internet Check
+
+COPY RHN files to server
+
+Move *.repo to BACKUP
+
+Register Server To Spacewalk
+	Install Files I
+	Install Files II
+	yum-rhn-plugin - disable GPG check
+	rhnreg_ks
+	osad Package
+	Spacewalk SSL Certificate
+	Spacewalk openscap client
+	Firewall Rules		
+
+TMOUT FOR LOGINS
+
+USERS
+	ADD sp_users group
+	ADD xrdpusers group
+
+	include USERS/group.yml
+	include USERS/users.yml
+
+	Create Groups Ahead of accounts
+		Add Users admin_users
+		add Users dev_users
+		Remove_users
+
+	sp_users sudo entries
+
+	ACL's:
+		devs
+		DevLead
+		DevMan
+		/etc/ECA
+	
+	Clean up old DEVS sudo rules
+	Add new DEVS sudo entries
+
+
+Install snmp latest
+
+Install 3rd-Party Copy over /var/satellite/3rd-Party
+
+Install rsyslog
+	Add eventEngine hosts to rsyslog
+	Restart Rsyslog
+
+Install CrowdStrike
+	Set Customer Number
+	REstart CrowdStrike
+	Firewalld Add 3121/tcp
+	resatrt Firewalld
+
+IVANTI
+	Copy Ivanti Over
+	YUM install Ivanti RPM
+	Ivanti - install/register the agent back to the Server
+	Clean up /tmp/Ivanti dir
+
+GIT
+	Remove older Git
+	Install Git 2.22.2
+
+MariaDB
+	yum install MariaDB
+
+XRDP
+	Yum install XRDP and selinux files
+	Firewalld enable ports for XRDP
+	Firewalld enable ports for XRDP
+	Systemctl restart XRDP
+
+
+DOTNET
+	Yum install DotNet 3.1
+		SRC:  /var/tmp/3rd-Party
+		Install DotNet Dependencies
+		Install DotNet
+
+STARATE
+	yum install starrate 3rd-Party
+		BeyondCompare-4.3.2.24472
+		Code 1.40.1
+		dbeaver-ce-6.2.5
+
+Google Chrome Dependencies
+	yum install dependnecies
+	yum add Google Chrome Repo
+	yum add Google Chrome
+	yum remove Google Chrome repo
+
+
+BeyondCompare
+	yum add Scootersoft repo
+	yum install bcompare 
+	copy bcompare License key
+
+
+max_user Settings for Visual Studio
+
+File Directory create NuGetFallBackFolder
+
+user perms Ca-Certificates
+
+Install nodejs
+	Install npm @angular/cli 8.3.21
+	Install npm typescript 3.7.4
+
+
+Tidy Up tmp working directories
+		/var/tmp/RHN-Register
+		/var/tmp/3rd-Party
+
+Remove Admin User
+
+
+
+
+
+
+
+
+
+
+
+
